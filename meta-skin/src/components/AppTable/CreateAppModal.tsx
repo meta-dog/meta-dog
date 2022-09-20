@@ -92,7 +92,8 @@ export default function CreateAppModal() {
         toast.success("The App referral was created successfully!", {
           icon: "🎉",
         });
-        setOpenCreateModal(false);
+        setValidUrl(INITIAL_VALID_URL);
+        setTextFieldText("You can paste more App referral links");
       })
       .catch((code) => {
         if (code === StatusCodes.CONFLICT) {
