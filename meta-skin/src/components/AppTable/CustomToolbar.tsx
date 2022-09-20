@@ -19,7 +19,7 @@ export default function CustomToolbar() {
           fullWidth
           sx={{ width: "stretch" }}
           autoFocus
-          placeholder="Search App by name..."
+          placeholder="Search by name..."
         />
         <IconButton onClick={() => reloadApps()} color="secondary">
           <Refresh />
