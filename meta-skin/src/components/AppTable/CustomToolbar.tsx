@@ -1,11 +1,11 @@
-import { Refresh } from "@mui/icons-material";
+import { Add, Refresh } from "@mui/icons-material";
 import { IconButton, Stack } from "@mui/material";
 import { GridToolbarContainer, GridToolbarQuickFilter } from "@mui/x-data-grid";
 
 import { useAppStateContext } from "contexts";
 
 export default function CustomToolbar() {
-  const { reloadApps } = useAppStateContext();
+  const { reloadApps, setOpenCreateModal } = useAppStateContext();
   return (
     <GridToolbarContainer>
       <Stack
@@ -23,6 +23,9 @@ export default function CustomToolbar() {
         />
         <IconButton onClick={() => reloadApps()} color="secondary">
           <Refresh />
+        </IconButton>
+        <IconButton onClick={() => setOpenCreateModal(true)} color="secondary">
+          <Add />
         </IconButton>
       </Stack>
     </GridToolbarContainer>

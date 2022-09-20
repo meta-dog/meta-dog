@@ -1,5 +1,6 @@
+import { CreateReferralVM } from "api/viewModel";
+
 import { AppVM } from "api";
 
-type HandleRequestClick = (id: AppVM["id"]) => void;
-
-export default HandleRequestClick;
+export type HandleRequestClick = (id: AppVM["id"]) => void;
+export type ValidateReferralUrlResult = false | CreateReferralVM;
