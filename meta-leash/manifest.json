@@ -1,7 +1,7 @@
 {
   "name": "Meta-Dog Leash",
   "description": "Navigate to a Meta App via the Oculus store and, if there is a referral available, you will be able to request it immediately!",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "manifest_version": 3,
   "background": {
     "service_worker": "scripts/background.js"
