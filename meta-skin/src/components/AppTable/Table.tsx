@@ -45,7 +45,7 @@ const getColumns = (
     },
   ] as GridColDef[];
 
-export default function AppTable() {
+export default function Table() {
   const { apps } = useAppStateContext();
 
   const [filter, setFilter] = useState<GridFilterModel>();
