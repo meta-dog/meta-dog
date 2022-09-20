@@ -1,0 +1,2 @@
+class Advocate < ApplicationRecord
+end
