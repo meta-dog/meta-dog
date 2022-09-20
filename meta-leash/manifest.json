@@ -6,7 +6,7 @@
   "background": {
     "service_worker": "scripts/background.js"
   },
-  "permissions": ["storage", "tabs", "scripting"],
+  "permissions": [],
   "action": {
     "default_popup": "views/intro.html",
     "default_icon": {
@@ -30,12 +30,6 @@
       ],
       "js": ["scripts/app.js"],
       "run_at": "document_idle"
-    }
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": ["scripts/app.js"],
-      "matches": []
     }
   ]
 }
