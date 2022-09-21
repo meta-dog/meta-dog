@@ -1,13 +1,13 @@
 import { CreateReferralVM } from "api/viewModel";
 
-import validateReferralUrl from "./utils";
+import { extractReferral, extractUrls } from "./utils";
 
-interface ValidateReferralUrlData {
+interface ExtractReferralData {
   input: string;
   output: false | CreateReferralVM;
 }
 
-const validateReferralUrlData: ValidateReferralUrlData[] = [
+const extractReferralData: ExtractReferralData[] = [
   {
     input:
       "https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
@@ -40,9 +40,40 @@ const validateReferralUrlData: ValidateReferralUrlData[] = [
   },
 ];
 
-test.each(validateReferralUrlData)(
-  "expects validateReferralUrl($input) to equal $output",
+test.each(extractReferralData)(
+  "expects extractReferral($input) to equal $output",
   ({ input, output }) => {
-    expect(validateReferralUrl(input)).toEqual(output);
+    expect(extractReferral(input)).toEqual(output);
+  },
+);
+
+interface ExtractUrlData {
+  input: string;
+  output: string[];
+}
+
+const extractUrlData: ExtractUrlData[] = [
+  {
+    input:
+      "URL 1: https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
+    output: [
+      "https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
+    ],
+  },
+  {
+    input: `URL 1: https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3
+      , URL 2:  https://www.oculus.com/appreferrals/example.user.potato/1212541241241241/?utm_source=3
+      , NON OCULUS URL: https://www.facebook.com`,
+    output: [
+      "https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
+      "https://www.oculus.com/appreferrals/example.user.potato/1212541241241241/?utm_source=3",
+    ],
+  },
+];
+
+test.each(extractUrlData)(
+  "expects extractUrls($input) to equal $output",
+  ({ input, output }) => {
+    expect(extractUrls(input)).toEqual(output);
   },
 );
