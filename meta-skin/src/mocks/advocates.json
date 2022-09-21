@@ -1,7 +1,20 @@
 [
-  "great-guy",
-  "maybe-good-guy",
-  "totally-ok-gal",
-  "maybe-a-dragon",
-  "perhaps-flies"
+  {
+    "username": "great-guy",
+    "appIds": [
+      { "input": "1251251", "status-code": 201 },
+      { "input": "2323124", "status-code": 409 },
+      { "input": "1672671", "status-code": 404 },
+      { "input": "5138511912885491", "status-code": 409 }
+    ]
+  },
+  {
+    "username": "maybe-good-gal",
+    "appIds": [
+      { "input": "1251251", "status-code": 201 },
+      { "input": "2323124", "status-code": 201 },
+      { "input": "1672671", "status-code": 404 },
+      { "input": "16513851191288549172671", "status-code": 404 }
+    ]
+  }
 ]

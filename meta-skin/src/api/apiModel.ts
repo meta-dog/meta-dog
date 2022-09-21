@@ -1,4 +1,8 @@
-export default interface AppAM {
+export interface AppAM {
   id: string;
   name: string;
+}
+
+export interface CreateReferralAM {
+  advocate_id: string;
 }

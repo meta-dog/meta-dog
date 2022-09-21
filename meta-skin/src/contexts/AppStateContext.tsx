@@ -12,6 +12,7 @@ import { AppVM, readApps } from "api";
 
 function useAppState() {
   const [apps, setApps] = useState<AppVM[]>([]);
+  const [openCreateModal, setOpenCreateModal] = useState(false);
 
   const reloadApps = async () =>
     readApps()
@@ -25,17 +26,19 @@ function useAppState() {
   return {
     apps,
     reloadApps,
+    openCreateModal,
+    setOpenCreateModal,
   };
 }
 
 export type IAppStateContext = ReturnType<typeof useAppState>;
 export const AppStateContext = createContext<IAppStateContext>(null!);
 
-export default function AppStateProvider({
-  children,
-}: {
+interface Props {
   children: ReactNode;
-}) {
+}
+
+export default function AppStateProvider({ children }: Props) {
   const authState = useAppState();
   return (
     <AppStateContext.Provider value={authState}>

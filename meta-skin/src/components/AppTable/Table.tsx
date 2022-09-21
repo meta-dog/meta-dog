@@ -15,7 +15,7 @@ import AppNameRenderer from "./AppNameRenderer";
 import CustomToolbar from "./CustomToolbar";
 import ReferralCellRenderer from "./ReferralCellRenderer";
 import ReferralHeaderRenderer from "./ReferralHeaderRenderer";
-import HandleRequestClick from "./types";
+import { HandleRequestClick } from "./types";
 
 const getColumns = (
   handleRequestClick: HandleRequestClick,

@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 
 import { AppTable, Footer, Header } from "components";
+import CreateAppModal from "components/AppTable/CreateAppModal";
 
 export default function Main() {
   return (
@@ -16,6 +17,7 @@ export default function Main() {
       </Grid>
       <Grid item gridArea="table">
         <AppTable />
+        <CreateAppModal />
       </Grid>
       <Grid item gridArea="footer">
         <Footer />

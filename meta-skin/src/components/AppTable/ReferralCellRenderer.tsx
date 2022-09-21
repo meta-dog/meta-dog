@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 
 import { AppVM } from "api";
 
-import HandleRequestClick from "./types";
+import { HandleRequestClick } from "./types";
 
 export default function ReferralCellRenderer(
   params: { row: any },

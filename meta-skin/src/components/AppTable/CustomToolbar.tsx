@@ -1,11 +1,11 @@
-import { Refresh } from "@mui/icons-material";
+import { Add, Refresh } from "@mui/icons-material";
 import { IconButton, Stack } from "@mui/material";
 import { GridToolbarContainer, GridToolbarQuickFilter } from "@mui/x-data-grid";
 
 import { useAppStateContext } from "contexts";
 
 export default function CustomToolbar() {
-  const { reloadApps } = useAppStateContext();
+  const { reloadApps, setOpenCreateModal } = useAppStateContext();
   return (
     <GridToolbarContainer>
       <Stack
@@ -19,10 +19,13 @@ export default function CustomToolbar() {
           fullWidth
           sx={{ width: "stretch" }}
           autoFocus
-          placeholder="Search App by name..."
+          placeholder="Search by name..."
         />
         <IconButton onClick={() => reloadApps()} color="secondary">
           <Refresh />
+        </IconButton>
+        <IconButton onClick={() => setOpenCreateModal(true)} color="secondary">
+          <Add />
         </IconButton>
       </Stack>
     </GridToolbarContainer>

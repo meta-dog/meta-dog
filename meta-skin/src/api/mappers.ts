@@ -1,6 +1,12 @@
-import AppAM from "./apiModel";
-import AppVM from "./viewModel";
+import { AppAM, CreateReferralAM } from "./apiModel";
+import { AppVM, CreateReferralVM } from "./viewModel";
 
-export default function mapAppAMToVM({ id, name }: AppAM) {
+export function mapAppAMToVM({ id, name }: AppAM) {
   return { id, name } as AppVM;
+}
+
+export function mapCreateReferralVMToAM({
+  advocateId,
+}: CreateReferralVM): CreateReferralAM {
+  return { advocate_id: advocateId };
 }
