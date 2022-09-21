@@ -13,6 +13,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  IconButton,
   Stack,
   TextField,
   Typography,
@@ -24,7 +25,7 @@ import { useAppStateContext } from "contexts";
 
 import { extractReferral, extractUrls } from "./utils";
 
-const INITIAL_TEXT_FIELD_TEXT = "Paste your App referral link here";
+const INITIAL_TEXT_FIELD_TEXT = "Paste here";
 const INITIAL_VALID_URL = null;
 
 export default function CreateAppModal() {
@@ -56,34 +57,35 @@ export default function CreateAppModal() {
   if (validUrl === false) validationIcon = <Error color="error" />;
   const disabled = validUrl === null || validUrl === false;
 
-  const handlePaste: ClipboardEventHandler<HTMLDivElement> = ({
-    clipboardData,
-  }) => {
-    const clipboardText = clipboardData.getData("text");
-    const urls = extractUrls(clipboardText);
+  const validateText = (text: string) => {
+    const urls = extractUrls(text);
+    if (urls.length === 0) {
+      toast.warn("No App URLs were found in the pasted text!");
+      setTextFieldText(INITIAL_TEXT_FIELD_TEXT);
+      return;
+    }
     const newValidUrls = urls.map(extractReferral);
     const singular = newValidUrls.length === 1;
     if (newValidUrls.some((isValid) => isValid === false)) {
       let message =
         "At least one of the provided App referral link is invalid. Please review them and paste them again.";
-      let newTextFieldText = "Invalid App Referral links";
+      let newTextFieldText = "Invalid links";
       if (singular) {
         message =
           "The provided App referral link is invalid. Please review it and paste it again.";
-        newTextFieldText = "Invalid App Referral link";
+        newTextFieldText = "Invalid link";
       }
       setTextFieldText(newTextFieldText);
       toast.error(message, { icon: "😥" });
       setValidUrl(false);
       return;
     }
-    let message =
-      "All of the provided App referral links seem valid! Please click on the button to try to save them.";
-    let newTextFieldText = "Valid App Referral links";
+    let message = `All of the ${newValidUrls.length} detected App referral links seem valid! Please click on the button to try to save them.`;
+    let newTextFieldText = `${newValidUrls.length} Valid links`;
     if (singular) {
       message =
         "The provided App referral link seems valid! Please click on the button to try to save it.";
-      newTextFieldText = "Valid App Referral link";
+      newTextFieldText = "Valid link";
     }
     toast.info(message);
     setTextFieldText(newTextFieldText);
@@ -96,6 +98,13 @@ export default function CreateAppModal() {
       }, 0);
     }
     setValidUrl(newValidUrls as CreateReferralVM[]);
+  };
+
+  const handlePaste: ClipboardEventHandler<HTMLDivElement> = ({
+    clipboardData,
+  }) => {
+    const clipboardText = clipboardData.getData("text");
+    validateText(clipboardText);
   };
 
   const handleSaveClick = () => {
@@ -114,7 +123,7 @@ export default function CreateAppModal() {
         }
         toast.success(message, { icon: "🎉" });
         setValidUrl(INITIAL_VALID_URL);
-        setTextFieldText("You can paste more App referral links");
+        setTextFieldText(INITIAL_TEXT_FIELD_TEXT);
         return;
       }
       if (fulfilled.length === 0) {
@@ -135,24 +144,34 @@ export default function CreateAppModal() {
   };
 
   return (
-    <Dialog open={openCreateModal} onClose={() => setOpenCreateModal(false)}>
+    <Dialog
+      open={openCreateModal}
+      onClose={() => setOpenCreateModal(false)}
+      sx={{ "& .MuiPaper-root": { width: "95vw", maxWidth: "650px" } }}
+    >
       <DialogTitle textAlign="center">Add your referral</DialogTitle>
       <DialogContent>
         <Stack
           direction="row"
           alignItems="center"
           justifyContent="center"
-          className="gap-4 min-w-[500px]"
+          className="gap-4"
         >
-          <ContentPasteGo />
+          <IconButton
+            onClick={() => navigator.clipboard.readText().then(validateText)}
+          >
+            <ContentPasteGo />
+          </IconButton>
           <TextField
             inputRef={inputRef}
             value=""
-            sx={{ "& input": { textAlign: "center" } }}
+            sx={{
+              "& input": { textAlign: "center", caretColor: "transparent" },
+            }}
             fullWidth
-            InputProps={{ readOnly: true }}
             onPaste={handlePaste}
             placeholder={textFieldText}
+            type="url"
           />
           {validationIcon}
         </Stack>
