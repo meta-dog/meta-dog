@@ -13,6 +13,7 @@ import { AppVM, readApps } from "api";
 function useAppState() {
   const [apps, setApps] = useState<AppVM[]>([]);
   const [openCreateModal, setOpenCreateModal] = useState(false);
+  const [openHelpModal, setOpenHelpModal] = useState(false);
 
   const reloadApps = async () =>
     readApps()
@@ -28,6 +29,8 @@ function useAppState() {
     reloadApps,
     openCreateModal,
     setOpenCreateModal,
+    openHelpModal,
+    setOpenHelpModal,
   };
 }
 
