@@ -1,5 +1,5 @@
 export interface AppAM {
-  id: string;
+  app_id: string;
   name: string;
 }
 

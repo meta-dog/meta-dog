@@ -1,7 +1,7 @@
 import { AppAM, ReadReferralAM } from "./apiModel";
 import { AppVM, ReadReferralVM } from "./viewModel";
 
-export function mapAppAMToVM({ id, name }: AppAM) {
+export function mapAppAMToVM({ app_id: id, name }: AppAM) {
   if (id === undefined) throw Error("Undefined id");
   if (name === undefined) throw Error("Undefined name");
   return { id, name } as AppVM;
