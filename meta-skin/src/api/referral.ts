@@ -6,7 +6,7 @@ import { CreateReferralVM } from "./viewModel";
 export function createReferral(createReferralVM: CreateReferralVM) {
   // TODO: Do API Call with axios or similar and remove mock
   // const { appId } = createReferralVM;
-  // const apiUrl = `/api/app/${appId}/referral`;
+  // const apiUrl = `/api/app/${appId}/referral/${advocateId}`;
   // const params = mapCreateReferralVMToAM(createReferralVM);
   const result = createReferralMock(createReferralVM);
 
