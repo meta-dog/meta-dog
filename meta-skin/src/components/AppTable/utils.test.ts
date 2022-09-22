@@ -1,4 +1,4 @@
-import { CreateReferralVM } from "api/viewModel";
+import { CreateReferralVM } from "api";
 
 import { extractReferral, extractUrls } from "./utils";
 

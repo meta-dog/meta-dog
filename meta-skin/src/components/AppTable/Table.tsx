@@ -8,7 +8,7 @@ import {
   GridSortModel,
 } from "@mui/x-data-grid";
 
-import { AppVM } from "api";
+import { AppVM, readReferral } from "api";
 import { useAppStateContext } from "contexts";
 
 import AppNameRenderer from "./AppNameRenderer";
@@ -59,7 +59,13 @@ export default function Table() {
   const handleRequestClick = (id: AppVM["id"]) => {
     setIdsClicked((prev) => prev.add(id));
 
-    // TODO: Add api call to get referral id, compose url and open it
+    readReferral(id).then(({ advocateId }) => {
+      window.open(
+        `https://www.oculus.com/appreferrals/${advocateId}/${id}`,
+        "_blank",
+        "noreferrer",
+      );
+    });
   };
   const handleResetClick = () => setIdsClicked(new Set<AppVM["id"]>());
 

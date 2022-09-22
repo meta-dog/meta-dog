@@ -1,5 +1,10 @@
-export type { AppVM, CreateReferralVM } from "./viewModel";
-export type { AppAM, CreateReferralAM } from "./apiModel";
+export type { AppAM, CreateReferralAM, ReadReferralAM } from "./apiModel";
+export type { AppVM, CreateReferralVM, ReadReferralVM } from "./viewModel";
 
 export { default as readApps } from "./app";
-export { default as createReferral } from "./referral";
+export { createReferral, readReferral } from "./referral";
+export {
+  mapAppAMToVM,
+  mapCreateReferralVMToAM,
+  mapReadReferralVMToAM as mapReadReferralAMToVM,
+} from "./mappers";
