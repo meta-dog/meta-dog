@@ -1,6 +1,7 @@
 {
   "name": "meta-skin",
-  "version": "0.3.0",
+  "version": "0.4.0",
+  "homepage": "https://meta-dog.github.io/meta-dog",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -24,6 +25,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -58,6 +61,7 @@
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "gh-pages": "^4.0.0",
     "postcss": "^8.4.16",
     "prettier": "^2.7.1",
     "tailwindcss": "^3.1.8"

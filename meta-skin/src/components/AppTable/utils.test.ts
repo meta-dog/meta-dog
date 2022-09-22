@@ -15,6 +15,11 @@ const extractReferralData: ExtractReferralData[] = [
   },
   {
     input:
+      "https://www.oculus.com/appreferrals/maybe-good-gal/5138511912885491/?utm_source=3",
+    output: { advocateId: "maybe-good-gal", appId: "5138511912885491" },
+  },
+  {
+    input:
       "https://www.oculus.com/appreferrals/example.user/asdasd/1241241241241241/?utm_source=3",
     output: false,
   },
@@ -67,6 +72,16 @@ const extractUrlData: ExtractUrlData[] = [
     output: [
       "https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
       "https://www.oculus.com/appreferrals/example.user.potato/1212541241241241/?utm_source=3",
+    ],
+  },
+  {
+    input: `URL 1: https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3
+      , URL 2:  https://www.oculus.com/appreferrals/example.user.potato/1212541241241241/?utm_source=3
+      , NON OCULUS URL: https://www.facebook.com https://www.oculus.com/appreferrals/maybe-good-gal/5138511912885491/?utm_source=3`,
+    output: [
+      "https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
+      "https://www.oculus.com/appreferrals/example.user.potato/1212541241241241/?utm_source=3",
+      "https://www.oculus.com/appreferrals/maybe-good-gal/5138511912885491/?utm_source=3",
     ],
   },
 ];
