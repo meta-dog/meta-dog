@@ -26,15 +26,24 @@ export function extractUrls(text: string) {
   }, []);
 }
 
-export function getSavedAppIds(): string[] {
-  const unparsedSavedAppsIds = localStorage.getItem("saved-app-ids");
+export function getSavedAppIds(
+  key: "saved-app-ids" | "received-app-ids",
+): string[] {
+  const unparsedSavedAppsIds = localStorage.getItem(key);
   return unparsedSavedAppsIds === null
     ? []
     : (JSON.parse(unparsedSavedAppsIds) as string[]);
 }
 
-export function appendSavedAppIds(extraAppIds: string[]) {
-  const prevAppIds = getSavedAppIds();
-  const nextAppIds: string[] = [...prevAppIds, ...extraAppIds];
-  localStorage.setItem("saved-app-ids", JSON.stringify(nextAppIds));
+export function appendSavedAppIds(
+  key: "saved-app-ids" | "received-app-ids",
+  extraAppIds: string[],
+) {
+  const prevAppIds = getSavedAppIds(key);
+  const nextAppIds: Set<string> = new Set([...prevAppIds, ...extraAppIds]);
+  localStorage.setItem(key, JSON.stringify(Array.from(nextAppIds)));
+}
+
+export function resetSavedAppIds(key: "saved-app-ids" | "received-app-ids") {
+  localStorage.removeItem(key);
 }
