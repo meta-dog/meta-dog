@@ -5,7 +5,7 @@ export default function ReferralHeaderRenderer(handleResetClick: () => void) {
   return (
     <Stack direction="row" className="flex justify-center items-center">
       <Typography variant="body2" fontWeight={500}>
-        Referral
+        Get
       </Typography>
       <Box>
         <IconButton

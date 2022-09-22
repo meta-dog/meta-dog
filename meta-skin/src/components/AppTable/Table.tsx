@@ -8,31 +8,30 @@ import {
   GridSortModel,
 } from "@mui/x-data-grid";
 
-import { AppVM, readReferral } from "api";
+import { AppVM, createReferral, readReferral } from "api";
 import { useAppStateContext } from "contexts";
 
 import AppNameRenderer from "./AppNameRenderer";
+import CreateCellRenderer from "./CreateCellRenderer";
 import CustomToolbar from "./CustomToolbar";
 import ReferralCellRenderer from "./ReferralCellRenderer";
 import ReferralHeaderRenderer from "./ReferralHeaderRenderer";
-import { HandleRequestClick } from "./types";
-import { getSavedAppIds } from "./utils";
+import { HandleIdClick } from "./types";
+import { appendSavedAppIds, getSavedAppIds, resetSavedAppIds } from "./utils";
 
 const getColumns = (
-  handleRequestClick: HandleRequestClick,
+  handleRequestClick: HandleIdClick,
+  handleCreateClick: HandleIdClick,
   handleResetClick: () => void,
-  idsClicked: Set<AppVM["id"]>,
 ) =>
   [
     {
       field: "referral",
       renderHeader: () => ReferralHeaderRenderer(handleResetClick),
-      headerName: "Referral",
       headerAlign: "center",
       headerClassName: "text-center",
-      width: 100,
-      renderCell: (params) =>
-        ReferralCellRenderer(params, idsClicked, handleRequestClick),
+      width: 70,
+      renderCell: (params) => ReferralCellRenderer(params, handleRequestClick),
       disableReorder: true,
       disableColumnMenu: true,
       disableExport: true,
@@ -44,28 +43,35 @@ const getColumns = (
       flex: 1,
       renderCell: AppNameRenderer,
     },
+    {
+      field: "create",
+      headerName: "Create",
+      headerAlign: "center",
+      headerClassName: "text-center",
+      width: 70,
+      renderCell: (params) => CreateCellRenderer(params, handleCreateClick),
+      disableReorder: true,
+      disableColumnMenu: true,
+      disableExport: true,
+      sortable: false,
+    },
   ] as GridColDef[];
 
 export default function Table() {
   const { apps } = useAppStateContext();
 
-  const [storedAdvocateId, setStoredAdvocateId] = useState<string | null>(null);
   const [savedAppIds, setSavedAppIds] = useState<string[]>([]);
   const [filter, setFilter] = useState<GridFilterModel>();
   const [sortModel, setSortModel] = useState<GridSortModel>([
     { field: "name", sort: "asc" },
   ]);
-  const [idsClicked, setIdsClicked] = useState<Set<AppVM["id"]>>(
-    new Set<AppVM["id"]>(),
-  );
 
   useEffect(() => {
-    setStoredAdvocateId(localStorage.getItem("advocate-id"));
-    setSavedAppIds(getSavedAppIds());
+    setSavedAppIds(getSavedAppIds("saved-app-ids"));
   }, []);
 
   const handleRequestClick = (id: AppVM["id"]) => {
-    setIdsClicked((prev) => prev.add(id));
+    appendSavedAppIds("received-app-ids", [id]);
 
     readReferral(id).then(({ advocateId }) => {
       window.open(
@@ -75,7 +81,12 @@ export default function Table() {
       );
     });
   };
-  const handleResetClick = () => setIdsClicked(new Set<AppVM["id"]>());
+  const handleCreateClick = (appId: AppVM["id"]) => {
+    const advocateId = localStorage.getItem("advocate-id");
+    if (advocateId === null) return;
+    createReferral({ advocateId, appId });
+  };
+  const handleResetClick = () => resetSavedAppIds("received-app-ids");
 
   const onSortChange = () => {
     setSortModel(([{ field, sort }]) => {
@@ -107,6 +118,12 @@ export default function Table() {
     },
   };
 
+  const columns = getColumns(
+    handleRequestClick,
+    handleCreateClick,
+    handleResetClick,
+  );
+
   return (
     <Stack
       direction="column"
@@ -115,11 +132,10 @@ export default function Table() {
       <Box className="w-full h-full p-6 max-w-[800px]">
         <DataGrid
           rows={apps}
-          columns={getColumns(handleRequestClick, handleResetClick, idsClicked)}
+          columns={columns}
           rowsPerPageOptions={[]}
           filterMode="client"
           hideFooter
-          checkboxSelection={storedAdvocateId !== null}
           components={{ Toolbar: CustomToolbar }}
           disableColumnFilter
           disableColumnMenu

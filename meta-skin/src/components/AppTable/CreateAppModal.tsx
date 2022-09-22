@@ -134,8 +134,8 @@ export default function CreateAppModal() {
       return;
     }
 
-    const repeatedAppIds = getSavedAppIds().filter((savedAppId) =>
-      uniqueAppIdsArray.includes(savedAppId),
+    const repeatedAppIds = getSavedAppIds("saved-app-ids").filter(
+      (savedAppId) => uniqueAppIdsArray.includes(savedAppId),
     );
 
     if (repeatedAppIds.length > 0) {
@@ -202,6 +202,9 @@ export default function CreateAppModal() {
         (result) => result.status === "fulfilled",
       );
       const rejected = results.filter((result) => result.status === "rejected");
+      const fulfilledAppIds = (
+        fulfilled as PromiseFulfilledResult<string>[]
+      ).map(({ value }) => value);
       if (rejected.length === 0) {
         let message = `All of the ${validUrl.length} App referrals were created successfully!`;
         if (singular) {
@@ -212,11 +215,7 @@ export default function CreateAppModal() {
         setTextFieldPlaceholder(INITIAL_TEXT_FIELD_TEXT);
         setTextFieldValue([]);
         localStorage.setItem("advocate-id", validUrl[0].advocateId);
-        appendSavedAppIds(
-          (fulfilled as PromiseFulfilledResult<string>[]).map(
-            ({ value }) => value,
-          ),
-        );
+        appendSavedAppIds("saved-app-ids", fulfilledAppIds);
         return;
       }
       if (fulfilled.length === 0) {
@@ -232,9 +231,6 @@ export default function CreateAppModal() {
       }
       const message = `${fulfilled.length} App referrals were created successfully, but ${rejected.length} could not be created. Please review them and try again`;
       toast.error(message, { icon: "🤔" });
-      const fulfilledAppIds = (
-        fulfilled as PromiseFulfilledResult<string>[]
-      ).map(({ value }) => value);
       setValidUrl((prevValidUrls) => {
         if (prevValidUrls === false || prevValidUrls === null)
           return prevValidUrls;
@@ -246,7 +242,7 @@ export default function CreateAppModal() {
       setTextFieldValue((prevAppIds) =>
         prevAppIds.filter((appId) => !fulfilledAppIds.includes(appId)),
       );
-      appendSavedAppIds(fulfilledAppIds);
+      appendSavedAppIds("saved-app-ids", fulfilledAppIds);
       localStorage.setItem("advocate-id", validUrl[0].advocateId);
     });
   };
