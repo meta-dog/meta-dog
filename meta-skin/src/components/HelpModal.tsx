@@ -90,6 +90,10 @@ export default function HelpModal() {
             david.c.iglesias@gmail.com
           </Link>
           <Typography>
+            - As an Advocate, your id is saved once you save a link, to thwart
+            attempts of saving links from someone else.
+          </Typography>
+          <Typography>
             - As a Friend, nothing is saved. Whenever you click on a link you go
             directly to the Meta Oculus Store, no strings attached.
           </Typography>
