@@ -17,7 +17,7 @@ export function extractReferral(url: string): false | CreateReferralVM {
 
 export function extractUrls(text: string) {
   const urlRegex =
-    /\s*(?<url>https:\/\/www.oculus.com\/appreferrals\/[\w.-/?*&_=]+)\s*/g;
+    /\s*(?<url>https:\/\/www.oculus.com\/appreferrals\/[\w.\-/?*&_=]+)\s*/g;
   const allMatches = text.matchAll(urlRegex);
   return Array.from(allMatches).reduce((prev, match) => {
     const url = match.groups?.url;
