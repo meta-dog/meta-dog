@@ -25,3 +25,16 @@ export function extractUrls(text: string) {
     return prev;
   }, []);
 }
+
+export function getSavedAppIds(): string[] {
+  const unparsedSavedAppsIds = localStorage.getItem("saved-app-ids");
+  return unparsedSavedAppsIds === null
+    ? []
+    : (JSON.parse(unparsedSavedAppsIds) as string[]);
+}
+
+export function appendSavedAppIds(extraAppIds: string[]) {
+  const prevAppIds = getSavedAppIds();
+  const nextAppIds: string[] = [...prevAppIds, ...extraAppIds];
+  localStorage.setItem("saved-app-ids", JSON.stringify(nextAppIds));
+}
