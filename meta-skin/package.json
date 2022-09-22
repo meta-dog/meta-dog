@@ -1,6 +1,6 @@
 {
   "name": "meta-skin",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "homepage": "https://meta-dog.github.io/meta-dog",
   "private": true,
   "dependencies": {

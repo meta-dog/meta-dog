@@ -13,15 +13,16 @@ import advocates from "./advocates.json";
 // https://www.oculus.com/appreferrals/maybe-good-gal/1672671/?utm_source=3 404
 // https://www.oculus.com/appreferrals/maybe-good-gal/5138511912885491/?utm_source=3 404
 
-export default function createReferralMock(createReferralVM: CreateReferralVM) {
-  const advocate = advocates.find(
-    ({ username }) => username === createReferralVM.advocateId,
-  );
+export default function createReferralMock({
+  appId,
+  advocateId,
+}: CreateReferralVM) {
+  const advocate = advocates.find(({ username }) => username === advocateId);
   if (advocate === undefined) return Promise.reject(StatusCodes.NOT_FOUND);
-  const status = advocate.appIds.find(
-    ({ input }) => input === createReferralVM.appId,
-  )?.["status-code"];
+  const status = advocate.appIds.find(({ input }) => input === appId)?.[
+    "status-code"
+  ];
   if (status === undefined) return Promise.reject(StatusCodes.NOT_FOUND);
-  if (status === StatusCodes.CREATED) return Promise.resolve();
+  if (status === StatusCodes.CREATED) return Promise.resolve(appId);
   return Promise.reject(status);
 }

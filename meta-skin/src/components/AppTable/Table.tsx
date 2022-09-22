@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Box, Stack, SxProps, Theme } from "@mui/material";
 import {
@@ -16,6 +16,7 @@ import CustomToolbar from "./CustomToolbar";
 import ReferralCellRenderer from "./ReferralCellRenderer";
 import ReferralHeaderRenderer from "./ReferralHeaderRenderer";
 import { HandleRequestClick } from "./types";
+import { getSavedAppIds } from "./utils";
 
 const getColumns = (
   handleRequestClick: HandleRequestClick,
@@ -48,6 +49,8 @@ const getColumns = (
 export default function Table() {
   const { apps } = useAppStateContext();
 
+  const [storedAdvocateId, setStoredAdvocateId] = useState<string | null>(null);
+  const [savedAppIds, setSavedAppIds] = useState<string[]>([]);
   const [filter, setFilter] = useState<GridFilterModel>();
   const [sortModel, setSortModel] = useState<GridSortModel>([
     { field: "name", sort: "asc" },
@@ -55,6 +58,11 @@ export default function Table() {
   const [idsClicked, setIdsClicked] = useState<Set<AppVM["id"]>>(
     new Set<AppVM["id"]>(),
   );
+
+  useEffect(() => {
+    setStoredAdvocateId(localStorage.getItem("advocate-id"));
+    setSavedAppIds(getSavedAppIds());
+  }, []);
 
   const handleRequestClick = (id: AppVM["id"]) => {
     setIdsClicked((prev) => prev.add(id));
@@ -111,6 +119,7 @@ export default function Table() {
           rowsPerPageOptions={[]}
           filterMode="client"
           hideFooter
+          checkboxSelection={storedAdvocateId !== null}
           components={{ Toolbar: CustomToolbar }}
           disableColumnFilter
           disableColumnMenu
@@ -121,6 +130,9 @@ export default function Table() {
           onFilterModelChange={onFilterChange}
           sx={dataGridSx}
           disableSelectionOnClick
+          isRowSelectable={({ row }) =>
+            !savedAppIds.includes((row as AppVM).id)
+          }
         />
       </Box>
     </Stack>
