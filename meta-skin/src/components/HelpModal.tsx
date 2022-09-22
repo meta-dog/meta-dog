@@ -157,6 +157,7 @@ export default function HelpModal() {
             color="secondary"
             onClick={handleAcceptTerms}
             disabled={getHasAcceptedTerms()}
+            aria-label="accepted terms"
           >
             <Typography variant="button">
               {hasAccepted ? "You have already accepted" : "I accept the terms"}

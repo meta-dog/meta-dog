@@ -299,6 +299,7 @@ export default function CreateAppModal() {
             color="secondary"
             disabled={disabled}
             onClick={handleSaveClick}
+            aria-label="save"
           >
             <Typography variant="button">Save</Typography>
           </Button>

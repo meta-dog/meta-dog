@@ -45,6 +45,7 @@ export default function ReferralCellRenderer(
           onClick={() => handleRequestClick(id)}
           color="secondary"
           disabled={disabled}
+          aria-label="get new link for the app"
         >
           <Hail />
         </Button>

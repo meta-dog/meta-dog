@@ -37,6 +37,7 @@ export default function CreateCellRenderer(
           onClick={() => !appIdWasSaved && handleCreateClick(id)}
           disabled={noAdvocateId || appIdWasSaved}
           color="secondary"
+          aria-label="create new link with my user"
         >
           <RecordVoiceOver />
         </Button>
