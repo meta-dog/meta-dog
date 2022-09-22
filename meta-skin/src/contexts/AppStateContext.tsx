@@ -18,7 +18,12 @@ function useAppState() {
   const reloadApps = async () =>
     readApps()
       .then(setApps)
-      .catch((error) => toast.error(`Error reading the Apps: ${error}`));
+      .catch(() =>
+        toast.error(
+          `There was an error retrieving the App list. Please reload it manually.`,
+          { icon: "😥" },
+        ),
+      );
 
   useEffect(() => {
     reloadApps();
