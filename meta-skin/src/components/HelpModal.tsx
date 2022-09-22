@@ -72,6 +72,15 @@ export default function HelpModal() {
           <Typography>
             The confirmed regions so far are UK, ES, KR, NL and some US states.
           </Typography>
+          <Typography variant="h6">🤓 Are there any limits?</Typography>
+          <Typography>
+            - As a Friend, once you have accepted an invitation, you have 7 days
+            to buy the game.
+          </Typography>
+          <Typography>
+            - As an Advocate, you will receive your credit 15 days after your
+            Friend has bought the game (to avoid refunds).
+          </Typography>
           <Typography variant="h6">😥 What data do you store?</Typography>
           <Typography>
             Your browser stores locally whether you have accepted these terms or
