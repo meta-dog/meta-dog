@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
-import { CheckCircle, ThumbUpAlt } from "@mui/icons-material";
+import { CheckCircle, Email, ThumbUpAlt } from "@mui/icons-material";
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  IconButton,
+  Link,
   Stack,
   Typography,
 } from "@mui/material";
@@ -78,9 +80,15 @@ export default function HelpModal() {
           <Typography>
             - As an Advocate, a simple Database stores your `username` and a
             list of the meta apps that you have saved. You can request this
-            information to be deleted by writing an email to
-            david.c.iglesias@gmail.com.
+            information to be deleted by sending an email via the following
+            link:
           </Typography>
+          <Link href="mailto:david.c.iglesias@gmail.com?subject=[Meta App Referrals] Please remove my username!&body=Hi, my username is: [write your username here] and I would like it removed from your Meta App Referrals App.Thank you.">
+            <IconButton>
+              <Email />
+            </IconButton>
+            david.c.iglesias@gmail.com
+          </Link>
           <Typography>
             - As a Friend, nothing is saved. Whenever you click on a link you go
             directly to the Meta Oculus Store, no strings attached.
