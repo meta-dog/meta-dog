@@ -25,7 +25,8 @@ import { useAppStateContext } from "contexts";
 
 import { extractReferral, extractUrls } from "./utils";
 
-const INITIAL_TEXT_FIELD_TEXT = "Paste here";
+const LIMIT = 10 as const;
+const INITIAL_TEXT_FIELD_TEXT = `Paste here (${LIMIT} MAX)`;
 const INITIAL_VALID_URL = null;
 
 export default function CreateAppModal() {
@@ -64,6 +65,13 @@ export default function CreateAppModal() {
       setTextFieldText(INITIAL_TEXT_FIELD_TEXT);
       return;
     }
+    if (urls.length >= LIMIT) {
+      toast.error(
+        `The limit of App Referrals to be pasted at once is ${LIMIT}`,
+      );
+      setTextFieldText(INITIAL_TEXT_FIELD_TEXT);
+      return;
+    }
     const newValidUrls = urls.map(extractReferral);
     const singular = newValidUrls.length === 1;
     if (newValidUrls.some((isValid) => isValid === false)) {
@@ -80,6 +88,37 @@ export default function CreateAppModal() {
       setValidUrl(false);
       return;
     }
+    const uniqueAdvocateIds = new Set<string>();
+    const uniqueAppIds = new Set<string>();
+    newValidUrls.forEach((createReferralVM) => {
+      const { advocateId, appId } = createReferralVM as CreateReferralVM;
+      uniqueAdvocateIds.add(advocateId);
+      uniqueAppIds.add(appId);
+    });
+
+    const uniqueAdvocateIdsArray = Array.from(uniqueAdvocateIds);
+    if (uniqueAdvocateIdsArray.length > 1) {
+      toast.error("You can only send referral links from one user");
+      setValidUrl(false);
+      return;
+    }
+    const uniqueAppIdsArray = Array.from(uniqueAppIds);
+    if (uniqueAppIdsArray.length < newValidUrls.length) {
+      toast.error("At least one of the Referral App links is repeated");
+      setValidUrl(false);
+      return;
+    }
+
+    const pastedAdvocateId = uniqueAdvocateIdsArray[0];
+    const savedAdvocateId = localStorage.getItem("advocate-id");
+    if (savedAdvocateId !== null && savedAdvocateId !== pastedAdvocateId) {
+      toast.error(
+        `You sent a link from the user "${savedAdvocateId}" in the past, but you pasted a link from the user "${pastedAdvocateId}" now. Only one user is allowed.`,
+      );
+      setValidUrl(false);
+      return;
+    }
+
     let message = `All of the ${newValidUrls.length} detected App referral links seem valid! Please click on the button to try to save them.`;
     let newTextFieldText = `${newValidUrls.length} Valid links`;
     if (singular) {
@@ -124,6 +163,7 @@ export default function CreateAppModal() {
         toast.success(message, { icon: "🎉" });
         setValidUrl(INITIAL_VALID_URL);
         setTextFieldText(INITIAL_TEXT_FIELD_TEXT);
+        localStorage.setItem("advocate-id", validUrl[0].advocateId);
         return;
       }
       if (fulfilled.length === 0) {
@@ -134,12 +174,14 @@ export default function CreateAppModal() {
         toast.error(message, { icon: "🥺" });
         setValidUrl(false);
         setTextFieldText(INITIAL_TEXT_FIELD_TEXT);
+        localStorage.setItem("advocate-id", validUrl[0].advocateId);
         return;
       }
       const message = `${fulfilled.length} App referrals were created successfully, but ${rejected.length} could not be created`;
       toast.error(message, { icon: "🤔" });
       setValidUrl(INITIAL_VALID_URL);
       setTextFieldText(INITIAL_TEXT_FIELD_TEXT);
+      localStorage.setItem("advocate-id", validUrl[0].advocateId);
     });
   };
 
