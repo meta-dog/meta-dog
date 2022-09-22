@@ -1,7 +1,7 @@
 {
   "name": "meta-skin",
   "version": "0.4.0",
-  "homepage": "https://davidciglesias.github.io/meta-dog",
+  "homepage": "https://meta-dog.github.io/meta-dog",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",
