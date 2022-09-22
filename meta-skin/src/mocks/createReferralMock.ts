@@ -1,5 +1,6 @@
-import { CreateReferralVM } from "api/viewModel";
 import { StatusCodes } from "http-status-codes";
+
+import { CreateReferralVM } from "api";
 
 import advocates from "./advocates.json";
 
