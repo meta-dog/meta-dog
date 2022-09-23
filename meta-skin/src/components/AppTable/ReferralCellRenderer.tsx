@@ -24,7 +24,7 @@ export default function ReferralCellRenderer(
   let title: string | ReactNode = "";
   if (disabled) {
     title = (
-      <div className="whitespace-pre-line text-center">
+      <div className="whitespace-pre-line text-center max-w-[30vw]">
         {t("tooltip.title-when-disabled")}
       </div>
     );

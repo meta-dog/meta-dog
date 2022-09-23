@@ -37,7 +37,11 @@ export default function CreateCellRenderer(
       onMouseLeave={() => setOpen(false)}
       onTouchEnd={() => setOpen(true)}
       onBlur={() => setOpen(false)}
-      title={<div className="whitespace-pre-line text-center">{titleText}</div>}
+      title={
+        <div className="whitespace-pre-line text-center max-w-[30vw]">
+          {titleText}
+        </div>
+      }
       arrow
       placement="left"
     >
