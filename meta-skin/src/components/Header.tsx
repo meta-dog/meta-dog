@@ -16,7 +16,11 @@ export default function Header() {
           <Logo />
         </Avatar>
         <Typography variant="h6">Meta App Referrals</Typography>
-        <IconButton color="secondary" onClick={() => setOpenHelpModal(true)}>
+        <IconButton
+          aria-label="terms and help"
+          color="secondary"
+          onClick={() => setOpenHelpModal(true)}
+        >
           <Help />
         </IconButton>
       </Toolbar>

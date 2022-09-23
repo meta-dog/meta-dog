@@ -21,10 +21,10 @@ export default function CustomToolbar() {
           autoFocus
           placeholder="Search by name..."
         />
-        <IconButton onClick={() => reloadApps()} color="secondary">
+        <IconButton aria-label="reload table" onClick={() => reloadApps()} color="secondary">
           <Refresh />
         </IconButton>
-        <IconButton onClick={() => setOpenCreateModal(true)} color="secondary">
+        <IconButton aria-label="create link" onClick={() => setOpenCreateModal(true)} color="secondary">
           <Add />
         </IconButton>
       </Stack>

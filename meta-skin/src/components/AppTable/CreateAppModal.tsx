@@ -265,6 +265,7 @@ export default function CreateAppModal() {
           className="gap-4"
         >
           <IconButton
+            aria-label="paste from clipboard"
             onClick={() => navigator.clipboard.readText().then(validateText)}
           >
             <ContentPasteGo />
