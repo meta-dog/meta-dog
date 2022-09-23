@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import config from './config';
 import { DatabaseConnectionService } from './database-connection-service';
 import { AppModule } from './modules/app/app.module';
+import { ReferralModule } from './modules/referral/referral.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { AppModule } from './modules/app/app.module';
       useClass: DatabaseConnectionService,
     }),
     AppModule,
+    ReferralModule,
   ],
   controllers: [],
   providers: [],

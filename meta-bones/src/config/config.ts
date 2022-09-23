@@ -8,7 +8,7 @@ export const config = () => ({
     type: process.env.DATABASE_TYPE,
     database: process.env.DATABASE_DB,
     synchronize: true,
-    dropSchema: true,
+    dropSchema: false,
     logging: true,
     entities: ['dist/entities/*.js'],
     migrations: ['dist/migration/**/*.js'],

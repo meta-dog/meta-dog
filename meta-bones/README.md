@@ -71,3 +71,18 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## .env
+
+In order to run the project, you must have a proper `.env` config:
+
+```ts
+PORT=4000
+APP_NAME="Meta-Dog, actually a Cat"
+
+DATABASE_TYPE="sqlite"
+DATABASE_HOST="localhost"
+DATABASE_PORT=5532
+DATABASE_DB="metadog.db"
+DATABASE_NAME="metadog DB"
+```
