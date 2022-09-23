@@ -26,9 +26,9 @@ export default function CreateCellRenderer(
   const advocateId = getSavedAdvocateId();
   const noAdvocateId = advocateId === null;
 
-  let title = "";
-  if (noAdvocateId) title = t("tooltip.no-advocate-id");
-  else if (appIdWasSaved) title = t("tooltip.app-id-was-saved");
+  let titleText = t("tooltip.no-advocate-id");
+  if (noAdvocateId) titleText = t("tooltip.no-advocate-id");
+  else if (appIdWasSaved) titleText = t("tooltip.app-id-was-saved");
 
   return (
     <Tooltip
@@ -37,7 +37,7 @@ export default function CreateCellRenderer(
       onMouseLeave={() => setOpen(false)}
       onTouchEnd={() => setOpen(true)}
       onBlur={() => setOpen(false)}
-      title={title}
+      title={<div className="whitespace-pre-line text-center">{titleText}</div>}
       arrow
       placement="left"
     >

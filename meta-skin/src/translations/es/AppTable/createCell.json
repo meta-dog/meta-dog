@@ -1,7 +1,7 @@
 {
   "tooltip": {
-    "no-advocate-id": "Antes debes crear un referido con el botón +",
-    "app-id-was-saved": "Ya has subido este referido de App"
+    "no-advocate-id": "Antes debes crear un\r\nreferido con el botón +",
+    "app-id-was-saved": "Ya has subido este\r\nreferido de App"
   },
   "button": {
     "create": {

@@ -1,7 +1,7 @@
 import { ReactNode, useState } from "react";
 
 import { Hail } from "@mui/icons-material";
-import { Button, Stack, Tooltip, Typography } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { AppVM } from "api";
@@ -24,10 +24,8 @@ export default function ReferralCellRenderer(
   let title: string | ReactNode = "";
   if (disabled) {
     title = (
-      <div onMouseEnter={() => setOpen(true)}>
-        <Stack direction="column">
-          <Typography>{t("tooltip.title-when-disabled")}</Typography>
-        </Stack>
+      <div className="whitespace-pre-line text-center">
+        {t("tooltip.title-when-disabled")}
       </div>
     );
   }
