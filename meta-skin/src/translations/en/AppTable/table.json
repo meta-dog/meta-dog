@@ -1,0 +1,12 @@
+{
+  "columns": {
+    "referral": "Get",
+    "app-name": "App Name",
+    "create": "Create"
+  },
+  "table": {
+    "no-rows-label": "No Apps match",
+    "column-header-sort-icon-label": "Order by name",
+    "error-overlay-default-label": "Ocurrió un error. Intente recargar la tabla."
+  }
+}

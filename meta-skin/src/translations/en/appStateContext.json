@@ -1,0 +1,5 @@
+{
+  "toast": {
+    "error-read-apps": "There was an error retrieving the App list. Please wait a bit and reload it manually via the table button."
+  }
+}

@@ -17,6 +17,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
 import { CreateReferralVM, createReferral } from "api";
@@ -32,10 +33,11 @@ import {
 } from "./utils";
 
 const LIMIT = 10 as const;
-const INITIAL_TEXT_FIELD_TEXT = `Paste here (${LIMIT} MAX)`;
 
 export default function CreateAppModal() {
   const { openCreateModal, setOpenCreateModal } = useAppStateContext();
+
+  const { t } = useTranslation("appTableCreateAppModal");
 
   const [currAdvocateId, setCurrAdvocateId] = useState<string | null>(null);
   const [hasError, setHasError] = useState(false);
@@ -66,30 +68,22 @@ export default function CreateAppModal() {
   const validateText = (text: string) => {
     const urls = extractUrls(text);
     if (urls.length === 0) {
-      toast.warn("No App URLs were found in the pasted text!");
+      toast.error(t("toast.error.no-urls-found"));
       setValidUrls([]);
       setHasError(true);
       return;
     }
     if (urls.length >= LIMIT) {
-      toast.error(
-        `The limit of App Referrals to be pasted at once is ${LIMIT}`,
-      );
+      toast.error(t("toast.error.above-limit", { limit: LIMIT }));
       setValidUrls([]);
       setHasError(true);
       return;
     }
     const newValidUrls = urls.map(extractReferral);
-    const singular = newValidUrls.length === 1;
+    const lenNewValidUrls = newValidUrls.length;
     if (newValidUrls.some((isValid) => isValid === false)) {
-      let message =
-        "At least one of the provided App referral link is invalid. Please review them and paste them again.";
-      if (singular) {
-        message =
-          "The provided App referral link is invalid. Please review it and paste it again.";
-      }
       setHasError(true);
-      toast.error(message, { icon: "😥" });
+      toast.error(t("toast.error.invalid-url", { quantity: lenNewValidUrls }));
       setValidUrls([]);
       return;
     }
@@ -103,14 +97,15 @@ export default function CreateAppModal() {
 
     const uniqueAdvocateIdsArray = Array.from(uniqueAdvocateIds);
     if (uniqueAdvocateIdsArray.length > 1) {
-      toast.error("You can only send referral links from one user");
+      toast.error(t("toast.error.multiple-users"));
       setHasError(true);
       setValidUrls([]);
       return;
     }
     const uniqueAppIdsArray = Array.from(uniqueAppIds);
     if (uniqueAppIdsArray.length < newValidUrls.length) {
-      toast.error("At least one of the Referral App links is repeated");
+      // TODO: Prune repeated and continue
+      toast.error(t("toast.error.repeated-urls"));
       setHasError(true);
       setValidUrls([]);
       return;
@@ -120,7 +115,7 @@ export default function CreateAppModal() {
     const savedAdvocateId = getSavedAdvocateId();
     if (savedAdvocateId !== null && savedAdvocateId !== pastedAdvocateId) {
       toast.error(
-        `You sent a link from the user "${savedAdvocateId}" in the past, but you pasted a link from the user "${pastedAdvocateId}" now. Only one user is allowed.`,
+        t("toast.error.duplicated-user", { savedAdvocateId, pastedAdvocateId }),
       );
       setHasError(true);
       setValidUrls([]);
@@ -132,11 +127,14 @@ export default function CreateAppModal() {
     );
 
     if (repeatedAppIds.length > 0) {
+      const repeatedAppsText = repeatedAppIds.reduce(
+        (prev, appId, idx) => (idx === 0 ? appId : `${prev}, ${appId}`),
+        "",
+      );
       toast.warn(
-        `You have already saved the Apps: "${repeatedAppIds.reduce(
-          (prev, appId, idx) => (idx === 0 ? appId : `${prev}, ${appId}`),
-          "",
-        )}" in the past, but you pasted links that included them again, and have been removed.`,
+        t("toast.warn.repeated-saved-apps", {
+          repeatedAppsText,
+        }),
       );
       const nonRepeatedAppIds = uniqueAppIdsArray.filter(
         (appId) => !repeatedAppIds.includes(appId),
@@ -156,12 +154,7 @@ export default function CreateAppModal() {
       return;
     }
 
-    let message = `All of the ${newValidUrls.length} detected App referral links seem valid! Please click on the button to try to save them.`;
-    if (singular) {
-      message =
-        "The provided App referral link seems valid! Please click on the button to try to save it.";
-    }
-    toast.info(message);
+    toast.info(t("toast.info.all_valid", { quantity: lenNewValidUrls }));
     setHasError(false);
     if (addButtonRef.current) {
       // StrictMode React autoFocus fix: https://github.com/mui/material-ui/issues/33004
@@ -186,7 +179,6 @@ export default function CreateAppModal() {
   const handleSaveClick = () => {
     const numValidUrls = validUrls.length;
     if (numValidUrls === 0) return;
-    const singular = numValidUrls === 1;
     const promises = validUrls.map(createReferral);
     Promise.allSettled(promises).then((results) => {
       saveAdvocateId(validUrls[0].advocateId);
@@ -195,12 +187,7 @@ export default function CreateAppModal() {
       );
       const rejected = results.filter((result) => result.status === "rejected");
       if (fulfilled.length === 0) {
-        let message = `None of the ${numValidUrls} App referral were created successfully. Please review them and try again`;
-        if (singular) {
-          message =
-            "The App referral could not be created. Please review it and try again.";
-        }
-        toast.error(message, { icon: "🥺" });
+        toast.error(t("toast.error.all-rejected"), { icon: "🥺" });
         setHasError(true);
         return;
       }
@@ -209,17 +196,20 @@ export default function CreateAppModal() {
       ).map(({ value }) => value);
       appendSavedAppIds("saved-app-ids", fulfilledAppIds);
       if (rejected.length === 0) {
-        let message = `All of the ${validUrls.length} App referrals were created successfully!`;
-        if (singular) {
-          message = "The App referral was created successfully!";
-        }
-        toast.success(message, { icon: "🎉" });
+        toast.success(
+          t("toast.info.all-successful", { quatnity: numValidUrls }),
+          { icon: "🎉" },
+        );
         setValidUrls([]);
         setHasError(false);
         return;
       }
-      const message = `${fulfilled.length} App referrals were created successfully, but ${rejected.length} could not be created. Please review them and try again`;
-      toast.error(message, { icon: "🤔" });
+      const numFulfilled = fulfilled.length;
+      const numRejected = rejected.length;
+      toast.warn(
+        t("toast.warn.partial-reject", { numFulfilled, numRejected }),
+        { icon: "🤔" },
+      );
       setValidUrls((prevValidUrls) =>
         prevValidUrls.filter(({ appId }) => !fulfilledAppIds.includes(appId)),
       );
@@ -232,16 +222,16 @@ export default function CreateAppModal() {
     "",
   );
 
+  const context = currAdvocateId === null ? "" : "with-advocate";
+  const title = t("title", { context, currAdvocateId });
+
   return (
     <Dialog
       open={openCreateModal}
       onClose={() => setOpenCreateModal(false)}
       sx={{ "& .MuiPaper-root": { width: "95vw", maxWidth: "650px" } }}
     >
-      <DialogTitle textAlign="center">
-        Add your link(s)
-        {currAdvocateId === null ? "" : `: ${currAdvocateId}`}
-      </DialogTitle>
+      <DialogTitle textAlign="center">{title}</DialogTitle>
       <DialogContent>
         <Stack
           direction="row"
@@ -258,9 +248,10 @@ export default function CreateAppModal() {
             }}
             fullWidth
             onPaste={handlePaste}
-            placeholder={
-              hasError ? "Please try again" : INITIAL_TEXT_FIELD_TEXT
-            }
+            placeholder={t("textfield.placeholder", {
+              context: String(hasError),
+              limit: LIMIT,
+            })}
             type="url"
             multiline
           />
@@ -279,9 +270,9 @@ export default function CreateAppModal() {
             color="secondary"
             disabled={disabled}
             onClick={handleSaveClick}
-            aria-label="save"
+            aria-label={t("button.save.aria-label")}
           >
-            <Typography variant="button">Save</Typography>
+            <Typography variant="button">{t("button.save.label")}</Typography>
           </Button>
         </Stack>
       </DialogActions>

@@ -1,0 +1,8 @@
+{
+  "tooltip": {
+    "title-when-disabled": "You have already gotten this one. If you still want it nevertheless, use the reset icon on this column."
+  },
+  "button": {
+    "request": { "aria-label": "get new link for the app" }
+  }
+}

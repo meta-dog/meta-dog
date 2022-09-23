@@ -1,0 +1,9 @@
+{
+  "search": {
+    "placeholder": "Buscar por nombre..."
+  },
+  "button": {
+    "reload": { "aria-label": "recargar tabla" },
+    "create": { "aria-label": "crear referido de App" }
+  }
+}

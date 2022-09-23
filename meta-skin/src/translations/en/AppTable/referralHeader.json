@@ -1,0 +1,8 @@
+{
+  "tooltip": {
+    "reset-saved-apps": "Forget Gotten Apps' list"
+  },
+  "button": {
+    "reset": { "aria-label": "forget gotten apps' list" }
+  }
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import { RecordVoiceOver } from "@mui/icons-material";
 import { Button, Tooltip } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { AppVM } from "api";
 
@@ -12,6 +13,8 @@ export default function CreateCellRenderer(
   params: { row: any },
   handleCreateClick: HandleIdClick,
 ) {
+  const { t } = useTranslation("appTableCreateCell");
+
   const [open, setOpen] = useState(false);
 
   const { row } = params;
@@ -24,8 +27,8 @@ export default function CreateCellRenderer(
   const noAdvocateId = advocateId === null;
 
   let title = "";
-  if (noAdvocateId) title = "You must create a link with the + icon first";
-  else if (appIdWasSaved) title = "You have already uploaded this App referral";
+  if (noAdvocateId) title = t("tooltip.no-advocate-id");
+  else if (appIdWasSaved) title = t("tooltip.app-id-was-saved");
 
   return (
     <Tooltip
@@ -42,7 +45,7 @@ export default function CreateCellRenderer(
           onClick={() => !appIdWasSaved && handleCreateClick(id)}
           disabled={noAdvocateId || appIdWasSaved}
           color="secondary"
-          aria-label="create new link with my user"
+          aria-label={t("button.create.aria-label")}
         >
           <RecordVoiceOver />
         </Button>

@@ -2,6 +2,7 @@ import { ReactNode, useState } from "react";
 
 import { Hail } from "@mui/icons-material";
 import { Button, Stack, Tooltip, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { AppVM } from "api";
 
@@ -14,22 +15,23 @@ export default function ReferralCellRenderer(
 ) {
   const [open, setOpen] = useState(false);
 
+  const { t } = useTranslation("appTableReferralCell");
+
   const { row } = params;
   const { id } = row as AppVM;
+
   const disabled = getSavedAppIds("received-app-ids").includes(id);
   let title: string | ReactNode = "";
   if (disabled) {
     title = (
       <div onMouseEnter={() => setOpen(true)}>
         <Stack direction="column">
-          <Typography>
-            You have already gotten this one. If you still want it nevertheless,
-            use the reset icon on this column.
-          </Typography>
+          <Typography>{t("tooltip.title-when-disabled")}</Typography>
         </Stack>
       </div>
     );
   }
+
   return (
     <Tooltip
       open={open}
@@ -45,7 +47,7 @@ export default function ReferralCellRenderer(
           onClick={() => handleRequestClick(id)}
           color="secondary"
           disabled={disabled}
-          aria-label="get new link for the app"
+          aria-label={t("button.request.aria-label")}
         >
           <Hail />
         </Button>

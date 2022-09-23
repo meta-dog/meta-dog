@@ -1,0 +1,8 @@
+{
+  "title": "Meta App Referrals",
+  "button": {
+    "open-help": {
+      "aria-label": "terms and help"
+    }
+  }
+}
