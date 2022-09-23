@@ -1,0 +1,9 @@
+{
+  "tooltip": {
+    "no-advocate-id": "You must create a link with the + icon first",
+    "app-id-was-saved": "You have already uploaded this App referral"
+  },
+  "button": {
+    "create": { "aria-label": "create new link for this App with my user" }
+  }
+}

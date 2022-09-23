@@ -1,0 +1,9 @@
+{
+  "search": {
+    "placeholder": "Search by name..."
+  },
+  "button": {
+    "reload": { "aria-label": "reload table" },
+    "create": { "aria-label": "create App referral" }
+  }
+}

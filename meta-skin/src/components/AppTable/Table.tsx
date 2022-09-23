@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Box, Stack, SxProps, Theme } from "@mui/material";
 import {
@@ -7,19 +7,25 @@ import {
   GridFilterModel,
   GridSortModel,
 } from "@mui/x-data-grid";
+import { TFunction, useTranslation } from "react-i18next";
 
 import { AppVM, createReferral, readReferral } from "api";
 import { useAppStateContext } from "contexts";
 
 import AppNameRenderer from "./AppNameRenderer";
 import CreateCellRenderer from "./CreateCellRenderer";
-import CustomToolbar from "./CustomToolbar";
 import ReferralCellRenderer from "./ReferralCellRenderer";
 import ReferralHeaderRenderer from "./ReferralHeaderRenderer";
+import Toolbar from "./Toolbar";
 import { HandleIdClick } from "./types";
-import { appendSavedAppIds, getSavedAppIds, resetSavedAppIds } from "./utils";
+import {
+  appendSavedAppIds,
+  getSavedAdvocateId,
+  resetSavedAppIds,
+} from "./utils";
 
 const getColumns = (
+  t: TFunction<"appTableTable", undefined>,
   handleRequestClick: HandleIdClick,
   handleCreateClick: HandleIdClick,
   handleResetClick: () => void,
@@ -27,10 +33,12 @@ const getColumns = (
   [
     {
       field: "referral",
-      renderHeader: () => ReferralHeaderRenderer(handleResetClick),
+      headerName: t("columns.referral"),
+      renderHeader: ({ colDef }) =>
+        ReferralHeaderRenderer(colDef.headerName || "", handleResetClick),
       headerAlign: "center",
       headerClassName: "text-center",
-      width: 70,
+      width: 80,
       renderCell: (params) => ReferralCellRenderer(params, handleRequestClick),
       disableReorder: true,
       disableColumnMenu: true,
@@ -39,13 +47,13 @@ const getColumns = (
     },
     {
       field: "name",
-      headerName: "App Name",
+      headerName: t("columns.app-name"),
       flex: 1,
       renderCell: AppNameRenderer,
     },
     {
       field: "create",
-      headerName: "Create",
+      headerName: t("columns.create"),
       headerAlign: "center",
       headerClassName: "text-center",
       width: 70,
@@ -58,17 +66,14 @@ const getColumns = (
   ] as GridColDef[];
 
 export default function Table() {
-  const { apps } = useAppStateContext();
+  const { apps, loadingApps } = useAppStateContext();
 
-  const [savedAppIds, setSavedAppIds] = useState<string[]>([]);
+  const { t } = useTranslation("appTableTable");
+
   const [filter, setFilter] = useState<GridFilterModel>();
   const [sortModel, setSortModel] = useState<GridSortModel>([
     { field: "name", sort: "asc" },
   ]);
-
-  useEffect(() => {
-    setSavedAppIds(getSavedAppIds("saved-app-ids"));
-  }, []);
 
   const handleRequestClick = (id: AppVM["id"]) => {
     appendSavedAppIds("received-app-ids", [id]);
@@ -82,11 +87,13 @@ export default function Table() {
     });
   };
   const handleCreateClick = (appId: AppVM["id"]) => {
-    const advocateId = localStorage.getItem("advocate-id");
+    const advocateId = getSavedAdvocateId();
     if (advocateId === null) return;
     createReferral({ advocateId, appId });
   };
-  const handleResetClick = () => resetSavedAppIds("received-app-ids");
+  const handleResetClick = () => {
+    resetSavedAppIds("received-app-ids");
+  };
 
   const onSortChange = () => {
     setSortModel(([{ field, sort }]) => {
@@ -119,6 +126,7 @@ export default function Table() {
   };
 
   const columns = getColumns(
+    t,
     handleRequestClick,
     handleCreateClick,
     handleResetClick,
@@ -136,7 +144,7 @@ export default function Table() {
           rowsPerPageOptions={[]}
           filterMode="client"
           hideFooter
-          components={{ Toolbar: CustomToolbar }}
+          components={{ Toolbar }}
           disableColumnFilter
           disableColumnMenu
           sortingMode="client"
@@ -146,9 +154,12 @@ export default function Table() {
           onFilterModelChange={onFilterChange}
           sx={dataGridSx}
           disableSelectionOnClick
-          isRowSelectable={({ row }) =>
-            !savedAppIds.includes((row as AppVM).id)
-          }
+          loading={loadingApps}
+          localeText={{
+            noRowsLabel: t("table.no-rows-label"),
+            columnHeaderSortIconLabel: t("table.column-header-sort-icon-label"),
+            errorOverlayDefaultLabel: t("table.error-overlay-default-label"),
+          }}
         />
       </Box>
     </Stack>

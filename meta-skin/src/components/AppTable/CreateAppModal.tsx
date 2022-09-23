@@ -13,11 +13,11 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  IconButton,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
 import { CreateReferralVM, createReferral } from "api";
@@ -27,32 +27,28 @@ import {
   appendSavedAppIds,
   extractReferral,
   extractUrls,
+  getSavedAdvocateId,
   getSavedAppIds,
+  saveAdvocateId,
 } from "./utils";
 
 const LIMIT = 10 as const;
-const INITIAL_TEXT_FIELD_TEXT = `Paste here (${LIMIT} MAX)`;
-const INITIAL_VALID_URL = null;
 
 export default function CreateAppModal() {
   const { openCreateModal, setOpenCreateModal } = useAppStateContext();
 
-  const [currentAdvocateId, setCurrentAdvocateId] = useState("");
-  const [textFieldPlaceholder, setTextFieldPlaceholder] = useState(
-    INITIAL_TEXT_FIELD_TEXT,
-  );
-  const [textFieldValue, setTextFieldValue] = useState<string[]>([]);
-  const [validUrl, setValidUrl] = useState<null | false | CreateReferralVM[]>(
-    INITIAL_VALID_URL,
-  );
+  const { t } = useTranslation("appTableCreateAppModal");
+
+  const [currAdvocateId, setCurrAdvocateId] = useState<string | null>(null);
+  const [hasError, setHasError] = useState(false);
+  const [validUrls, setValidUrls] = useState<CreateReferralVM[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
-  const addButtonRef = useRef<any>(null);
+  const addButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    setCurrentAdvocateId(localStorage.getItem("advocate-id") || "");
-    setTextFieldPlaceholder(INITIAL_TEXT_FIELD_TEXT);
-    setValidUrl(INITIAL_VALID_URL);
-    setTextFieldValue([]);
+    setCurrAdvocateId(getSavedAdvocateId());
+    setHasError(false);
+    setValidUrls([]);
 
     // StrictMode React autoFocus fix: https://github.com/mui/material-ui/issues/33004
     const timeout = setTimeout(() => {
@@ -65,39 +61,30 @@ export default function CreateAppModal() {
   }, [openCreateModal]);
 
   let validationIcon = <Verified color="success" />;
-  if (validUrl === null) validationIcon = <Pending />;
-  if (validUrl === false) validationIcon = <Error color="error" />;
-  const disabled = validUrl === null || validUrl === false;
+  if (validUrls.length === 0) validationIcon = <Pending />;
+  if (hasError) validationIcon = <Error color="error" />;
+  const disabled = validUrls.length === 0;
 
   const validateText = (text: string) => {
     const urls = extractUrls(text);
     if (urls.length === 0) {
-      toast.warn("No App URLs were found in the pasted text!");
-      setTextFieldPlaceholder(INITIAL_TEXT_FIELD_TEXT);
+      toast.error(t("toast.error.no-urls-found"));
+      setValidUrls([]);
+      setHasError(true);
       return;
     }
     if (urls.length >= LIMIT) {
-      toast.error(
-        `The limit of App Referrals to be pasted at once is ${LIMIT}`,
-      );
-      setTextFieldPlaceholder(INITIAL_TEXT_FIELD_TEXT);
+      toast.error(t("toast.error.above-limit", { limit: LIMIT }));
+      setValidUrls([]);
+      setHasError(true);
       return;
     }
     const newValidUrls = urls.map(extractReferral);
-    const singular = newValidUrls.length === 1;
+    const lenNewValidUrls = newValidUrls.length;
     if (newValidUrls.some((isValid) => isValid === false)) {
-      let message =
-        "At least one of the provided App referral link is invalid. Please review them and paste them again.";
-      let newTextFieldText = "Invalid links";
-      if (singular) {
-        message =
-          "The provided App referral link is invalid. Please review it and paste it again.";
-        newTextFieldText = "Invalid link";
-      }
-      setTextFieldPlaceholder(newTextFieldText);
-      toast.error(message, { icon: "😥" });
-      setValidUrl(false);
-      setTextFieldValue([]);
+      setHasError(true);
+      toast.error(t("toast.error.invalid-url", { quantity: lenNewValidUrls }));
+      setValidUrls([]);
       return;
     }
     const uniqueAdvocateIds = new Set<string>();
@@ -110,27 +97,28 @@ export default function CreateAppModal() {
 
     const uniqueAdvocateIdsArray = Array.from(uniqueAdvocateIds);
     if (uniqueAdvocateIdsArray.length > 1) {
-      toast.error("You can only send referral links from one user");
-      setValidUrl(false);
-      setTextFieldValue([]);
+      toast.error(t("toast.error.multiple-users"));
+      setHasError(true);
+      setValidUrls([]);
       return;
     }
     const uniqueAppIdsArray = Array.from(uniqueAppIds);
     if (uniqueAppIdsArray.length < newValidUrls.length) {
-      toast.error("At least one of the Referral App links is repeated");
-      setValidUrl(false);
-      setTextFieldValue([]);
+      // TODO: Prune repeated and continue
+      toast.error(t("toast.error.repeated-urls"));
+      setHasError(true);
+      setValidUrls([]);
       return;
     }
 
     const pastedAdvocateId = uniqueAdvocateIdsArray[0];
-    const savedAdvocateId = localStorage.getItem("advocate-id");
+    const savedAdvocateId = getSavedAdvocateId();
     if (savedAdvocateId !== null && savedAdvocateId !== pastedAdvocateId) {
       toast.error(
-        `You sent a link from the user "${savedAdvocateId}" in the past, but you pasted a link from the user "${pastedAdvocateId}" now. Only one user is allowed.`,
+        t("toast.error.duplicated-user", { savedAdvocateId, pastedAdvocateId }),
       );
-      setValidUrl(false);
-      setTextFieldValue([]);
+      setHasError(true);
+      setValidUrls([]);
       return;
     }
 
@@ -139,39 +127,35 @@ export default function CreateAppModal() {
     );
 
     if (repeatedAppIds.length > 0) {
+      const repeatedAppsText = repeatedAppIds.reduce(
+        (prev, appId, idx) => (idx === 0 ? appId : `${prev}, ${appId}`),
+        "",
+      );
       toast.warn(
-        `You have already saved the Apps: "${repeatedAppIds.reduce(
-          (prev, appId, idx) => (idx === 0 ? appId : `${prev}, ${appId}`),
-          "",
-        )}" in the past, but you pasted links that included them again, and have been removed.`,
+        t("toast.warn.repeated-saved-apps", {
+          repeatedAppsText,
+        }),
       );
       const nonRepeatedAppIds = uniqueAppIdsArray.filter(
         (appId) => !repeatedAppIds.includes(appId),
       );
       if (nonRepeatedAppIds.length === 0) {
-        setValidUrl(false);
-        setTextFieldValue([]);
+        setValidUrls([]);
+        setHasError(true);
       } else {
-        setValidUrl(
+        setValidUrls(
           nonRepeatedAppIds.map((appId) => ({
             advocateId: pastedAdvocateId,
             appId,
           })),
         );
-        setTextFieldValue(nonRepeatedAppIds);
+        setHasError(false);
       }
       return;
     }
 
-    let message = `All of the ${newValidUrls.length} detected App referral links seem valid! Please click on the button to try to save them.`;
-    let newTextFieldText = `${newValidUrls.length} Valid links`;
-    if (singular) {
-      message =
-        "The provided App referral link seems valid! Please click on the button to try to save it.";
-      newTextFieldText = "Valid link";
-    }
-    toast.info(message);
-    setTextFieldPlaceholder(newTextFieldText);
+    toast.info(t("toast.info.all_valid", { quantity: lenNewValidUrls }));
+    setHasError(false);
     if (addButtonRef.current) {
       // StrictMode React autoFocus fix: https://github.com/mui/material-ui/issues/33004
       setTimeout(() => {
@@ -181,9 +165,8 @@ export default function CreateAppModal() {
       }, 0);
     }
     const createReferralVM = newValidUrls as CreateReferralVM[];
-    setValidUrl(createReferralVM);
-    setTextFieldValue(createReferralVM.map(({ appId }) => appId));
-    setCurrentAdvocateId(pastedAdvocateId);
+    setValidUrls(createReferralVM);
+    setCurrAdvocateId(pastedAdvocateId);
   };
 
   const handlePaste: ClipboardEventHandler<HTMLDivElement> = ({
@@ -194,58 +177,53 @@ export default function CreateAppModal() {
   };
 
   const handleSaveClick = () => {
-    if (validUrl === null || validUrl === false) return;
-    const singular = validUrl.length === 1;
-    const promises = validUrl.map(createReferral);
+    const numValidUrls = validUrls.length;
+    if (numValidUrls === 0) return;
+    const promises = validUrls.map(createReferral);
     Promise.allSettled(promises).then((results) => {
+      saveAdvocateId(validUrls[0].advocateId);
       const fulfilled = results.filter(
         (result) => result.status === "fulfilled",
       );
       const rejected = results.filter((result) => result.status === "rejected");
+      if (fulfilled.length === 0) {
+        toast.error(t("toast.error.all-rejected"), { icon: "🥺" });
+        setHasError(true);
+        return;
+      }
       const fulfilledAppIds = (
         fulfilled as PromiseFulfilledResult<string>[]
       ).map(({ value }) => value);
-      if (rejected.length === 0) {
-        let message = `All of the ${validUrl.length} App referrals were created successfully!`;
-        if (singular) {
-          message = "The App referral was created successfully!";
-        }
-        toast.success(message, { icon: "🎉" });
-        setValidUrl(INITIAL_VALID_URL);
-        setTextFieldPlaceholder(INITIAL_TEXT_FIELD_TEXT);
-        setTextFieldValue([]);
-        localStorage.setItem("advocate-id", validUrl[0].advocateId);
-        appendSavedAppIds("saved-app-ids", fulfilledAppIds);
-        return;
-      }
-      if (fulfilled.length === 0) {
-        let message = `None of the ${validUrl.length} App referral were created successfully. Please review them and try again`;
-        if (singular) {
-          message =
-            "The App referral could not be created. Please review it and try again.";
-        }
-        toast.error(message, { icon: "🥺" });
-        setTextFieldPlaceholder(INITIAL_TEXT_FIELD_TEXT);
-        localStorage.setItem("advocate-id", validUrl[0].advocateId);
-        return;
-      }
-      const message = `${fulfilled.length} App referrals were created successfully, but ${rejected.length} could not be created. Please review them and try again`;
-      toast.error(message, { icon: "🤔" });
-      setValidUrl((prevValidUrls) => {
-        if (prevValidUrls === false || prevValidUrls === null)
-          return prevValidUrls;
-        return prevValidUrls.filter(
-          ({ appId }) => !fulfilledAppIds.includes(appId),
-        );
-      });
-      setTextFieldPlaceholder(INITIAL_TEXT_FIELD_TEXT);
-      setTextFieldValue((prevAppIds) =>
-        prevAppIds.filter((appId) => !fulfilledAppIds.includes(appId)),
-      );
       appendSavedAppIds("saved-app-ids", fulfilledAppIds);
-      localStorage.setItem("advocate-id", validUrl[0].advocateId);
+      if (rejected.length === 0) {
+        toast.success(
+          t("toast.info.all-successful", { quatnity: numValidUrls }),
+          { icon: "🎉" },
+        );
+        setValidUrls([]);
+        setHasError(false);
+        return;
+      }
+      const numFulfilled = fulfilled.length;
+      const numRejected = rejected.length;
+      toast.warn(
+        t("toast.warn.partial-reject", { numFulfilled, numRejected }),
+        { icon: "🤔" },
+      );
+      setValidUrls((prevValidUrls) =>
+        prevValidUrls.filter(({ appId }) => !fulfilledAppIds.includes(appId)),
+      );
+      setHasError(false);
     });
   };
+
+  const value = validUrls.reduce(
+    (prev, { appId }, idx) => (idx === 0 ? appId : `${prev}\r\n${appId}`),
+    "",
+  );
+
+  const context = currAdvocateId === null ? "" : "with-advocate";
+  const title = t("title", { context, currAdvocateId });
 
   return (
     <Dialog
@@ -253,10 +231,7 @@ export default function CreateAppModal() {
       onClose={() => setOpenCreateModal(false)}
       sx={{ "& .MuiPaper-root": { width: "95vw", maxWidth: "650px" } }}
     >
-      <DialogTitle textAlign="center">
-        Add your link(s)
-        {currentAdvocateId === "" ? "" : `: ${currentAdvocateId}`}
-      </DialogTitle>
+      <DialogTitle textAlign="center">{title}</DialogTitle>
       <DialogContent>
         <Stack
           direction="row"
@@ -264,24 +239,19 @@ export default function CreateAppModal() {
           justifyContent="center"
           className="gap-4"
         >
-          <IconButton
-            aria-label="paste from clipboard"
-            onClick={() => navigator.clipboard.readText().then(validateText)}
-          >
-            <ContentPasteGo />
-          </IconButton>
+          <ContentPasteGo />
           <TextField
             inputRef={inputRef}
-            value={textFieldValue.reduce(
-              (prev, appId, idx) => (idx === 0 ? appId : `${prev}\r\n${appId}`),
-              "",
-            )}
+            value={value}
             sx={{
               "& textarea": { textAlign: "center", caretColor: "transparent" },
             }}
             fullWidth
             onPaste={handlePaste}
-            placeholder={textFieldPlaceholder}
+            placeholder={t("textfield.placeholder", {
+              context: String(hasError),
+              limit: LIMIT,
+            })}
             type="url"
             multiline
           />
@@ -300,9 +270,9 @@ export default function CreateAppModal() {
             color="secondary"
             disabled={disabled}
             onClick={handleSaveClick}
-            aria-label="save"
+            aria-label={t("button.save.aria-label")}
           >
-            <Typography variant="button">Save</Typography>
+            <Typography variant="button">{t("button.save.label")}</Typography>
           </Button>
         </Stack>
       </DialogActions>

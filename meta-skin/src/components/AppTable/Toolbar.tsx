@@ -1,11 +1,15 @@
 import { Add, Refresh } from "@mui/icons-material";
 import { IconButton, Stack } from "@mui/material";
 import { GridToolbarContainer, GridToolbarQuickFilter } from "@mui/x-data-grid";
+import { useTranslation } from "react-i18next";
 
 import { useAppStateContext } from "contexts";
 
-export default function CustomToolbar() {
+export default function Toolbar() {
   const { reloadApps, setOpenCreateModal } = useAppStateContext();
+
+  const { t } = useTranslation("appTableToolbar");
+
   return (
     <GridToolbarContainer>
       <Stack
@@ -19,12 +23,20 @@ export default function CustomToolbar() {
           fullWidth
           sx={{ width: "stretch" }}
           autoFocus
-          placeholder="Search by name..."
+          placeholder={t("search.placeholder")}
         />
-        <IconButton aria-label="reload table" onClick={() => reloadApps()} color="secondary">
+        <IconButton
+          aria-label={t("button.reload.aria-label")}
+          onClick={() => reloadApps()}
+          color="secondary"
+        >
           <Refresh />
         </IconButton>
-        <IconButton aria-label="create link" onClick={() => setOpenCreateModal(true)} color="secondary">
+        <IconButton
+          aria-label={t("button.create.aria-label")}
+          onClick={() => setOpenCreateModal(true)}
+          color="secondary"
+        >
           <Add />
         </IconButton>
       </Stack>

@@ -1,5 +1,6 @@
 import { Help } from "@mui/icons-material";
 import { AppBar, Avatar, IconButton, Toolbar, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 import { useAppStateContext } from "contexts";
 
@@ -9,15 +10,18 @@ import HelpModal from "./HelpModal";
 
 export default function Header() {
   const { setOpenHelpModal } = useAppStateContext();
+
+  const { t } = useTranslation("header");
+
   return (
     <AppBar position="static">
       <Toolbar className="gap-4 justify-center">
         <Avatar>
           <Logo />
         </Avatar>
-        <Typography variant="h6">Meta App Referrals</Typography>
+        <Typography variant="h6">{t("title")}</Typography>
         <IconButton
-          aria-label="terms and help"
+          aria-label={t("button.open-help.aria-label")}
           color="secondary"
           onClick={() => setOpenHelpModal(true)}
         >

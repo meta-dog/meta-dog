@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { AppStateProvider } from "./contexts";
+import "./i18n";
 import Main from "./pages";
 
 const theme = createTheme({

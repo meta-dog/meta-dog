@@ -1,33 +1,36 @@
 import {
   ReactNode,
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
 } from "react";
 
+import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
 import { AppVM, readApps } from "api";
 
 function useAppState() {
   const [apps, setApps] = useState<AppVM[]>([]);
+  const [loadingApps, setLoadingApps] = useState(false);
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [openHelpModal, setOpenHelpModal] = useState(false);
 
-  const reloadApps = async () =>
+  const { t } = useTranslation("appStateContext");
+
+  const reloadApps = useCallback(async () => {
+    setLoadingApps(true);
     readApps()
       .then(setApps)
-      .catch(() =>
-        toast.error(
-          `There was an error retrieving the App list. Please reload it manually.`,
-          { icon: "😥" },
-        ),
-      );
+      .catch(() => toast.error(t("toast.error-read-apps"), { icon: "😥" }))
+      .finally(() => setLoadingApps(false));
+  }, [t]);
 
   useEffect(() => {
     reloadApps();
-  }, []);
+  }, [reloadApps]);
 
   return {
     apps,
@@ -36,6 +39,7 @@ function useAppState() {
     setOpenCreateModal,
     openHelpModal,
     setOpenHelpModal,
+    loadingApps,
   };
 }
 

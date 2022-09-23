@@ -1,0 +1,8 @@
+{
+  "tooltip": {
+    "title-when-disabled": "Ya has recibido esta invitación. Si aun así la quieres, utiliza el botón de olvidar de la columna."
+  },
+  "button": {
+    "request": { "aria-label": "obtener invitación para la App" }
+  }
+}

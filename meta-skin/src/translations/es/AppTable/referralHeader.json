@@ -1,0 +1,8 @@
+{
+  "tooltip": {
+    "reset-saved-apps": "Olvidar la lista de Apps recibidas"
+  },
+  "button": {
+    "reset": { "aria-label": "olvidar lista de Apps recibidas" }
+  }
+}

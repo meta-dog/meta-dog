@@ -26,6 +26,13 @@ export function extractUrls(text: string) {
   }, []);
 }
 
+export function getSavedAdvocateId(): string | null {
+  return localStorage.getItem("advocate-id");
+}
+export function saveAdvocateId(advocateId: string) {
+  localStorage.setItem("advocate-id", advocateId);
+}
+
 export function getSavedAppIds(
   key: "saved-app-ids" | "received-app-ids",
 ): string[] {

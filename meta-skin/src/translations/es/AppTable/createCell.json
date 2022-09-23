@@ -1,0 +1,11 @@
+{
+  "tooltip": {
+    "no-advocate-id": "Antes debes crear un referido con el botón +",
+    "app-id-was-saved": "Ya has subido este referido de App"
+  },
+  "button": {
+    "create": {
+      "aria-label": "crear nuevo referido para esta App con mi usuario"
+    }
+  }
+}

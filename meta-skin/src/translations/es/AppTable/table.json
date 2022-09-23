@@ -1,0 +1,12 @@
+{
+  "columns": {
+    "referral": "Dame",
+    "app-name": "Nombre App",
+    "create": "Crear"
+  },
+  "table": {
+    "no-rows-label": "Ninguna App coincidente",
+    "column-header-sort-icon-label": "Ordenar por nombre",
+    "error-overlay-default-label": "Ocurrió un error. Intente recargar la tabla."
+  }
+}
