@@ -3,13 +3,15 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-  SxProps,
-  Theme,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { AvailableLanguages, fallbackLng as languages } from "translations";
 
-export default function LanguageSelector(sx: SxProps<Theme>) {
+interface Props {
+  color?: string;
+}
+
+export default function LanguageSelector({ color = "initial" }: Props) {
   const { t, i18n } = useTranslation("languageSelector");
 
   const handleChange = ({ target }: SelectChangeEvent<AvailableLanguages>) => {
@@ -17,12 +19,12 @@ export default function LanguageSelector(sx: SxProps<Theme>) {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+    <FormControl sx={{ m: 1, minWidth: 130 }} size="small">
       <Select
         value={i18n.resolvedLanguage as AvailableLanguages}
         onChange={handleChange}
         color="secondary"
-        sx={sx}
+        sx={{ color, textAlign: "center" }}
       >
         {languages.map((lang) => (
           <MenuItem key={lang} value={lang}>
@@ -33,3 +35,5 @@ export default function LanguageSelector(sx: SxProps<Theme>) {
     </FormControl>
   );
 }
+
+LanguageSelector.defaultProps = { color: "initial" };

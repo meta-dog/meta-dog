@@ -11,7 +11,7 @@ export default function Footer() {
       <Toolbar className="justify-center py-2">
         <Stack direction="column" className="gap-0">
           <Typography variant="h6">{t("made-in")}</Typography>
-          <LanguageSelector sx={{ color: "white", textAlign: "center" }} />
+          <LanguageSelector color="white" />
         </Stack>
       </Toolbar>
     </AppBar>

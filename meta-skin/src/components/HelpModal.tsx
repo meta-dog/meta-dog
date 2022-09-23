@@ -64,7 +64,7 @@ export default function HelpModal() {
           alignItems="center"
           gap={2}
         >
-          <LanguageSelector sx={{ textAlign: "center" }} />
+          <LanguageSelector />
           <Stack
             direction="row"
             justifyContent="space-between"
