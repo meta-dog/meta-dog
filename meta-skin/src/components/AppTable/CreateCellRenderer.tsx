@@ -39,6 +39,7 @@ export default function CreateCellRenderer(
       onBlur={() => setOpen(false)}
       title={title}
       arrow
+      placement="left"
     >
       <div className="flex items-center justify-center w-full h-full">
         <Button

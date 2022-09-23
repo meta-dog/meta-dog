@@ -41,6 +41,7 @@ export default function ReferralCellRenderer(
       onBlur={() => setOpen(false)}
       title={title}
       arrow
+      placement="right"
     >
       <div className="flex items-center justify-center w-full h-full">
         <Button
