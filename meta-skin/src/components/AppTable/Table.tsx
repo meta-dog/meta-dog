@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Box, Stack, SxProps, Theme } from "@mui/material";
 import {
@@ -17,7 +17,11 @@ import CustomToolbar from "./CustomToolbar";
 import ReferralCellRenderer from "./ReferralCellRenderer";
 import ReferralHeaderRenderer from "./ReferralHeaderRenderer";
 import { HandleIdClick } from "./types";
-import { appendSavedAppIds, getSavedAppIds, resetSavedAppIds } from "./utils";
+import {
+  appendSavedAppIds,
+  getSavedAdvocateId,
+  resetSavedAppIds,
+} from "./utils";
 
 const getColumns = (
   handleRequestClick: HandleIdClick,
@@ -60,15 +64,10 @@ const getColumns = (
 export default function Table() {
   const { apps } = useAppStateContext();
 
-  const [savedAppIds, setSavedAppIds] = useState<string[]>([]);
   const [filter, setFilter] = useState<GridFilterModel>();
   const [sortModel, setSortModel] = useState<GridSortModel>([
     { field: "name", sort: "asc" },
   ]);
-
-  useEffect(() => {
-    setSavedAppIds(getSavedAppIds("saved-app-ids"));
-  }, []);
 
   const handleRequestClick = (id: AppVM["id"]) => {
     appendSavedAppIds("received-app-ids", [id]);
@@ -82,11 +81,13 @@ export default function Table() {
     });
   };
   const handleCreateClick = (appId: AppVM["id"]) => {
-    const advocateId = localStorage.getItem("advocate-id");
+    const advocateId = getSavedAdvocateId();
     if (advocateId === null) return;
     createReferral({ advocateId, appId });
   };
-  const handleResetClick = () => resetSavedAppIds("received-app-ids");
+  const handleResetClick = () => {
+    resetSavedAppIds("received-app-ids");
+  };
 
   const onSortChange = () => {
     setSortModel(([{ field, sort }]) => {
@@ -146,9 +147,6 @@ export default function Table() {
           onFilterModelChange={onFilterChange}
           sx={dataGridSx}
           disableSelectionOnClick
-          isRowSelectable={({ row }) =>
-            !savedAppIds.includes((row as AppVM).id)
-          }
         />
       </Box>
     </Stack>
