@@ -1,10 +1,6 @@
 export interface AppAM {
-  id: string;
+  app_id: string;
   name: string;
-}
-
-export interface CreateReferralAM {
-  advocate_id: string;
 }
 
 export interface ReadReferralAM {

@@ -9,6 +9,7 @@ export default function ReferralHeaderRenderer(handleResetClick: () => void) {
       </Typography>
       <Box>
         <IconButton
+          aria-label="reset received links"
           size="small"
           sx={{ "& .MuiSvgIcon-root": { fontSize: "initial" } }}
           onClick={handleResetClick}

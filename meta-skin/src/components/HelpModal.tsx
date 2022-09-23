@@ -110,8 +110,11 @@ export default function HelpModal() {
             information to be deleted by sending an email via the following
             link:
           </Typography>
-          <Link href="mailto:david.c.iglesias@gmail.com?subject=[Meta App Referrals] Please remove my username!&body=Hi, my username is: [write your username here] and I would like it removed from your Meta App Referrals App.Thank you.">
-            <IconButton>
+          <Link
+            aria-label="email"
+            href="mailto:david.c.iglesias@gmail.com?subject=[Meta App Referrals] Please remove my username!&body=Hi, my username is: [write your username here] and I would like it removed from your Meta App Referrals App.Thank you."
+          >
+            <IconButton aria-label="email button">
               <Email />
             </IconButton>
             david.c.iglesias@gmail.com
@@ -157,6 +160,7 @@ export default function HelpModal() {
             color="secondary"
             onClick={handleAcceptTerms}
             disabled={getHasAcceptedTerms()}
+            aria-label="accepted terms"
           >
             <Typography variant="button">
               {hasAccepted ? "You have already accepted" : "I accept the terms"}
