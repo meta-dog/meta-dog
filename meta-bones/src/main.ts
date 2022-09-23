@@ -1,9 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppModule } from './app.module';
+import { BaseAppModule } from './baseapp.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(BaseAppModule);
 
   const config = new DocumentBuilder()
     .setTitle('Meta-Dog (actually a 😾)')
