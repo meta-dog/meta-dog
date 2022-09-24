@@ -1,6 +1,6 @@
 import axios, { Method } from "axios";
 
-axios.defaults.baseURL = "https://meta-organs.herokuapp.com/api/";
+axios.defaults.baseURL = "https://meta-bones.herokuapp.com/api/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.common.Accept = "application/json";
 
