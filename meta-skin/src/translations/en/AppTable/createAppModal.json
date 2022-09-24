@@ -22,17 +22,17 @@
       "repeated-urls": "At least one of the Referral App links is repeated",
       "duplicated-user": "You sent a link from the user {{savedAdvocateId}} in the past, but you pasted a link from the user {{pastedAdvocateId}} now. Only one user is allowed.",
       "all-rejected_one": "The App referral could not be created. Please review it and try again.",
-      "all-rejected_other": "None of the {{quantity}} App referrals were created successfully. Please review them and try again"
+      "all-rejected_other": "None of the {{count}} App referrals were created successfully. Please review them and try again"
     },
     "warn": {
       "repeated-saved-apps": "You have already saved the Apps: {{repeatedAppsText}} in the past, but you pasted links that included them again, and have been removed.",
       "partial-reject": "{{numFulfilled}} App referrals were created successfully, but {{numRejected}} could not be created. Please review them and try again"
     },
     "info": {
-      "all_valid_one": "All of the {{quantity}} detected App referral links seem valid! Please click on the button to try to save them.",
+      "all_valid_one": "All of the {{count}} detected App referral links seem valid! Please click on the button to try to save them.",
       "all_valid_other": "The provided App referral link seems valid! Please click on the button to try to save it.",
       "all-successful_one": "The App referral was created successfully!",
-      "all-successful_other": "All of the {{quantity}} App referrals were created successfully!"
+      "all-successful_other": "All of the {{count}} App referrals were created successfully!"
     }
   }
 }

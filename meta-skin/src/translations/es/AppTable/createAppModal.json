@@ -22,17 +22,17 @@
       "repeated-urls": "Al menos uno de los referidos está repetido",
       "duplicated-user": "Ya has mandado un referido del usuario {{savedAdvocateId}} antes, y ahora has pegado un referido de {{pastedAdvocateId}}. Solo se permite un usuario",
       "all-rejected_one": "No se pudo crear el referido de App. Por favor, revíselo e inténtelo de nuevo",
-      "all-rejected_other": "Ninguno de los {{quantity}} referidos de App se crearon correctamente. Por favor, revíselos e inténtelo de nuevo"
+      "all-rejected_other": "Ninguno de los {{count}} referidos de App se crearon correctamente. Por favor, revíselos e inténtelo de nuevo"
     },
     "warn": {
       "repeated-saved-apps": "Ya has salvado las Apps: {{repeatedAppsText}} en el pasado, pero las has vuelto a pegar, y no se han guardado",
       "partial-reject": "Se han creado {{numFulfilled}} referidos de App, pero {{numRejected}} no se pudieron crear. Por favor, revíselos e inténtelo de nuevo"
     },
     "info": {
-      "all_valid_one": "¡Todos los {{quantity}} referidos de App detectados parecen válidos! Utilice el botón para guardarlos",
+      "all_valid_one": "¡Todos los {{count}} referidos de App detectados parecen válidos! Utilice el botón para guardarlos",
       "all_valid_other": "¡El referido de App parece válido! Utilice el botón para guardarlo",
       "all-successful_one": "¡El referido de App se creó con éxito!",
-      "all-successful_other": "¡Todos los {{quantity}} referidos de App se crearon correctamente!"
+      "all-successful_other": "¡Todos los {{count}} referidos de App se crearon correctamente!"
     }
   }
 }

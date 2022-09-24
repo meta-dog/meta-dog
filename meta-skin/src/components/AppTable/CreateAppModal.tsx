@@ -83,7 +83,7 @@ export default function CreateAppModal() {
     const lenNewValidUrls = newValidUrls.length;
     if (newValidUrls.some((isValid) => isValid === false)) {
       setHasError(true);
-      toast.error(t("toast.error.invalid-url", { quantity: lenNewValidUrls }));
+      toast.error(t("toast.error.invalid-url", { count: lenNewValidUrls }));
       setValidUrls([]);
       return;
     }
@@ -154,7 +154,7 @@ export default function CreateAppModal() {
       return;
     }
 
-    toast.info(t("toast.info.all_valid", { quantity: lenNewValidUrls }));
+    toast.info(t("toast.info.all_valid", { count: lenNewValidUrls }));
     setHasError(false);
     if (addButtonRef.current) {
       // StrictMode React autoFocus fix: https://github.com/mui/material-ui/issues/33004
@@ -197,7 +197,7 @@ export default function CreateAppModal() {
       appendSavedAppIds("saved-app-ids", fulfilledAppIds);
       if (rejected.length === 0) {
         toast.success(
-          t("toast.info.all-successful", { quatnity: numValidUrls }),
+          t("toast.info.all-successful", { count: numValidUrls }),
           { icon: "🎉" },
         );
         setValidUrls([]);
