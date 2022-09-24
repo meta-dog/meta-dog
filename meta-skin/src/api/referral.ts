@@ -1,21 +1,27 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { createReferralMock, readReferralMock } from "mocks";
+import { StatusCodes } from "http-status-codes";
 
+import { ReadReferralAM } from "./apiModel";
+import apiCall from "./baseApi";
+import { mapReadReferralAMToVM } from "./mappers";
 import { CreateReferralVM } from "./viewModel";
 
-export function createReferral(createReferralVM: CreateReferralVM) {
-  // TODO: Do API Call with axios or similar and remove mock
-  // const { appId } = createReferralVM;
-  // const apiUrl = `/api/app/${appId}/referral/${advocateId}`;
-  // const params = mapCreateReferralVMToAM(createReferralVM);
-  const result = createReferralMock(createReferralVM);
-
-  return Promise.resolve(result);
+export async function createReferral({ advocateId, appId }: CreateReferralVM) {
+  const createReferralURL = `app/${appId}/referral/${advocateId}`;
+  try {
+    const { status } = await apiCall("POST", createReferralURL);
+    if (status === StatusCodes.CREATED) return appId;
+    throw new Error("Error creating referral");
+  } catch (error) {
+    throw new Error(`Error creating referral: ${error}`);
+  }
 }
-export function readReferral(appId: string) {
-  // TODO: Do API Call with axios or similar and remove mock
-  // const apiUrl = `/api/app/${appId}/referral`;
-  const result = readReferralMock();
 
-  return Promise.resolve(result);
+export async function readReferral(appId: string) {
+  const readReferralURL = `app/${appId}/referral`;
+  try {
+    const { data } = await apiCall("GET", readReferralURL);
+    return mapReadReferralAMToVM(data as ReadReferralAM);
+  } catch (error) {
+    throw new Error(`Error creating referral: ${error}`);
+  }
 }
