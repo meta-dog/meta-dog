@@ -8,5 +8,13 @@
     "no-rows-label": "No Apps match",
     "column-header-sort-icon-label": "Order by name",
     "error-overlay-default-label": "Ocurrió un error. Intente recargar la tabla."
+  },
+  "toast": {
+    "create": {
+      "success": "Your referral was created succesfully",
+      "error": "Your referral could not be created. Please try again later",
+      "error_conflict": "Your referral was already in the system",
+      "error_notfound": "The App does not exist"
+    }
   }
 }

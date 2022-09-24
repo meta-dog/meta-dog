@@ -8,5 +8,13 @@
     "no-rows-label": "Ninguna App coincidente",
     "column-header-sort-icon-label": "Ordenar por nombre",
     "error-overlay-default-label": "Ocurrió un error. Intente recargar la tabla."
+  },
+  "toast": {
+    "create": {
+      "success": "Su invitación se creó correctamente",
+      "error": "Su invitación no se creó correctamente. Por favor, inténtelo de nuevo más tarde",
+      "error_conflict": "Su invitación ya estaba en el sistema",
+      "error_notfound": "La App no existe"
+    }
   }
 }

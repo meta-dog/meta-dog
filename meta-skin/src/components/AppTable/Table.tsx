@@ -8,6 +8,7 @@ import {
   GridSortModel,
 } from "@mui/x-data-grid";
 import { TFunction, useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 import { AppVM, createReferral, readReferral } from "api";
 import { useAppStateContext } from "contexts";
@@ -86,10 +87,17 @@ export default function Table() {
       );
     });
   };
-  const handleCreateClick = (appId: AppVM["id"]) => {
+  const handleCreateClick = async (appId: AppVM["id"]) => {
     const advocateId = getSavedAdvocateId();
     if (advocateId === null) return;
-    createReferral({ advocateId, appId });
+    try {
+      await createReferral({ advocateId, appId });
+      toast.success(t("toast.create.success"));
+    } catch (exception: any) {
+      toast.error(
+        t("toast.create.error", { context: exception.message as string }),
+      );
+    }
   };
   const handleResetClick = () => {
     resetSavedAppIds("received-app-ids");
