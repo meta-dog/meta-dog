@@ -17,8 +17,6 @@
     "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "paths": {
-      "@entities/*": ["src/entities/*"]
-    }
+    "paths": { "@schemas/*": ["src/schemas/*"] }
   }
 }

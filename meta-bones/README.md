@@ -77,12 +77,10 @@ Nest is [MIT licensed](LICENSE).
 In order to run the project, you must have a proper `.env` config:
 
 ```ts
-PORT=4000
-APP_NAME="Meta-Dog, actually a Cat"
+PORT = 4000;
 
-DATABASE_TYPE="sqlite"
-DATABASE_HOST="localhost"
-DATABASE_PORT=5532
-DATABASE_DB="metadog.db"
-DATABASE_NAME="metadog DB"
+DATABASE_TYPE = 'mongodb';
+DATABASE_URL =
+  'mongodb+srv://{{user}}:{{password}}@{{cluster_id}}.mongodb.net/?retryWrites=true&w=majority';
+DATABASE_NAME = '{{db_name}}';
 ```

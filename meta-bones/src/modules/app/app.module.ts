@@ -1,12 +1,17 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { App } from '@entities/app';
-import { Advocate } from '@entities/advocate';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Advocate, AdvocateSchema } from '@schemas/advocate.schema';
+import { App, AppSchema } from '@schemas/app.schema';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([App, Advocate])],
+  imports: [
+    MongooseModule.forFeature([
+      { name: App.name, schema: AppSchema },
+      { name: Advocate.name, schema: AdvocateSchema },
+    ]),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude, Expose } from 'class-transformer';
-import { ReferralInterface } from '../referral.types';
+import { ReferralInterface } from '../app.types';
 
 @Exclude()
 export class GetReferralResponse implements ReferralInterface {

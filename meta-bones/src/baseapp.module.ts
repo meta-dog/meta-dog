@@ -1,10 +1,8 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import config from './config';
-import { DatabaseConnectionService } from './database-connection-service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { config } from './config';
 import { AppModule } from './modules/app/app.module';
-import { ReferralModule } from './modules/referral/referral.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -12,12 +10,17 @@ import { ReferralModule } from './modules/referral/referral.module';
       isGlobal: true,
       load: [config],
     }),
-    TypeOrmModule.forRootAsync({
+    MongooseModule.forRootAsync({
       imports: [ConfigModule],
-      useClass: DatabaseConnectionService,
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => ({
+        uri: config.get('database.uri'),
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        dbName: config.get('database.dbName'),
+      }),
     }),
     AppModule,
-    ReferralModule,
   ],
   controllers: [],
   providers: [],

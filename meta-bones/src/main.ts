@@ -1,6 +1,10 @@
+import { Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { BaseAppModule } from './baseapp.module';
+
+declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create(BaseAppModule);
@@ -15,6 +19,14 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(5000);
+  const configService: ConfigService = app.get(ConfigService);
+  const appPort = configService.get('app.port') || 3500;
+  Logger.log('Listening to port ' + appPort);
+  await app.listen(appPort);
+
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
 }
 bootstrap();
