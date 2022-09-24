@@ -39,7 +39,7 @@ const getColumns = (
         ReferralHeaderRenderer(colDef.headerName || "", handleResetClick),
       headerAlign: "center",
       headerClassName: "text-center",
-      width: 80,
+      width: 90,
       renderCell: (params) => ReferralCellRenderer(params, handleRequestClick),
       disableReorder: true,
       disableColumnMenu: true,
@@ -131,6 +131,9 @@ export default function Table() {
     "& .MuiDataGrid-cell--withRenderer": {
       padding: 0,
     },
+    "& .MuiDataGrid-columnSeparator": {
+      display: "none",
+    },
   };
 
   const columns = getColumns(
@@ -145,7 +148,7 @@ export default function Table() {
       direction="column"
       className="h-full w-full flex justify-center items-center"
     >
-      <Box className="w-full h-full p-6 max-w-[800px]">
+      <Box className="w-full h-full py-6 max-w-[800px]">
         <DataGrid
           rows={apps}
           columns={columns}
