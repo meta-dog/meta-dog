@@ -73,7 +73,7 @@ export default function CreateAppModal() {
       setHasError(true);
       return;
     }
-    if (urls.length >= LIMIT) {
+    if (urls.length > LIMIT) {
       toast.error(t("toast.error.above-limit", { limit: LIMIT }));
       setValidUrls([]);
       setHasError(true);
@@ -187,7 +187,9 @@ export default function CreateAppModal() {
       );
       const rejected = results.filter((result) => result.status === "rejected");
       if (fulfilled.length === 0) {
-        toast.error(t("toast.error.all-rejected"), { icon: "🥺" });
+        toast.error(t("toast.error.all-rejected", { count: rejected.length }), {
+          icon: "🥺",
+        });
         setHasError(true);
         return;
       }
@@ -196,10 +198,9 @@ export default function CreateAppModal() {
       ).map(({ value }) => value);
       appendSavedAppIds("saved-app-ids", fulfilledAppIds);
       if (rejected.length === 0) {
-        toast.success(
-          t("toast.info.all-successful", { count: numValidUrls }),
-          { icon: "🎉" },
-        );
+        toast.success(t("toast.info.all-successful", { count: numValidUrls }), {
+          icon: "🎉",
+        });
         setValidUrls([]);
         setHasError(false);
         return;
