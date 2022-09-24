@@ -1,6 +1,6 @@
 {
   "name": "meta-bones",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "API for Meta-Dog, actually a Cat",
   "author": "david.c.iglesias@gmail.com",
   "private": true,
@@ -81,5 +81,8 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "engines": {
+    "node": "16.13.0"
   }
 }
