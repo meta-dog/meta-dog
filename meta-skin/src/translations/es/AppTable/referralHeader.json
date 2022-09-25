@@ -1,8 +1,6 @@
 {
   "tooltip": {
-    "reset-saved-apps": "Olvidar la lista de Apps recibidas"
-  },
-  "button": {
-    "reset": { "aria-label": "olvidar lista de Apps recibidas" }
+    "deactivate-dialog": "Desactivar confirmación de repetidos",
+    "activate-dialog": "Activar confirmación de repetidos"
   }
 }

@@ -1,8 +1,6 @@
 {
   "tooltip": {
-    "reset-saved-apps": "Forget Gotten Apps' list"
-  },
-  "button": {
-    "reset": { "aria-label": "forget gotten apps' list" }
+    "deactivate-dialog": "Deactivate duplicates' confirmation",
+    "activate-dialog": "Activate duplicates' confirmation"
   }
 }

@@ -1,12 +1,29 @@
-import { RestartAlt } from "@mui/icons-material";
+import { useState } from "react";
+
+import { SpeakerNotes, SpeakerNotesOff } from "@mui/icons-material";
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
+import { getSavedBoolean } from "./utils";
+
 export default function ReferralHeaderRenderer(
   name: string,
-  handleResetClick: () => void,
+  handleDialogChangeOn: (newOn: boolean) => void,
 ) {
   const { t } = useTranslation("appTableReferralHeader");
+
+  const [currentOn, setCurrentOn] = useState(
+    getSavedBoolean("referral-dialog-on"),
+  );
+
+  const handleDialogChangeOnClick = () => {
+    handleDialogChangeOn(!currentOn);
+    setCurrentOn(!currentOn);
+  };
+
+  const title = currentOn
+    ? t("tooltip.deactivate-dialog")
+    : t("tooltip.activate-dialog");
 
   return (
     <Stack direction="row" className="flex justify-center items-center">
@@ -18,14 +35,14 @@ export default function ReferralHeaderRenderer(
         {name}
       </Typography>
       <Box>
-        <Tooltip title={t("tooltip.reset-saved-apps")}>
+        <Tooltip title={title}>
           <IconButton
-            aria-label={t("button.reset.aria-label")}
+            aria-label={title}
             size="small"
             sx={{ "& .MuiSvgIcon-root": { fontSize: "initial" } }}
-            onClick={handleResetClick}
+            onClick={handleDialogChangeOnClick}
           >
-            <RestartAlt />
+            {currentOn ? <SpeakerNotes /> : <SpeakerNotesOff />}
           </IconButton>
         </Tooltip>
       </Box>

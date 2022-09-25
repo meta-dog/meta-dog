@@ -18,7 +18,7 @@ interface Props {
   handleAccept: () => void;
 }
 
-export default function ReferralModal({ open, setOpen, handleAccept }: Props) {
+export default function ReferralDialog({ open, setOpen, handleAccept }: Props) {
   const { t: tCommon } = useTranslation("common");
   const { t } = useTranslation("appTableReferralDialog");
 
@@ -41,7 +41,7 @@ export default function ReferralModal({ open, setOpen, handleAccept }: Props) {
       <DialogActions>
         <Stack
           direction="row"
-          className="flex w-full items-center justify-between py-4"
+          className="flex w-full items-center justify-evenly py-4"
         >
           <Button
             startIcon={<Cancel />}

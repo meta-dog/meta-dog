@@ -32,8 +32,8 @@ export function saveBoolean(key: "referral-dialog-on", value: boolean) {
 
 export function getSavedBoolean(key: "referral-dialog-on") {
   let value = true;
-  const activateReferralModal = localStorage.getItem(key);
-  if (activateReferralModal === "false") {
+  const oldValue = localStorage.getItem(key);
+  if (oldValue === "false") {
     value = false;
   }
   saveBoolean(key, value);
@@ -63,8 +63,4 @@ export function appendSavedAppIds(
   const prevAppIds = getSavedAppIds(key);
   const nextAppIds: Set<string> = new Set([...prevAppIds, ...extraAppIds]);
   localStorage.setItem(key, JSON.stringify(Array.from(nextAppIds)));
-}
-
-export function resetSavedAppIds(key: "saved-app-ids" | "received-app-ids") {
-  localStorage.removeItem(key);
 }

@@ -24,14 +24,14 @@ import {
   appendSavedAppIds,
   getSavedAdvocateId,
   getSavedBoolean,
-  resetSavedAppIds,
+  saveBoolean,
 } from "./utils";
 
 const getColumns = (
   t: TFunction<"appTableTable", undefined>,
   handleRequestClick: HandleIdClick,
   handleCreateClick: HandleIdClick,
-  handleChangeReferralModalActive: () => void,
+  handleChangeReferralDialogOn: (newOn: boolean) => void,
 ) =>
   [
     {
@@ -40,7 +40,7 @@ const getColumns = (
       renderHeader: ({ colDef }) =>
         ReferralHeaderRenderer(
           colDef.headerName || "",
-          handleChangeReferralModalActive,
+          handleChangeReferralDialogOn,
         ),
       headerAlign: "center",
       headerClassName: "text-center",
@@ -83,10 +83,7 @@ export default function Table() {
   const [referralAppId, setReferralAppId] = useState<AppVM["id"] | null>(null);
   const [referralDialogOpen, setReferralDialogOpen] = useState(false);
 
-  const referralDialogOn = getSavedBoolean("referral-dialog-on");
-
-  const handleRequest = () => {
-    const id = referralAppId;
+  const handleRequest = (id: AppVM["id"] | null = referralAppId) => {
     if (id === null) return;
     appendSavedAppIds("received-app-ids", [id]);
 
@@ -100,11 +97,11 @@ export default function Table() {
   };
   const handleRequestClick = (id: AppVM["id"]) => {
     setReferralAppId(id);
-    if (referralDialogOn) {
+    if (getSavedBoolean("referral-dialog-on")) {
       setReferralDialogOpen(true);
       return;
     }
-    handleRequest();
+    handleRequest(id);
   };
 
   const handleCreateClick = async () => {
@@ -121,8 +118,8 @@ export default function Table() {
       );
     }
   };
-  const handleChangeReferralModalActive = () => {
-    resetSavedAppIds("received-app-ids");
+  const handleChangeReferralDialogOn = (newOn: boolean) => {
+    saveBoolean("referral-dialog-on", newOn);
   };
 
   const onSortChange = () => {
@@ -162,7 +159,7 @@ export default function Table() {
     t,
     handleRequestClick,
     handleCreateClick,
-    handleChangeReferralModalActive,
+    handleChangeReferralDialogOn,
   );
 
   return (
@@ -195,13 +192,11 @@ export default function Table() {
           }}
         />
       </Box>
-      {referralDialogOn && (
-        <ReferralDialog
-          open={referralDialogOpen}
-          setOpen={setReferralDialogOpen}
-          handleAccept={handleRequest}
-        />
-      )}
+      <ReferralDialog
+        open={referralDialogOpen}
+        setOpen={setReferralDialogOpen}
+        handleAccept={handleRequest}
+      />
     </Stack>
   );
 }

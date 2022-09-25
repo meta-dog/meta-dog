@@ -35,6 +35,7 @@ export default function ReferralCellRenderer(
           onClick={() => handleRequestClick(id)}
           color={disabled ? "primary" : "secondary"}
           aria-label={t("button.request.aria-label")}
+          sx={{ padding: 0, width: "100%", height: "100%" }}
         >
           <Hail />
         </Button>
