@@ -1,4 +1,4 @@
 {
-  "title": "Create App Referral",
-  "text": "Please confirm that you want to create a referral for the App: <appName/> Using your Advocate Id: <advocateId/>"
+  "title": "Add App Referral to verification queue",
+  "text": "Please confirm that you want to add a referral to the verification queue for the App: <appName/> Using your Advocate Id: <advocateId/> Please note that the verificacion process may take a bit"
 }
