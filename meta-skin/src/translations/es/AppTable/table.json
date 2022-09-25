@@ -1,8 +1,8 @@
 {
   "columns": {
-    "referral": "Dame",
+    "referral": "Pido",
     "app-name": "Nombre App",
-    "create": "Crear"
+    "create": "Doy"
   },
   "table": {
     "no-rows-label": "Ninguna App coincidente",

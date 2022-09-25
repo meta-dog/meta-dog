@@ -6,19 +6,19 @@ import { useTranslation } from "react-i18next";
 
 import { AppVM } from "api";
 
-import { HandleIdClick } from "./types";
-import { getSavedAppIds } from "./utils";
+import { HandleAppClick } from "./types";
+import { getStoredArray } from "./utils";
 
 export default function ReferralCellRenderer(
   params: { row: any },
-  handleRequestClick: HandleIdClick,
+  handleRequestClick: HandleAppClick,
 ) {
   const { t } = useTranslation("appTableReferralCell");
 
   const { row } = params;
-  const { id } = row as AppVM;
+  const app = row as AppVM;
 
-  const disabled = getSavedAppIds("received-app-ids").includes(id);
+  const disabled = getStoredArray("received-app-ids").includes(app.id);
   let title: string | ReactNode = "";
   if (disabled) {
     title = (
@@ -32,7 +32,7 @@ export default function ReferralCellRenderer(
     <Tooltip title={title} arrow placement="right">
       <div className="flex items-center justify-center w-full h-full">
         <Button
-          onClick={() => handleRequestClick(id)}
+          onClick={() => handleRequestClick(app)}
           color={disabled ? "primary" : "secondary"}
           aria-label={t("button.request.aria-label")}
           sx={{ padding: 0, width: "100%", height: "100%" }}

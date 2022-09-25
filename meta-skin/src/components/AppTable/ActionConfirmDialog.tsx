@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 import { Cancel, CheckCircle } from "@mui/icons-material";
 import {
@@ -16,16 +16,20 @@ interface Props {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   handleAccept: () => void;
+  disableAccept?: boolean;
   title: string;
-  text: string;
+  text?: string;
+  content?: ReactNode;
 }
 
 export default function ActionConfirmDialog({
   open,
   setOpen,
   handleAccept,
+  disableAccept = false,
   title,
   text,
+  content,
 }: Props) {
   const { t: tCommon } = useTranslation("common");
 
@@ -43,7 +47,7 @@ export default function ActionConfirmDialog({
       <DialogContent
         sx={{ paddingBottom: 0, maxWidth: "750px", margin: "auto" }}
       >
-        <Typography variant="body1">{text}</Typography>
+        {content || <Typography variant="body1">{text}</Typography>}
       </DialogContent>
       <DialogActions>
         <Stack
@@ -55,7 +59,7 @@ export default function ActionConfirmDialog({
             variant="contained"
             color="primary"
             onClick={handleClose}
-            aria-label="accepted terms"
+            aria-label={tCommon("button.cancel")}
           >
             <Typography variant="button">{tCommon("button.cancel")}</Typography>
           </Button>
@@ -64,7 +68,8 @@ export default function ActionConfirmDialog({
             variant="contained"
             color="secondary"
             onClick={handleAcceptClick}
-            aria-label="accepted terms"
+            aria-label={tCommon("button.continue")}
+            disabled={disableAccept}
           >
             <Typography variant="button">
               {tCommon("button.continue")}
@@ -75,3 +80,9 @@ export default function ActionConfirmDialog({
     </Dialog>
   );
 }
+
+ActionConfirmDialog.defaultProps = {
+  text: "",
+  content: null,
+  disableAccept: false,
+};
