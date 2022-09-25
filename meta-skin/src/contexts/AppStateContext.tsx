@@ -16,7 +16,7 @@ function useAppState() {
   const [apps, setApps] = useState<AppVM[]>([]);
   const [loadingApps, setLoadingApps] = useState(false);
   const [openCreateModal, setOpenCreateModal] = useState(false);
-  const [openHelpModal, setOpenHelpModal] = useState(false);
+  const [openHelpDialog, setOpenHelpDialog] = useState(false);
 
   const { t } = useTranslation("appStateContext");
 
@@ -37,8 +37,8 @@ function useAppState() {
     reloadApps,
     openCreateModal,
     setOpenCreateModal,
-    openHelpModal,
-    setOpenHelpModal,
+    openHelpDialog,
+    setOpenHelpDialog,
     loadingApps,
   };
 }

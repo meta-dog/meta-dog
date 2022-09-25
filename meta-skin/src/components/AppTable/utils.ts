@@ -26,6 +26,20 @@ export function extractUrls(text: string) {
   }, []);
 }
 
+export function saveBoolean(key: "referral-dialog-on", value: boolean) {
+  localStorage.setItem(key, String(value));
+}
+
+export function getSavedBoolean(key: "referral-dialog-on") {
+  let value = true;
+  const activateReferralModal = localStorage.getItem(key);
+  if (activateReferralModal === "false") {
+    value = false;
+  }
+  saveBoolean(key, value);
+  return value;
+}
+
 export function getSavedAdvocateId(): string | null {
   return localStorage.getItem("advocate-id");
 }
