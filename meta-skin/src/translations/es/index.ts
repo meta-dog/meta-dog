@@ -1,5 +1,5 @@
 import { Language, TranslationType } from "../en";
-import appTableCreateAppModal from "./AppTable/createAppModal.json";
+import appTableCreateAppDialog from "./AppTable/createAppDialog.json";
 import appTableCreateCell from "./AppTable/createCell.json";
 import appTableReferralCell from "./AppTable/referralCell.json";
 import appTableReferralDialog from "./AppTable/referralDialog.json";
@@ -15,7 +15,7 @@ import languageSelector from "./languageSelector.json";
 
 const translations: TranslationType = {
   appStateContext,
-  appTableCreateAppModal,
+  appTableCreateAppDialog,
   appTableCreateCell,
   appTableTable,
   appTableReferralCell,

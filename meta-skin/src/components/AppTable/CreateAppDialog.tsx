@@ -34,10 +34,10 @@ import {
 
 const LIMIT = 10 as const;
 
-export default function CreateAppModal() {
-  const { openCreateModal, setOpenCreateModal } = useAppStateContext();
+export default function CreateAppDialog() {
+  const { openCreateDialog, setOpenCreateDialog } = useAppStateContext();
 
-  const { t } = useTranslation("appTableCreateAppModal");
+  const { t } = useTranslation("appTableCreateAppDialog");
 
   const [currAdvocateId, setCurrAdvocateId] = useState<string | null>(null);
   const [hasError, setHasError] = useState(false);
@@ -52,13 +52,13 @@ export default function CreateAppModal() {
 
     // StrictMode React autoFocus fix: https://github.com/mui/material-ui/issues/33004
     const timeout = setTimeout(() => {
-      if (openCreateModal && inputRef.current) {
+      if (openCreateDialog && inputRef.current) {
         inputRef.current.focus();
       }
     }, 0);
 
     return () => clearTimeout(timeout);
-  }, [openCreateModal]);
+  }, [openCreateDialog]);
 
   let validationIcon = <Verified color="success" />;
   if (validUrls.length === 0) validationIcon = <Pending />;
@@ -159,7 +159,7 @@ export default function CreateAppModal() {
     if (addButtonRef.current) {
       // StrictMode React autoFocus fix: https://github.com/mui/material-ui/issues/33004
       setTimeout(() => {
-        if (openCreateModal && addButtonRef.current) {
+        if (openCreateDialog && addButtonRef.current) {
           addButtonRef.current.focus();
         }
       }, 0);
@@ -228,8 +228,8 @@ export default function CreateAppModal() {
 
   return (
     <Dialog
-      open={openCreateModal}
-      onClose={() => setOpenCreateModal(false)}
+      open={openCreateDialog}
+      onClose={() => setOpenCreateDialog(false)}
       sx={{ "& .MuiPaper-root": { width: "95vw", maxWidth: "650px" } }}
     >
       <DialogTitle textAlign="center">{title}</DialogTitle>
