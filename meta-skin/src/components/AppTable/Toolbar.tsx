@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useAppStateContext } from "contexts";
 
 export default function Toolbar() {
-  const { reloadApps, setOpenCreateModal } = useAppStateContext();
+  const { reloadApps, setOpenCreateDialog } = useAppStateContext();
 
   const { t } = useTranslation("appTableToolbar");
 
@@ -34,7 +34,7 @@ export default function Toolbar() {
         </IconButton>
         <IconButton
           aria-label={t("button.create.aria-label")}
-          onClick={() => setOpenCreateModal(true)}
+          onClick={() => setOpenCreateDialog(true)}
           color="secondary"
         >
           <Add />

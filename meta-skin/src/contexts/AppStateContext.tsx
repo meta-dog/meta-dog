@@ -15,8 +15,8 @@ import { AppVM, readApps } from "api";
 function useAppState() {
   const [apps, setApps] = useState<AppVM[]>([]);
   const [loadingApps, setLoadingApps] = useState(false);
-  const [openCreateModal, setOpenCreateModal] = useState(false);
-  const [openHelpModal, setOpenHelpModal] = useState(false);
+  const [openCreateDialog, setOpenCreateDialog] = useState(false);
+  const [openHelpDialog, setOpenHelpDialog] = useState(false);
 
   const { t } = useTranslation("appStateContext");
 
@@ -35,10 +35,10 @@ function useAppState() {
   return {
     apps,
     reloadApps,
-    openCreateModal,
-    setOpenCreateModal,
-    openHelpModal,
-    setOpenHelpModal,
+    openCreateDialog,
+    setOpenCreateDialog,
+    openHelpDialog,
+    setOpenHelpDialog,
     loadingApps,
   };
 }

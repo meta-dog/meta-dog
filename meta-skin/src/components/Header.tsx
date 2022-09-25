@@ -6,10 +6,10 @@ import { useAppStateContext } from "contexts";
 
 import { ReactComponent as Logo } from "res/logo.svg";
 
-import HelpModal from "./HelpModal";
+import HelpDialog from "./HelpDialog";
 
 export default function Header() {
-  const { setOpenHelpModal } = useAppStateContext();
+  const { setOpenHelpDialog } = useAppStateContext();
 
   const { t } = useTranslation("header");
 
@@ -23,12 +23,12 @@ export default function Header() {
         <IconButton
           aria-label={t("button.open-help.aria-label")}
           color="secondary"
-          onClick={() => setOpenHelpModal(true)}
+          onClick={() => setOpenHelpDialog(true)}
         >
           <Help />
         </IconButton>
       </Toolbar>
-      <HelpModal />
+      <HelpDialog />
     </AppBar>
   );
 }

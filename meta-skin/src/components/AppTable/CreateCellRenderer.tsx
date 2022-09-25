@@ -55,6 +55,7 @@ export default function CreateCellRenderer(
           disabled={noAdvocateId || appIdWasSaved}
           color="secondary"
           aria-label={t("button.create.aria-label")}
+          sx={{ padding: 0, width: "100%", height: "100%" }}
         >
           <RecordVoiceOver />
         </Button>

@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 
 import { AppTable, Footer, Header } from "components";
-import CreateAppModal from "components/AppTable/CreateAppModal";
+import { CreateAppDialog } from "components/AppTable";
 
 export default function Main() {
   return (
@@ -17,7 +17,7 @@ export default function Main() {
       </Grid>
       <Grid item gridArea="table">
         <AppTable />
-        <CreateAppModal />
+        <CreateAppDialog />
       </Grid>
       <Grid item gridArea="footer">
         <Footer />

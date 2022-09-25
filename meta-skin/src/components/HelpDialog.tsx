@@ -25,23 +25,23 @@ function getHasAcceptedTerms() {
   return localStorage.getItem("accepted-terms") === "true";
 }
 
-export default function HelpModal() {
-  const { openHelpModal, setOpenHelpModal } = useAppStateContext();
+export default function HelpDialog() {
+  const { openHelpDialog, setOpenHelpDialog } = useAppStateContext();
 
   const [hasAccepted, setHasAccepted] = useState(getHasAcceptedTerms());
 
-  const { t } = useTranslation("helpModal");
+  const { t } = useTranslation("helpDialog");
 
   useEffect(() => {
     if (!hasAccepted) {
-      setOpenHelpModal(true);
+      setOpenHelpDialog(true);
     }
-  }, [hasAccepted, setOpenHelpModal]);
+  }, [hasAccepted, setOpenHelpDialog]);
 
   const handleAcceptTerms = () => {
     localStorage.setItem("accepted-terms", "true");
     setHasAccepted(true);
-    setOpenHelpModal(false);
+    setOpenHelpDialog(false);
   };
 
   const handleCloseAttempt = () => {
@@ -49,12 +49,12 @@ export default function HelpModal() {
       toast.info(t("toast.must-accept"));
       return;
     }
-    setOpenHelpModal(false);
+    setOpenHelpDialog(false);
   };
 
   return (
     <Dialog
-      open={openHelpModal}
+      open={openHelpDialog}
       onClose={handleCloseAttempt}
       sx={{ "& .MuiPaper-root": { width: "95vw", maxWidth: "850px" } }}
     >
@@ -95,7 +95,7 @@ export default function HelpModal() {
           className="gap-2 w-full overflow-auto"
         >
           <Trans
-            ns="helpModal"
+            ns="helpDialog"
             i18nKey="text"
             components={{
               bold: <strong />,
@@ -121,7 +121,9 @@ export default function HelpModal() {
             color="secondary"
             onClick={handleAcceptTerms}
             disabled={getHasAcceptedTerms()}
-            aria-label="accepted terms"
+            aria-label={
+              hasAccepted ? t("button.accepted") : t("button.pending")
+            }
           >
             <Typography variant="button">
               {hasAccepted ? t("button.accepted") : t("button.pending")}

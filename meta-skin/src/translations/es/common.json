@@ -1,1 +1,6 @@
-{}
+{
+  "button": {
+    "cancel": "Cancelar",
+    "continue": "Continuar"
+  }
+}

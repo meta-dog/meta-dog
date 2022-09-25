@@ -16,27 +16,32 @@ import { useAppStateContext } from "contexts";
 import AppNameRenderer from "./AppNameRenderer";
 import CreateCellRenderer from "./CreateCellRenderer";
 import ReferralCellRenderer from "./ReferralCellRenderer";
+import ReferralDialog from "./ReferralDialog";
 import ReferralHeaderRenderer from "./ReferralHeaderRenderer";
 import Toolbar from "./Toolbar";
 import { HandleIdClick } from "./types";
 import {
   appendSavedAppIds,
   getSavedAdvocateId,
-  resetSavedAppIds,
+  getSavedBoolean,
+  saveBoolean,
 } from "./utils";
 
 const getColumns = (
   t: TFunction<"appTableTable", undefined>,
   handleRequestClick: HandleIdClick,
   handleCreateClick: HandleIdClick,
-  handleResetClick: () => void,
+  handleChangeReferralDialogOn: (newOn: boolean) => void,
 ) =>
   [
     {
       field: "referral",
       headerName: t("columns.referral"),
       renderHeader: ({ colDef }) =>
-        ReferralHeaderRenderer(colDef.headerName || "", handleResetClick),
+        ReferralHeaderRenderer(
+          colDef.headerName || "",
+          handleChangeReferralDialogOn,
+        ),
       headerAlign: "center",
       headerClassName: "text-center",
       width: 90,
@@ -75,8 +80,11 @@ export default function Table() {
   const [sortModel, setSortModel] = useState<GridSortModel>([
     { field: "name", sort: "asc" },
   ]);
+  const [referralAppId, setReferralAppId] = useState<AppVM["id"] | null>(null);
+  const [referralDialogOpen, setReferralDialogOpen] = useState(false);
 
-  const handleRequestClick = (id: AppVM["id"]) => {
+  const handleRequest = (id: AppVM["id"] | null = referralAppId) => {
+    if (id === null) return;
     appendSavedAppIds("received-app-ids", [id]);
 
     readReferral(id).then(({ advocateId }) => {
@@ -87,10 +95,21 @@ export default function Table() {
       );
     });
   };
-  const handleCreateClick = async (appId: AppVM["id"]) => {
+  const handleRequestClick = (id: AppVM["id"]) => {
+    setReferralAppId(id);
+    if (getSavedBoolean("referral-dialog-on")) {
+      setReferralDialogOpen(true);
+      return;
+    }
+    handleRequest(id);
+  };
+
+  const handleCreateClick = async () => {
     const advocateId = getSavedAdvocateId();
     if (advocateId === null) return;
+    if (referralAppId === null) return;
     try {
+      const appId = referralAppId;
       await createReferral({ advocateId, appId });
       toast.success(t("toast.create.success"));
     } catch (exception: any) {
@@ -99,8 +118,8 @@ export default function Table() {
       );
     }
   };
-  const handleResetClick = () => {
-    resetSavedAppIds("received-app-ids");
+  const handleChangeReferralDialogOn = (newOn: boolean) => {
+    saveBoolean("referral-dialog-on", newOn);
   };
 
   const onSortChange = () => {
@@ -140,7 +159,7 @@ export default function Table() {
     t,
     handleRequestClick,
     handleCreateClick,
-    handleResetClick,
+    handleChangeReferralDialogOn,
   );
 
   return (
@@ -173,6 +192,11 @@ export default function Table() {
           }}
         />
       </Box>
+      <ReferralDialog
+        open={referralDialogOpen}
+        setOpen={setReferralDialogOpen}
+        handleAccept={handleRequest}
+      />
     </Stack>
   );
 }

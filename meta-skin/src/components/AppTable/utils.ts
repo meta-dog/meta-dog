@@ -26,6 +26,20 @@ export function extractUrls(text: string) {
   }, []);
 }
 
+export function saveBoolean(key: "referral-dialog-on", value: boolean) {
+  localStorage.setItem(key, String(value));
+}
+
+export function getSavedBoolean(key: "referral-dialog-on") {
+  let value = true;
+  const oldValue = localStorage.getItem(key);
+  if (oldValue === "false") {
+    value = false;
+  }
+  saveBoolean(key, value);
+  return value;
+}
+
 export function getSavedAdvocateId(): string | null {
   return localStorage.getItem("advocate-id");
 }
@@ -49,8 +63,4 @@ export function appendSavedAppIds(
   const prevAppIds = getSavedAppIds(key);
   const nextAppIds: Set<string> = new Set([...prevAppIds, ...extraAppIds]);
   localStorage.setItem(key, JSON.stringify(Array.from(nextAppIds)));
-}
-
-export function resetSavedAppIds(key: "saved-app-ids" | "received-app-ids") {
-  localStorage.removeItem(key);
 }
