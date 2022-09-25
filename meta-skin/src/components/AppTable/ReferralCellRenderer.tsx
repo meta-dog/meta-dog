@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 
 import { Hail } from "@mui/icons-material";
 import { Button, Tooltip } from "@mui/material";
@@ -13,8 +13,6 @@ export default function ReferralCellRenderer(
   params: { row: any },
   handleRequestClick: HandleIdClick,
 ) {
-  const [open, setOpen] = useState(false);
-
   const { t } = useTranslation("appTableReferralCell");
 
   const { row } = params;
@@ -25,27 +23,17 @@ export default function ReferralCellRenderer(
   if (disabled) {
     title = (
       <div className="whitespace-pre-line text-center max-w-[30vw]">
-        {t("tooltip.title-when-disabled")}
+        {t("tooltip.title.got-it-already")}
       </div>
     );
   }
 
   return (
-    <Tooltip
-      open={open}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-      onTouchStart={() => setOpen(true)}
-      onBlur={() => setOpen(false)}
-      title={title}
-      arrow
-      placement="right"
-    >
+    <Tooltip title={title} arrow placement="right">
       <div className="flex items-center justify-center w-full h-full">
         <Button
           onClick={() => handleRequestClick(id)}
-          color="secondary"
-          disabled={disabled}
+          color={disabled ? "primary" : "secondary"}
           aria-label={t("button.request.aria-label")}
         >
           <Hail />
