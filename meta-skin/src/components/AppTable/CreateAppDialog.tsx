@@ -32,7 +32,7 @@ import {
   storeAdvocateId,
 } from "./utils";
 
-const LIMIT = 10 as const;
+const LIMIT = 30 as const;
 
 export default function CreateAppDialog() {
   const { openCreateDialog, setOpenCreateDialog } = useAppStateContext();
