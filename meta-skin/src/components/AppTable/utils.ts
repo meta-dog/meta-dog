@@ -26,41 +26,40 @@ export function extractUrls(text: string) {
   }, []);
 }
 
-export function saveBoolean(key: "referral-dialog-on", value: boolean) {
+export type BooleanKeys = "referral-dialog-on" | "create-referral-dialog-on";
+
+export function storeBoolean(key: BooleanKeys, value: boolean) {
   localStorage.setItem(key, String(value));
 }
 
-export function getSavedBoolean(key: "referral-dialog-on") {
+export function getStoredBoolean(key: BooleanKeys) {
   let value = true;
   const oldValue = localStorage.getItem(key);
   if (oldValue === "false") {
     value = false;
   }
-  saveBoolean(key, value);
+  storeBoolean(key, value);
   return value;
 }
 
-export function getSavedAdvocateId(): string | null {
+export function getStoredAdvocateId(): string | null {
   return localStorage.getItem("advocate-id");
 }
-export function saveAdvocateId(advocateId: string) {
+export function storeAdvocateId(advocateId: string) {
   localStorage.setItem("advocate-id", advocateId);
 }
 
-export function getSavedAppIds(
-  key: "saved-app-ids" | "received-app-ids",
-): string[] {
+type ArrayKeys = "saved-app-ids" | "received-app-ids";
+
+export function getStoredArray(key: ArrayKeys): string[] {
   const unparsedSavedAppsIds = localStorage.getItem(key);
   return unparsedSavedAppsIds === null
     ? []
     : (JSON.parse(unparsedSavedAppsIds) as string[]);
 }
 
-export function appendSavedAppIds(
-  key: "saved-app-ids" | "received-app-ids",
-  extraAppIds: string[],
-) {
-  const prevAppIds = getSavedAppIds(key);
+export function appendToStoredArray(key: ArrayKeys, extraAppIds: string[]) {
+  const prevAppIds = getStoredArray(key);
   const nextAppIds: Set<string> = new Set([...prevAppIds, ...extraAppIds]);
   localStorage.setItem(key, JSON.stringify(Array.from(nextAppIds)));
 }

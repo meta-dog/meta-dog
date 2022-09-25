@@ -2,7 +2,7 @@
   "columns": {
     "referral": "Get",
     "app-name": "App Name",
-    "create": "Create"
+    "create": "Add"
   },
   "table": {
     "no-rows-label": "No Apps match",

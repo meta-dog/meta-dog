@@ -24,12 +24,12 @@ import { CreateReferralVM, createReferral } from "api";
 import { useAppStateContext } from "contexts";
 
 import {
-  appendSavedAppIds,
+  appendToStoredArray,
   extractReferral,
   extractUrls,
-  getSavedAdvocateId,
-  getSavedAppIds,
-  saveAdvocateId,
+  getStoredAdvocateId,
+  getStoredArray,
+  storeAdvocateId,
 } from "./utils";
 
 const LIMIT = 10 as const;
@@ -46,7 +46,7 @@ export default function CreateAppDialog() {
   const addButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    setCurrAdvocateId(getSavedAdvocateId());
+    setCurrAdvocateId(getStoredAdvocateId());
     setHasError(false);
     setValidUrls([]);
 
@@ -112,7 +112,7 @@ export default function CreateAppDialog() {
     }
 
     const pastedAdvocateId = uniqueAdvocateIdsArray[0];
-    const savedAdvocateId = getSavedAdvocateId();
+    const savedAdvocateId = getStoredAdvocateId();
     if (savedAdvocateId !== null && savedAdvocateId !== pastedAdvocateId) {
       toast.error(
         t("toast.error.duplicated-user", { savedAdvocateId, pastedAdvocateId }),
@@ -122,7 +122,7 @@ export default function CreateAppDialog() {
       return;
     }
 
-    const repeatedAppIds = getSavedAppIds("saved-app-ids").filter(
+    const repeatedAppIds = getStoredArray("saved-app-ids").filter(
       (savedAppId) => uniqueAppIdsArray.includes(savedAppId),
     );
 
@@ -181,7 +181,7 @@ export default function CreateAppDialog() {
     if (numValidUrls === 0) return;
     const promises = validUrls.map(createReferral);
     Promise.allSettled(promises).then((results) => {
-      saveAdvocateId(validUrls[0].advocateId);
+      storeAdvocateId(validUrls[0].advocateId);
       const fulfilled = results.filter(
         (result) => result.status === "fulfilled",
       );
@@ -196,7 +196,7 @@ export default function CreateAppDialog() {
       const fulfilledAppIds = (
         fulfilled as PromiseFulfilledResult<string>[]
       ).map(({ value }) => value);
-      appendSavedAppIds("saved-app-ids", fulfilledAppIds);
+      appendToStoredArray("saved-app-ids", fulfilledAppIds);
       if (rejected.length === 0) {
         toast.success(t("toast.info.all-successful", { count: numValidUrls }), {
           icon: "🎉",

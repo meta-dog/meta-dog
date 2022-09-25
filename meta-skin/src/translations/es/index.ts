@@ -1,6 +1,8 @@
 import { Language, TranslationType } from "../en";
 import appTableCreateAppDialog from "./AppTable/createAppDialog.json";
 import appTableCreateCell from "./AppTable/createCell.json";
+import appTableCreateReferralCellDialog from "./AppTable/createReferralCellDialog.json";
+import appTableCreateReferralHeader from "./AppTable/createReferralHeader.json";
 import appTableReferralCell from "./AppTable/referralCell.json";
 import appTableReferralDialog from "./AppTable/referralDialog.json";
 import appTableReferralHeader from "./AppTable/referralHeader.json";
@@ -17,6 +19,8 @@ const translations: TranslationType = {
   appStateContext,
   appTableCreateAppDialog,
   appTableCreateCell,
+  appTableCreateReferralCellDialog,
+  appTableCreateReferralHeader,
   appTableTable,
   appTableReferralCell,
   appTableReferralDialog,

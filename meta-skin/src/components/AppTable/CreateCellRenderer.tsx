@@ -1,58 +1,38 @@
-import { useState } from "react";
-
 import { RecordVoiceOver } from "@mui/icons-material";
 import { Button, Tooltip } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { AppVM } from "api";
 
-import { HandleIdClick } from "./types";
-import { getSavedAdvocateId, getSavedAppIds } from "./utils";
+import { HandleAppClick } from "./types";
+import { getStoredArray } from "./utils";
 
 export default function CreateCellRenderer(
   params: { row: any },
-  handleCreateClick: HandleIdClick,
+  handleCreateClick: HandleAppClick,
 ) {
   const { t } = useTranslation("appTableCreateCell");
 
-  const [open, setOpen] = useState(false);
-
   const { row } = params;
-  const { id } = row as AppVM;
+  const app = row as AppVM;
 
-  const savedAppIds = getSavedAppIds("saved-app-ids");
-  const appIdWasSaved = savedAppIds.includes(id);
+  const savedAppIds = getStoredArray("saved-app-ids");
+  const appIdWasSaved = savedAppIds.includes(app.id);
 
-  const advocateId = getSavedAdvocateId();
-  const noAdvocateId = advocateId === null;
-
-  let titleText = "";
-  if (noAdvocateId) titleText = t("tooltip.no-advocate-id");
-  else if (appIdWasSaved) titleText = t("tooltip.app-id-was-saved");
+  const title = appIdWasSaved ? (
+    <div className="whitespace-pre-line text-center max-w-[30vw]">
+      {t("tooltip.app-id-was-saved")}
+    </div>
+  ) : (
+    ""
+  );
 
   return (
-    <Tooltip
-      open={open}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-      onTouchEnd={() => setOpen(true)}
-      onBlur={() => setOpen(false)}
-      title={
-        titleText === "" ? (
-          ""
-        ) : (
-          <div className="whitespace-pre-line text-center max-w-[30vw]">
-            {titleText}
-          </div>
-        )
-      }
-      arrow
-      placement="left"
-    >
+    <Tooltip title={title} arrow placement="left">
       <div className="flex items-center justify-center w-full h-full">
         <Button
-          onClick={() => !appIdWasSaved && handleCreateClick(id)}
-          disabled={noAdvocateId || appIdWasSaved}
+          onClick={() => !appIdWasSaved && handleCreateClick(app)}
+          disabled={appIdWasSaved}
           color="secondary"
           aria-label={t("button.create.aria-label")}
           sx={{ padding: 0, width: "100%", height: "100%" }}

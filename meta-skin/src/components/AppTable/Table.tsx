@@ -15,23 +15,27 @@ import { useAppStateContext } from "contexts";
 
 import AppNameRenderer from "./AppNameRenderer";
 import CreateCellRenderer from "./CreateCellRenderer";
+import CreateReferralCellDialog from "./CreateReferralCellDialog";
+import CreateReferralHeaderRenderer from "./CreateReferralHeaderRenderer";
 import ReferralCellRenderer from "./ReferralCellRenderer";
 import ReferralDialog from "./ReferralDialog";
 import ReferralHeaderRenderer from "./ReferralHeaderRenderer";
 import Toolbar from "./Toolbar";
-import { HandleIdClick } from "./types";
+import { HandleAppClick } from "./types";
 import {
-  appendSavedAppIds,
-  getSavedAdvocateId,
-  getSavedBoolean,
-  saveBoolean,
+  BooleanKeys,
+  appendToStoredArray,
+  getStoredAdvocateId,
+  getStoredArray,
+  getStoredBoolean,
+  storeBoolean,
 } from "./utils";
 
 const getColumns = (
   t: TFunction<"appTableTable", undefined>,
-  handleRequestClick: HandleIdClick,
-  handleCreateClick: HandleIdClick,
-  handleChangeReferralDialogOn: (newOn: boolean) => void,
+  handleRequestClick: HandleAppClick,
+  handleCreateClick: HandleAppClick,
+  handleChangeDialogOn: (key: BooleanKeys) => (newOn: boolean) => void,
 ) =>
   [
     {
@@ -40,7 +44,7 @@ const getColumns = (
       renderHeader: ({ colDef }) =>
         ReferralHeaderRenderer(
           colDef.headerName || "",
-          handleChangeReferralDialogOn,
+          handleChangeDialogOn("referral-dialog-on"),
         ),
       headerAlign: "center",
       headerClassName: "text-center",
@@ -60,6 +64,11 @@ const getColumns = (
     {
       field: "create",
       headerName: t("columns.create"),
+      renderHeader: ({ colDef }) =>
+        CreateReferralHeaderRenderer(
+          colDef.headerName || "",
+          handleChangeDialogOn("create-referral-dialog-on"),
+        ),
       headerAlign: "center",
       headerClassName: "text-center",
       width: 70,
@@ -80,12 +89,15 @@ export default function Table() {
   const [sortModel, setSortModel] = useState<GridSortModel>([
     { field: "name", sort: "asc" },
   ]);
-  const [referralAppId, setReferralAppId] = useState<AppVM["id"] | null>(null);
+  const [referralApp, setReferralApp] = useState<AppVM | null>(null);
   const [referralDialogOpen, setReferralDialogOpen] = useState(false);
+  const [createReferralDialogOpen, setCreateReferralDialogOpen] =
+    useState(false);
 
-  const handleRequest = (id: AppVM["id"] | null = referralAppId) => {
-    if (id === null) return;
-    appendSavedAppIds("received-app-ids", [id]);
+  const handleRequest = (app: AppVM | null = referralApp) => {
+    if (app === null) return;
+    const { id } = app;
+    appendToStoredArray("received-app-ids", [id]);
 
     readReferral(id).then(({ advocateId }) => {
       window.open(
@@ -95,22 +107,25 @@ export default function Table() {
       );
     });
   };
-  const handleRequestClick = (id: AppVM["id"]) => {
-    setReferralAppId(id);
-    if (getSavedBoolean("referral-dialog-on")) {
+  const handleRequestClick = (app: AppVM) => {
+    setReferralApp(app);
+
+    const shouldOpenDialog =
+      getStoredBoolean("referral-dialog-on") &&
+      getStoredArray("received-app-ids").includes(app.id);
+    if (shouldOpenDialog) {
       setReferralDialogOpen(true);
       return;
     }
-    handleRequest(id);
+    handleRequest(app);
   };
 
-  const handleCreateClick = async () => {
-    const advocateId = getSavedAdvocateId();
+  const handleCreate = async (app: AppVM | null = referralApp) => {
+    const advocateId = getStoredAdvocateId();
     if (advocateId === null) return;
-    if (referralAppId === null) return;
+    if (app === null) return;
     try {
-      const appId = referralAppId;
-      await createReferral({ advocateId, appId });
+      await createReferral({ advocateId, appId: app.id });
       toast.success(t("toast.create.success"));
     } catch (exception: any) {
       toast.error(
@@ -118,8 +133,16 @@ export default function Table() {
       );
     }
   };
-  const handleChangeReferralDialogOn = (newOn: boolean) => {
-    saveBoolean("referral-dialog-on", newOn);
+  const handleCreateClick = (app: AppVM) => {
+    setReferralApp(app);
+    if (getStoredBoolean("create-referral-dialog-on")) {
+      setCreateReferralDialogOpen(true);
+      return;
+    }
+    handleCreate(app);
+  };
+  const handleChangeDialogOn = (key: BooleanKeys) => (newOn: boolean) => {
+    storeBoolean(key, newOn);
   };
 
   const onSortChange = () => {
@@ -159,7 +182,7 @@ export default function Table() {
     t,
     handleRequestClick,
     handleCreateClick,
-    handleChangeReferralDialogOn,
+    handleChangeDialogOn,
   );
 
   return (
@@ -196,6 +219,13 @@ export default function Table() {
         open={referralDialogOpen}
         setOpen={setReferralDialogOpen}
         handleAccept={handleRequest}
+      />
+      <CreateReferralCellDialog
+        open={createReferralDialogOpen}
+        setOpen={setCreateReferralDialogOpen}
+        handleAccept={handleCreate}
+        app={referralApp}
+        advocateId={getStoredAdvocateId()}
       />
     </Stack>
   );
