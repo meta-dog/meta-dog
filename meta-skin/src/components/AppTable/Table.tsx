@@ -81,7 +81,7 @@ const getColumns = (
   ] as GridColDef[];
 
 export default function Table() {
-  const { apps, loadingApps } = useAppStateContext();
+  const { apps, loadingApps, reloadApps } = useAppStateContext();
 
   const { t } = useTranslation("appTableTable");
 
@@ -127,10 +127,14 @@ export default function Table() {
     try {
       await createReferral({ advocateId, appId: app.id });
       toast.success(t("toast.create.success"));
+      await reloadApps();
     } catch (exception: any) {
-      toast.error(
-        t("toast.create.error", { context: exception.message as string }),
-      );
+      const context = exception.message as string;
+      if (context === "conflict") {
+        appendToStoredArray("saved-app-ids", [app.id]);
+        await reloadApps();
+      }
+      toast.error(t("toast.create.error", { context }));
     }
   };
   const handleCreateClick = (app: AppVM) => {
