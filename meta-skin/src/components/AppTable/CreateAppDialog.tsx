@@ -35,7 +35,8 @@ import {
 const LIMIT = 30 as const;
 
 export default function CreateAppDialog() {
-  const { openCreateDialog, setOpenCreateDialog } = useAppStateContext();
+  const { openCreateDialog, setOpenCreateDialog, reloadApps } =
+    useAppStateContext();
 
   const { t } = useTranslation("appTableCreateAppDialog");
 
@@ -226,10 +227,15 @@ export default function CreateAppDialog() {
   const context = currAdvocateId === null ? "" : "with-advocate";
   const title = t("title", { context, currAdvocateId });
 
+  const handleClose = () => {
+    setOpenCreateDialog(false);
+    reloadApps();
+  };
+
   return (
     <Dialog
       open={openCreateDialog}
-      onClose={() => setOpenCreateDialog(false)}
+      onClose={handleClose}
       sx={{ "& .MuiPaper-root": { width: "95vw", maxWidth: "650px" } }}
     >
       <DialogTitle textAlign="center">{title}</DialogTitle>
