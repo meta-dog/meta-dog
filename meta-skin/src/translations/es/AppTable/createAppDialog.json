@@ -29,8 +29,8 @@
       "partial-reject": "Se han agregado {{numFulfilled}} referidos de App a la cola de verificación, pero {{numRejected}} no se pudieron agregar a la cola de verificación. Por favor, revíselos e inténtelo de nuevo"
     },
     "info": {
-      "all_valid_one": "¡Todos los {{count}} referidos de App detectados parecen válidos! Utilice el botón para agregarlos a la cola de verificación",
-      "all_valid_other": "¡El referido de App parece válido! Utilice el botón para agregarlo a la cola de verificación",
+      "all_valid_one": "¡El referido de App parece válido! Utilice el botón para agregarlo a la cola de verificación",
+      "all_valid_other": "¡Todos los {{count}} referidos de App detectados parecen válidos! Utilice el botón para agregarlos a la cola de verificación",
       "all-successful_one": "¡El referido de App se agregó a la cola de verificación con éxito!",
       "all-successful_other": "¡Todos los {{count}} referidos de App se agregaron a la cola de verificación correctamente!"
     }

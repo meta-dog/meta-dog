@@ -29,8 +29,8 @@
       "partial-reject": "{{numFulfilled}} App referrals were added to the verification queue successfully, but {{numRejected}} could not. Please review them and try again"
     },
     "info": {
-      "all_valid_one": "All of the {{count}} detected App referral links seem valid! Please click on the button to add them to the verification queue",
-      "all_valid_other": "The provided App referral link seems valid! Please click on the button to add it to the verification queue",
+      "all_valid_one": "The provided App referral link seems valid! Please click on the button to add it to the verification queue",
+      "all_valid_other": "All of the {{count}} detected App referral links seem valid! Please click on the button to add them to the verification queue",
       "all-successful_one": "The App referral was added to the verification queue successfully!",
       "all-successful_other": "All of the {{count}} App referrals were added to the verification queue successfully!"
     }
