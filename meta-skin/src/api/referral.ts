@@ -14,9 +14,11 @@ export async function createReferral({ advocateId, appId }: CreateReferralVM) {
   } catch (error) {
     // eslint-disable-next-line no-unsafe-optional-chaining
     const { status } = (error as any)?.response;
-    const statusCode = Number.parseInt(status, 10);
-    if (statusCode === StatusCodes.CONFLICT) throw new Error("conflict");
-    if (statusCode === StatusCodes.NOT_FOUND) throw new Error("notfound");
+    const code = Number.parseInt(status, 10);
+    if (code === StatusCodes.UNPROCESSABLE_ENTITY) {
+      throw new Error("unprocessable");
+    }
+    if (code === StatusCodes.CONFLICT) throw new Error("conflict");
     throw new Error("generic");
   }
 }

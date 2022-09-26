@@ -16,23 +16,23 @@
     "error": {
       "no-urls-found": "No App URLs were found in the pasted text!",
       "above-limit": "The limit of App Referrals to be pasted at once is {{limit}}",
-      "invalid-url_one": "The provided App referral link is invalid. Please review it and paste it again.",
-      "invalid-url_other": "At least one of the provided App referral link is invalid. Please review them and paste them again.",
+      "invalid-url_one": "The provided App referral link is invalid. Please review it and paste it again",
+      "invalid-url_other": "At least one of the provided App referral link is invalid. Please review them and paste them again",
       "multiple-users": "You can only send referral links from one user",
       "repeated-urls": "At least one of the Referral App links is repeated",
-      "duplicated-user": "You sent a link from the user {{savedAdvocateId}} in the past, but you pasted a link from the user {{pastedAdvocateId}} now. Only one user is allowed.",
-      "all-rejected_one": "The App referral could not be created. Please review it and try again.",
-      "all-rejected_other": "None of the {{count}} App referrals were created successfully. Please review them and try again"
+      "duplicated-user": "You sent a link from the user {{savedAdvocateId}} in the past, but you pasted a link from the user {{pastedAdvocateId}} now. Only one user is allowed",
+      "all-rejected_one": "The App referral could not be added to the verification queue. Please review it and try again",
+      "all-rejected_other": "None of the {{count}} App referrals were added to the verification queue successfully. Please review them and try again"
     },
     "warn": {
-      "repeated-saved-apps": "You have already saved the Apps: {{repeatedAppsText}} in the past, but you pasted links that included them again, and have been removed.",
-      "partial-reject": "{{numFulfilled}} App referrals were created successfully, but {{numRejected}} could not be created. Please review them and try again"
+      "repeated-saved-apps": "You have already saved the Apps: {{repeatedAppsText}} in the past, but you pasted links that included them again, and have been removed",
+      "partial-reject": "{{numFulfilled}} App referrals were added to the verification queue successfully, but {{numRejected}} could not. Please review them and try again"
     },
     "info": {
-      "all_valid_one": "All of the {{count}} detected App referral links seem valid! Please click on the button to try to save them.",
-      "all_valid_other": "The provided App referral link seems valid! Please click on the button to try to save it.",
-      "all-successful_one": "The App referral was created successfully!",
-      "all-successful_other": "All of the {{count}} App referrals were created successfully!"
+      "all_valid_one": "All of the {{count}} detected App referral links seem valid! Please click on the button to add them to the verification queue",
+      "all_valid_other": "The provided App referral link seems valid! Please click on the button to add it to the verification queue",
+      "all-successful_one": "The App referral was added to the verification queue successfully!",
+      "all-successful_other": "All of the {{count}} App referrals were added to the verification queue successfully!"
     }
   }
 }
