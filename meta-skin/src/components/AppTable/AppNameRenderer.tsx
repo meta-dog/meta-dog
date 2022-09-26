@@ -5,6 +5,7 @@ import { AppVM } from "api";
 export default function AppNameRenderer(params: { row: any }) {
   const { row } = params;
   const { id, name } = row as AppVM;
+
   return (
     <Link
       className="flex items-center justify-stretch w-full h-full pl-2 pr-2"
