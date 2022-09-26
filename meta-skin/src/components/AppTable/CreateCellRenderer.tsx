@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 import { RecordVoiceOver } from "@mui/icons-material";
 import { Button, Tooltip } from "@mui/material";
 import { useTranslation } from "react-i18next";
@@ -16,16 +18,22 @@ export default function CreateCellRenderer(
   const { row } = params;
   const app = row as AppVM;
 
-  const savedAppIds = getStoredArray("saved-app-ids");
-  const appIdWasSaved = savedAppIds.includes(app.id);
+  const appIdWasSaved = getStoredArray("saved-app-ids").includes(app.id);
+  const appIdWasBlacklisted = getStoredArray("blacklist-ids").includes(app.id);
 
-  const title = appIdWasSaved ? (
-    <div className="whitespace-pre-line text-center max-w-[30vw]">
-      {t("tooltip.app-id-was-saved")}
-    </div>
-  ) : (
-    ""
-  );
+  let title: string | ReactNode = "";
+  if (appIdWasSaved)
+    title = (
+      <div className="whitespace-pre-line text-center max-w-[30vw]">
+        {t("tooltip.app-id-was-saved")}
+      </div>
+    );
+  if (appIdWasBlacklisted)
+    title = (
+      <div className="whitespace-pre-line text-center max-w-[30vw]">
+        {t("tooltip.app-id-was-blacklisted")}
+      </div>
+    );
 
   return (
     <Tooltip title={title} arrow placement="left">

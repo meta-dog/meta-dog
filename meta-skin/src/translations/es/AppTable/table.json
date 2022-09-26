@@ -11,8 +11,8 @@
   },
   "toast": {
     "create": {
-      "success": "Su invitación se creó correctamente",
-      "error": "Su invitación no se creó correctamente. Por favor, inténtelo de nuevo más tarde",
+      "success": "Su invitación se agregó a la cola de verificación correctamente",
+      "error": "Su invitación no se agregó a la cola de verificación correctamente. Por favor, inténtelo de nuevo más tarde",
       "error_conflict": "Su invitación ya estaba en el sistema",
       "error_unprocessable": "La invitación es inválida"
     }

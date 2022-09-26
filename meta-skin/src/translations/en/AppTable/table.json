@@ -11,8 +11,8 @@
   },
   "toast": {
     "create": {
-      "success": "Your referral was created succesfully",
-      "error": "Your referral could not be created. Please try again later",
+      "success": "Your referral was added to the verification queue succesfully",
+      "error": "Your referral could not be added to the verification queue. Please try again later",
       "error_conflict": "Your referral was already in the system",
       "error_unprocessable": "The Referral is invalid"
     }

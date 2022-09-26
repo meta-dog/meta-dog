@@ -126,12 +126,17 @@ export default function Table() {
     if (app === null) return;
     try {
       await createReferral({ advocateId, appId: app.id });
+      appendToStoredArray("saved-app-ids", [app.id]);
       toast.success(t("toast.create.success"));
       await reloadApps();
     } catch (exception: any) {
       const context = exception.message as string;
       if (context === "conflict") {
         appendToStoredArray("saved-app-ids", [app.id]);
+        await reloadApps();
+      }
+      if (context === "unprocessable") {
+        appendToStoredArray("blacklist-ids", [app.id]);
         await reloadApps();
       }
       toast.error(t("toast.create.error", { context }));

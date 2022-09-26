@@ -49,7 +49,7 @@ export function storeAdvocateId(advocateId: string) {
   localStorage.setItem("advocate-id", advocateId);
 }
 
-type ArrayKeys = "saved-app-ids" | "received-app-ids";
+type ArrayKeys = "saved-app-ids" | "received-app-ids" | "blacklist-ids";
 
 export function getStoredArray(key: ArrayKeys): string[] {
   const unparsedSavedAppsIds = localStorage.getItem(key);

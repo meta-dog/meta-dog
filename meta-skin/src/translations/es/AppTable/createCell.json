@@ -1,7 +1,8 @@
 {
   "tooltip": {
     "no-advocate-id": "Antes debes crear un referido con el botón +",
-    "app-id-was-saved": "Ya has subido este referido de App"
+    "app-id-was-saved": "Ya has subido este referido de App",
+    "app-id-was-blacklisted": "Este referido de App se marcó como inválido"
   },
   "button": {
     "create": {
