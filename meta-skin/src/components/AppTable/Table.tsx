@@ -135,7 +135,7 @@ export default function Table() {
         appendToStoredArray("saved-app-ids", [app.id]);
         await reloadApps();
       }
-      if (context === "unprocessable") {
+      if (context === "unprocessable" || context === "badrequest") {
         appendToStoredArray("blacklist-ids", [app.id]);
         await reloadApps();
       }
@@ -144,7 +144,8 @@ export default function Table() {
   };
   const handleCreateClick = (app: AppVM) => {
     setReferralApp(app);
-    if (getStoredBoolean("create-referral-dialog-on")) {
+    const advocateId = getStoredAdvocateId();
+    if (advocateId === null || getStoredBoolean("create-referral-dialog-on")) {
       setCreateReferralDialogOpen(true);
       return;
     }
@@ -234,7 +235,6 @@ export default function Table() {
         setOpen={setCreateReferralDialogOpen}
         handleAccept={handleCreate}
         app={referralApp}
-        advocateId={getStoredAdvocateId()}
       />
     </Stack>
   );

@@ -14,6 +14,7 @@
       "success": "Your referral was added to the verification queue succesfully",
       "error": "Your referral could not be added to the verification queue. Please try again later",
       "error_conflict": "Your referral was already in the system",
+      "error_badrequest": "You sent an invalid referral",
       "error_unprocessable": "The Referral is invalid"
     }
   }

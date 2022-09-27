@@ -1,6 +1,6 @@
 import { CreateReferralVM } from "api";
 
-import { extractReferral, extractUrls } from "./utils";
+import { extractReferral, extractUrls, validateAdvocateId } from "./utils";
 
 interface ExtractReferralData {
   input: string;
@@ -10,8 +10,8 @@ interface ExtractReferralData {
 const extractReferralData: ExtractReferralData[] = [
   {
     input:
-      "https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
-    output: { advocateId: "example.user", appId: "1241241241241241" },
+      "https://www.oculus.com/appreferrals/example-user/1241241241241241/?utm_source=3",
+    output: { advocateId: "example-user", appId: "1241241241241241" },
   },
   {
     input:
@@ -20,27 +20,27 @@ const extractReferralData: ExtractReferralData[] = [
   },
   {
     input:
-      "https://www.oculus.com/appreferrals/example.user/asdasd/1241241241241241/?utm_source=3",
+      "https://www.oculus.com/appreferrals/example-user/asdasd/1241241241241241/?utm_source=3",
     output: false,
   },
   {
     input:
-      "https://oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
+      "https://oculus.com/appreferrals/example-user/1241241241241241/?utm_source=3",
     output: false,
   },
   {
     input:
-      "https://www.anotheroculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
+      "https://www.anotheroculus.com/appreferrals/example-user/1241241241241241/?utm_source=3",
     output: false,
   },
   {
     input:
-      "http://www.anotheroculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
+      "http://www.anotheroculus.com/appreferrals/example-user/1241241241241241/?utm_source=3",
     output: false,
   },
   {
     input:
-      "http://anotheroculus.com/appreferrals/example.user/1241241241241241/",
+      "http://anotheroculus.com/appreferrals/example-user/1241241241241241/",
     output: false,
   },
 ];
@@ -90,5 +90,82 @@ test.each(extractUrlData)(
   "expects extractUrls($input) to equal $output",
   ({ input, output }) => {
     expect(extractUrls(input)).toEqual(output);
+  },
+);
+
+interface ValidateAdvocateIdData {
+  input: string | null;
+  output: boolean;
+}
+
+// Based off on: https://www.meta.com/en-gb/help/quest/articles/accounts/account-settings-and-management/manage-oculus-account/
+/* Username requirements:
+
+- Usernames must start with a letter or digit.
+- Usernames may be between 2 and 20 characters in length.
+- Usernames may include a combination of letters, digits, dashes and underscores, but may not include dashes or underscores consecutively.
+- Usernames may not have spaces, slashes or full stops.
+
+*/
+const validateAdvocateIdData: ValidateAdvocateIdData[] = [
+  {
+    input: "1-true_exampleuser",
+    output: true,
+  },
+  {
+    input: "maybe-good-gal",
+    output: true,
+  },
+  {
+    input: null,
+    output: false,
+  },
+  {
+    input: "1",
+    output: false,
+  },
+  {
+    input: "a",
+    output: false,
+  },
+  {
+    input: "cant.stop.me.now",
+    output: false,
+  },
+  {
+    input: "take/this/fail",
+    output: false,
+  },
+  {
+    input: "double__under__fail",
+    output: false,
+  },
+  {
+    input: "double--dash--fail",
+    output: false,
+  },
+  {
+    input: "fail space user",
+    output: false,
+  },
+  {
+    input:
+      "https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
+    output: false,
+  },
+  {
+    input: "maybe-evil/not-great-user",
+    output: false,
+  },
+  {
+    input: "probablygood?user",
+    output: false,
+  },
+];
+
+test.each(validateAdvocateIdData)(
+  "expects validateAdvocateIds($input) to equal $output",
+  ({ input, output }) => {
+    expect(validateAdvocateId(input)).toEqual(output);
   },
 );

@@ -2,6 +2,16 @@ import { CreateReferralVM } from "api";
 
 const BASE_URL = "https://www.oculus.com/appreferrals/";
 
+export function validateAdvocateId(advocateId: string | null) {
+  if (advocateId === null) return false;
+  const hasLengthAndOnlyValidChars =
+    advocateId.match(/^[0-9a-zA-Z]{1}[\w\-_]+$/) !== null;
+  if (!hasLengthAndOnlyValidChars) return false;
+  const hasDoubleDashOrUnderscore = advocateId.match(/[-_]{2,}/);
+  if (hasDoubleDashOrUnderscore) return false;
+  return true;
+}
+
 export function extractReferral(url: string): false | CreateReferralVM {
   if (url.indexOf(BASE_URL) !== 0) return false;
   const shortenedUrl = url.substring(BASE_URL.length);
@@ -11,7 +21,9 @@ export function extractReferral(url: string): false | CreateReferralVM {
   if (urlMatch === null) return false;
   if (urlMatch.groups === undefined) return false;
   const { advocateId, appId } = urlMatch.groups;
-  if (advocateId === undefined || appId === undefined) return false;
+  if (advocateId === undefined) return false;
+  if (appId === undefined) return false;
+  if (!validateAdvocateId(advocateId)) return false;
   return { advocateId, appId };
 }
 
@@ -42,8 +54,14 @@ export function getStoredBoolean(key: BooleanKeys) {
   return value;
 }
 
+export function removeAdvocateId() {
+  localStorage.removeItem("advocate-id");
+}
 export function getStoredAdvocateId(): string | null {
-  return localStorage.getItem("advocate-id");
+  const storedAdvocateId = localStorage.getItem("advocate-id");
+  if (validateAdvocateId(storedAdvocateId)) return storedAdvocateId;
+  removeAdvocateId();
+  return null;
 }
 export function storeAdvocateId(advocateId: string) {
   localStorage.setItem("advocate-id", advocateId);

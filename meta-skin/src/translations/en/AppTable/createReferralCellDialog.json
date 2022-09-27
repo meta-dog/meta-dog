@@ -1,4 +1,12 @@
 {
   "title": "Add App Referral to verification queue",
-  "text": "Please confirm that you want to add a referral to the verification queue for the App: <appName/> Using your Advocate Id: <advocateId/> Please note that the verificacion process may take a bit"
+  "text": "Please confirm that you want to add a referral to the verification queue for the App: <appName/> Using your Advocate Id: <advocateId/> Please note that the verificacion process may take a bit",
+  "toast": {
+    "error": {
+      "invalid-advocate-id": "The Advocate Id is invalid, please review it",
+      "pasted-invalid-advocate-id": "The pasted Advocate Id is invalid, please review it; only an Advocate Id or a single referral url can be pasted here",
+      "pasted-too-many-urls": "The text pasted includes too many urls; only an Advocate Id or a single referral url can be pasted here",
+      "pasted-invalid-urls": "The text pasted includes an invalid url; only an Advocate Id or a single referral url can be pasted here"
+    }
+  }
 }
