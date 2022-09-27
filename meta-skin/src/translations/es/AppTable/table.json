@@ -14,6 +14,7 @@
       "success": "Su invitación se agregó a la cola de verificación correctamente",
       "error": "Su invitación no se agregó a la cola de verificación correctamente. Por favor, inténtelo de nuevo más tarde",
       "error_conflict": "Su invitación ya estaba en el sistema",
+      "error_badrequest": "Ha intentado enviar una invitación inválida",
       "error_unprocessable": "La invitación es inválida"
     }
   }

@@ -29,6 +29,7 @@ export async function createReferral({ advocateId, appId }: CreateReferralVM) {
       throw new Error("unprocessable");
     }
     if (code === StatusCodes.CONFLICT) throw new Error("conflict");
+    if (code === StatusCodes.BAD_REQUEST) throw new Error("badrequest");
     throw new Error("generic");
   }
 }
@@ -39,6 +40,6 @@ export async function readReferral(appId: string) {
     const { data } = await apiCall("GET", readReferralURL);
     return mapReadReferralAMToVM(data as ReadReferralAM);
   } catch (error) {
-    throw new Error(`Error creating referral: ${error}`);
+    throw new Error(`Error reading referral: ${error}`);
   }
 }

@@ -1,4 +1,12 @@
 {
   "title": "Agregar Referido de App a la cola de verificación",
-  "text": "Por favor confirme que quiere agregar un referido a la cola de verificación para la App: <appName/> Usando su Id de Promotor: <advocateId/> Por favor, tenga en cuenta que el proceso de verificación no es inmediato"
+  "text": "Por favor confirme que quiere agregar un referido a la cola de verificación para la App: <appName/> Usando su Id de Promotor: <advocateId/> Por favor, tenga en cuenta que el proceso de verificación no es inmediato",
+  "toast": {
+    "error": {
+      "invalid-advocate-id": "El Id de Promotor es inválido. Por favor, revíselo",
+      "pasted-invalid-advocate-id": "El Id de Promotor pegado es inválido; solo puede pegar un Id de Promotor o un enlace de referido aquí",
+      "pasted-too-many-urls": "El texto pegado incluye demasiadas urls; solo puede pegar un Id de Promotor o un enlace de referido aquí",
+      "pasted-invalid-urls": "El texto pegado incluye una url inválida; solo puede pegar un Id de Promotor o un enlace de referido aquí"
+    }
+  }
 }
