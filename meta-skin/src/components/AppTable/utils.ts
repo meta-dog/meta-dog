@@ -5,7 +5,7 @@ const BASE_URL = "https://www.oculus.com/appreferrals/";
 export function validateAdvocateId(advocateId: string | null) {
   if (advocateId === null) return false;
   const hasLengthAndOnlyValidChars =
-    advocateId.match(/^[0-9a-zA-Z]{1}[\w\-_]+$/) !== null;
+    advocateId.match(/^[0-9a-zA-Z]{1}[\w.\-_]+$/) !== null;
   if (!hasLengthAndOnlyValidChars) return false;
   const hasDoubleDashOrUnderscore = advocateId.match(/[-_]{2,}/);
   if (hasDoubleDashOrUnderscore) return false;
