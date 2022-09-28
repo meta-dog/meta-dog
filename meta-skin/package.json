@@ -1,6 +1,6 @@
 {
   "name": "meta-skin",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "homepage": "https://meta-dog.github.io/meta-dog",
   "proxy": "https://meta-organs.herokuapp.com",
   "private": true,
