@@ -209,7 +209,7 @@ export default function Table() {
       page: labelRowsArgs.page + 1,
       pages: Math.ceil(labelRowsArgs.count / ROWS_PER_PAGE),
       to: labelRowsArgs.to,
-      from: labelRowsArgs,
+      from: labelRowsArgs.from,
     });
 
   const localeText: Partial<GridLocaleText> = {
