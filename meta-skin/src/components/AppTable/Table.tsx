@@ -1,10 +1,17 @@
 import { useState } from "react";
 
-import { Box, Stack, SxProps, Theme } from "@mui/material";
+import {
+  Box,
+  LabelDisplayedRowsArgs,
+  Stack,
+  SxProps,
+  Theme,
+} from "@mui/material";
 import {
   DataGrid,
   GridColDef,
   GridFilterModel,
+  GridLocaleText,
   GridSortModel,
 } from "@mui/x-data-grid";
 import { TFunction, useTranslation } from "react-i18next";
@@ -80,6 +87,7 @@ const getColumns = (
     },
   ] as GridColDef[];
 
+const ROWS_PER_PAGE = 100;
 export default function Table() {
   const { apps, loadingApps, reloadApps } = useAppStateContext();
 
@@ -168,6 +176,7 @@ export default function Table() {
 
   const dataGridSx: SxProps<Theme> = {
     padding: 2,
+    paddingBottom: 0,
     "& .MuiDataGrid-columnHeader": {
       "&:focus, &:focus-within": {
         outline: "none",
@@ -195,6 +204,25 @@ export default function Table() {
     handleChangeDialogOn,
   );
 
+  const labelDisplayedRows = (labelRowsArgs: LabelDisplayedRowsArgs) =>
+    t("table.pagination.label-displayed-rows", {
+      page: labelRowsArgs.page + 1,
+      pages: Math.ceil(labelRowsArgs.count / ROWS_PER_PAGE),
+      to: labelRowsArgs.to,
+      from: labelRowsArgs,
+    });
+
+  const localeText: Partial<GridLocaleText> = {
+    noRowsLabel: t("table.no-rows-label"),
+    columnHeaderSortIconLabel: t("table.column-header-sort-icon-label"),
+    errorOverlayDefaultLabel: t("table.error-overlay-default-label"),
+    footerTotalRows: "de",
+    MuiTablePagination: {
+      labelDisplayedRows,
+      labelRowsPerPage: t("table.pagination.label-rows-per-page"),
+    },
+  };
+
   return (
     <Stack
       direction="column"
@@ -204,9 +232,9 @@ export default function Table() {
         <DataGrid
           rows={apps}
           columns={columns}
-          rowsPerPageOptions={[]}
           filterMode="client"
-          hideFooter
+          rowsPerPageOptions={[ROWS_PER_PAGE]}
+          hideFooter={apps.length <= ROWS_PER_PAGE}
           components={{ Toolbar }}
           disableColumnFilter
           disableColumnMenu
@@ -218,11 +246,7 @@ export default function Table() {
           sx={dataGridSx}
           disableSelectionOnClick
           loading={loadingApps}
-          localeText={{
-            noRowsLabel: t("table.no-rows-label"),
-            columnHeaderSortIconLabel: t("table.column-header-sort-icon-label"),
-            errorOverlayDefaultLabel: t("table.error-overlay-default-label"),
-          }}
+          localeText={localeText}
         />
       </Box>
       <ReferralDialog

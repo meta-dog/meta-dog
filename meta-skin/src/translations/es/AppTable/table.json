@@ -7,7 +7,11 @@
   "table": {
     "no-rows-label": "Ninguna App coincidente",
     "column-header-sort-icon-label": "Ordenar por nombre",
-    "error-overlay-default-label": "Ocurrió un error. Intente recargar la tabla"
+    "error-overlay-default-label": "Ocurrió un error. Intente recargar la tabla",
+    "pagination": {
+      "label-displayed-rows": "Página {{page}} de {{pages}} ({{from}}-{{to}})",
+      "label-rows-per-page": "Filas por página"
+    }
   },
   "toast": {
     "create": {

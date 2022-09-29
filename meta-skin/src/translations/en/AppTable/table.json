@@ -7,7 +7,11 @@
   "table": {
     "no-rows-label": "No Apps match",
     "column-header-sort-icon-label": "Order by name",
-    "error-overlay-default-label": "An error occurred. Please reload the table manually"
+    "error-overlay-default-label": "An error occurred. Please reload the table manually",
+    "pagination": {
+      "label-displayed-rows": "Page {{page}} of {{pages}} ({{from}}-{{to}})",
+      "label-rows-per-page": "Rows per page"
+    }
   },
   "toast": {
     "create": {
