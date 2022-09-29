@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 
 import { useAppStateContext } from "contexts";
 
+import packageJson from "../../package.json";
 import LanguageSelector from "./LanguageSelector";
 
 function getHasAcceptedTerms() {
@@ -52,6 +53,8 @@ export default function HelpDialog() {
     setOpenHelpDialog(false);
   };
 
+  const { version } = packageJson;
+
   return (
     <Dialog
       open={openHelpDialog}
@@ -72,7 +75,7 @@ export default function HelpDialog() {
             className="w-full"
           >
             <Typography variant="h5" fontWeight={600} textAlign="center">
-              {t("title")}
+              {t("title", { version })}
             </Typography>
             {hasAccepted && (
               <IconButton
