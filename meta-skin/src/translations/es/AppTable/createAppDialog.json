@@ -21,8 +21,12 @@
       "multiple-users": "Solo puede enviar referidos provinientes de un usuario",
       "repeated-urls": "Al menos uno de los referidos está repetido",
       "duplicated-user": "Ya ha mandado un referido del usuario {{savedAdvocateId}} antes, y ahora ha pegado un referido de {{pastedAdvocateId}}. Solo se permite un usuario",
-      "all-rejected_one": "No se pudo agregar el referido de App a la cola de verificación. Por favor, revíselo e inténtelo de nuevo",
-      "all-rejected_other": "Ninguno de los {{count}} referidos de App se agregaron a la cola de verificación correctamente. Por favor, revíselos e inténtelo de nuevo"
+      "all-rejected_one": "No se pudo agregar el referido de App a la cola de verificación debido a un error. Por favor, revíselo e inténtelo de nuevo",
+      "all-rejected_other": "{{count}} referidos de App no se agregaron a la cola de verificación debido a un error. Por favor, revíselos e inténtelo de nuevo",
+      "conflict_one": "No se pudo agregar el referido de App porque ya existía",
+      "conflict_other": "{{count}} referidos de App ya existían y no fueron añadidos",
+      "unprocessable_one": "No se pudo agregar el referido de App porque el servidor lo marcó como inválido",
+      "unprocessable_other": "{{count}} referidos de App estaban marcados como inválidos y no fueron añadidos"
     },
     "warn": {
       "repeated-saved-apps": "Ya ha salvado las Apps: {{repeatedAppsText}} en el pasado, pero las ha vuelto a pegar, y no se han guardado",

@@ -22,7 +22,11 @@
       "repeated-urls": "At least one of the Referral App links is repeated",
       "duplicated-user": "You sent a link from the user {{savedAdvocateId}} in the past, but you pasted a link from the user {{pastedAdvocateId}} now. Only one user is allowed",
       "all-rejected_one": "The App referral could not be added to the verification queue. Please review it and try again",
-      "all-rejected_other": "None of the {{count}} App referrals were added to the verification queue successfully. Please review them and try again"
+      "all-rejected_other": "{{count}} App referrals could not be added to the verification queue successfully. Please review them and try again",
+      "conflict_one": "The App referral could not be added to the verification queue as the Referral exists already",
+      "conflict_other": "{{count}} App referrals already existed and were not added",
+      "unprocessable_one": "The App referral could not be added to the verification queue as it was marked as invalid by the server",
+      "unprocessable_other": "{{count}} App referrals were stored as invalid by the server and were not added"
     },
     "warn": {
       "repeated-saved-apps": "You have already saved the Apps: {{repeatedAppsText}} in the past, but you pasted links that included them again, and have been removed",

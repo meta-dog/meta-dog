@@ -185,18 +185,49 @@ export default function CreateAppDialog() {
       storeAdvocateId(validUrls[0].advocateId);
       const fulfilled = results.filter(
         (result) => result.status === "fulfilled",
+      ) as PromiseFulfilledResult<string>[];
+      const rejected = results.filter(
+        (result) => result.status === "rejected",
+      ) as PromiseRejectedResult[];
+      const rejectedByConflict = rejected.filter(
+        ({ reason }) => reason?.message === "conflict",
       );
-      const rejected = results.filter((result) => result.status === "rejected");
+      if (rejectedByConflict.length > 0) {
+        toast.error(
+          t("toast.error.conflict", {
+            count: rejectedByConflict.length,
+          }),
+          { icon: "🛂" },
+        );
+      }
+      const rejectedByBlacklist = rejected.filter(
+        ({ reason }) => reason?.message === "unprocessable",
+      );
+      if (rejectedByBlacklist.length > 0) {
+        toast.error(
+          t("toast.error.unprocessable", {
+            count: rejectedByBlacklist.length,
+          }),
+          { icon: "💀" },
+        );
+      }
       if (fulfilled.length === 0) {
-        toast.error(t("toast.error.all-rejected", { count: rejected.length }), {
-          icon: "🥺",
-        });
+        const rejectedLeft =
+          rejected.length -
+          rejectedByConflict.length -
+          rejectedByBlacklist.length;
+        if (rejectedLeft > 0) {
+          toast.error(
+            t("toast.error.all-rejected", {
+              count: rejectedLeft,
+            }),
+            { icon: "🥺" },
+          );
+        }
         setHasError(true);
         return;
       }
-      const fulfilledAppIds = (
-        fulfilled as PromiseFulfilledResult<string>[]
-      ).map(({ value }) => value);
+      const fulfilledAppIds = fulfilled.map(({ value }) => value);
       appendToStoredArray("saved-app-ids", fulfilledAppIds);
       if (rejected.length === 0) {
         toast.success(t("toast.info.all-successful", { count: numValidUrls }), {
