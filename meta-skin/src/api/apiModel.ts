@@ -8,3 +8,7 @@ export interface AppAM {
 export interface ReadReferralAM {
   advocate_id: string;
 }
+
+export interface ReadDeviceReferralAM {
+  advocate_id: string;
+}

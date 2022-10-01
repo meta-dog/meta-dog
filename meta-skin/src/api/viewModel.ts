@@ -7,6 +7,14 @@ export interface CreateReferralVM {
   advocateId: string;
   appId: string;
 }
+
+export const REGIONS = ["ES", "UK", "NL", "US"] as const;
+export type Region = typeof REGIONS[number];
+
+export interface CreateDeviceReferralVM {
+  advocateId: string;
+  region: Region;
+}
 export interface ReadReferralVM {
   advocateId: string;
 }
