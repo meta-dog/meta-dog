@@ -1,6 +1,6 @@
 {
   "title": "Agregar Referido de App a la cola de verificación",
-  "text": "Por favor confirme que quiere agregar un referido a la cola de verificación para la App: <appName/> Usando su Id de Promotor: <advocateId/> Por favor, tenga en cuenta que el proceso de verificación no es inmediato",
+  "text": "Por favor confirme que quiere agregar un referido a la cola de verificación para la App: <appName/> Usando su Id de Promotor: <advocateId/> Por favor, tenga en cuenta que el proceso de verificación no es inmediato. Verifique siempre que su enlace funciona antes de enviarlo (entre con su cuenta y compruebe que el botón 'Solicitar Descuento' está disponible).",
   "toast": {
     "error": {
       "invalid-advocate-id": "El Id de Promotor es inválido. Por favor, revíselo",
