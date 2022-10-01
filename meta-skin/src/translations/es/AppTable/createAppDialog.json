@@ -2,6 +2,7 @@
   "base_title": "Añada su(s) enlace(s)",
   "title": "$t(base_title)",
   "title_with-advocate": "$t(base_title): {{currAdvocateId}}",
+  "subtitle": "Al guardar, los enlaces se enviarán a la cola de verificación. La verificación no es inmediata, pero asegura la validez de los enlaces.",
   "button": {
     "save": {
       "aria-label": "guardar",

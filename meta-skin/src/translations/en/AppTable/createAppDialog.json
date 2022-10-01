@@ -2,6 +2,7 @@
   "base_title": "Add your link(s)",
   "title": "$t(base_title)",
   "title_with-advocate": "$t(base_title): {{currAdvocateId}}",
+  "subtitle": "On saving, the links will be sent to the verificacion queue. The verification process may take some time, but it ensures that the links are valid.",
   "button": {
     "save": {
       "aria-label": "save",

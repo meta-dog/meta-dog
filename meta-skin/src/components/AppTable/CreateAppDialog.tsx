@@ -295,6 +295,7 @@ export default function CreateAppDialog() {
           />
           {validationIcon}
         </Stack>
+        <Typography className="pt-4">{t("subtitle")}</Typography>
       </DialogContent>
       <DialogActions>
         <Stack
