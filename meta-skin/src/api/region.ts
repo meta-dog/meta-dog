@@ -30,9 +30,16 @@ export async function createDeviceReferral({
 export async function readDeviceReferral(region: Region) {
   const readReferralURL = `region/${region}/referral`;
   try {
-    const { data } = await apiCall("GET", readReferralURL);
-    return mapReadReferralAMToVM(data as ReadReferralAM);
+    const { status, data } = await apiCall("GET", readReferralURL);
+    if (status === StatusCodes.OK) {
+      return mapReadReferralAMToVM(data as ReadReferralAM);
+    }
+    throw new Error("generic");
   } catch (error) {
-    throw new Error(`Error reading referral: ${error}`);
+    // eslint-disable-next-line no-unsafe-optional-chaining
+    const { status } = (error as any)?.response;
+    const code = Number.parseInt(status, 10);
+    if (code === StatusCodes.NOT_FOUND) throw new Error("notfound");
+    throw new Error("generic");
   }
 }
