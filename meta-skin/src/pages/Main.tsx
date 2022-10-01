@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 
 import { AppTable, Footer, Header } from "components";
 import { CreateAppDialog } from "components/AppTable";
+import Quickstart from "components/AppTable/Quickstart";
 
 export default function Main() {
   return (
@@ -15,7 +16,14 @@ export default function Main() {
       <Grid item gridArea="header">
         <Header />
       </Grid>
-      <Grid item gridArea="table">
+      <Grid
+        item
+        container
+        gridArea="table"
+        display="grid"
+        gridTemplateRows="auto 1fr"
+      >
+        <Quickstart />
         <AppTable />
         <CreateAppDialog />
       </Grid>

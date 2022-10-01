@@ -38,7 +38,10 @@ export function extractUrls(text: string) {
   }, []);
 }
 
-export type BooleanKeys = "referral-dialog-on" | "create-referral-dialog-on";
+export type BooleanKeys =
+  | "referral-dialog-on"
+  | "create-referral-dialog-on"
+  | "quickstart-on";
 
 export function storeBoolean(key: BooleanKeys, value: boolean) {
   localStorage.setItem(key, String(value));

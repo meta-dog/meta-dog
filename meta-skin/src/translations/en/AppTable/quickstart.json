@@ -1,0 +1,16 @@
+{
+  "tooltip": "Never show this again",
+  "button": { "aria-label": "close" },
+  "table-usage": {
+    "title": "Table usage",
+    "step-1": "Search using",
+    "step-2": ": Get a referral",
+    "step-3": ": Give your referral"
+  },
+  "add-links": {
+    "title": "Add Links",
+    "step-1": "1. Click on",
+    "step-2": "2. Paste Links",
+    "step-3": "3. Click on Save"
+  }
+}

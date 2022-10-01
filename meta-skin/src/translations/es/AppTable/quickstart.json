@@ -1,0 +1,16 @@
+{
+  "tooltip": "No mostrar de nuevo",
+  "button": { "aria-label": "cerrar" },
+  "table-usage": {
+    "title": "Uso de Tabla",
+    "step-1": "Busque con",
+    "step-2": ": Pida referido",
+    "step-3": ": Dé su referido"
+  },
+  "add-links": {
+    "title": "Añadir Enlaces",
+    "step-1": "1. Pinche en",
+    "step-2": "2. Pegue Enlaces",
+    "step-3": "3. Pinche en Guardar"
+  }
+}
