@@ -1,8 +1,8 @@
 import { StatusCodes } from "http-status-codes";
 
-import { ReadReferralAM } from "./apiModel";
+import { ReadReferralAM, RegionAM } from "./apiModel";
 import apiCall from "./baseApi";
-import { mapReadReferralAMToVM } from "./mappers";
+import { mapReadReferralAMToVM, mapRegionAMToVM } from "./mappers";
 import { CreateDeviceReferralVM, Region } from "./viewModel";
 
 export async function createDeviceReferral({
@@ -41,5 +41,15 @@ export async function readDeviceReferral(region: Region) {
     const code = Number.parseInt(status, 10);
     if (code === StatusCodes.NOT_FOUND) throw new Error("notfound");
     throw new Error("generic");
+  }
+}
+
+export async function readRegions() {
+  const readRegionsURL = "regions";
+  try {
+    const { data } = await apiCall("GET", readRegionsURL);
+    return (data as RegionAM[]).map(mapRegionAMToVM);
+  } catch (error) {
+    throw new Error(`Error getting Regions: ${error}`);
   }
 }

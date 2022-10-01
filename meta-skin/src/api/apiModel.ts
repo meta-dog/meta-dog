@@ -4,6 +4,9 @@ export interface AppAM {
   has_quest: boolean;
   has_rift: boolean;
 }
+export interface RegionAM {
+  region: string;
+}
 
 export interface ReadReferralAM {
   advocate_id: string;
