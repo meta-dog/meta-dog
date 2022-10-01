@@ -1,4 +1,5 @@
 {
+  "title": "Apps",
   "tooltip": "Never show this again",
   "button": { "aria-label": "close" },
   "table-usage": {
