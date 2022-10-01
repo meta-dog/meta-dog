@@ -1,0 +1,36 @@
+{
+  "title": "Device Referrals",
+  "regions": { "error": "Error getting the Regions. Wait a bit and refresh the page." },
+  "region": "{{context}}",
+  "region_ES": "Spain",
+  "region_US": "USA",
+  "region_NL": "The Netherlands",
+  "region_UK": "United Kingdom",
+  "dialog": {
+    "get": {
+      "title": "Get Device Referral",
+      "subtitle": "Please verify your region, as the Device Referrals are region-locked, so if you choose the wrong one you will not receive the credit. On accepting a Device Referral, you must buy the Meta Quest 2 before 30 days pass, and both you and the Advocate will receive credit to use in the Oculus Store."
+    },
+    "give": {
+      "title": "Give Device Referral",
+      "subtitle": "Please verify your region, as the Device Referrals are region-locked, so if you choose the wrong one you will not receive the credit. Once a Friend accepts your Device Referral, and they buy the Meta Quest 2 before 30 days pass, both you and the Friend will receive credit to use in the Oculus Store."
+    }
+  },
+  "button": {
+    "get": "Get",
+    "give": "Give"
+  },
+  "toast": {
+    "get": {
+      "success": "Redirecting to Device Referral link",
+      "error": "Error getting the Device Referral",
+      "error_notfound": "A Device Referral was not found for your region. Please try again later."
+    },
+    "give": {
+      "success": "Your Device Referral has been added to the verification queue.",
+      "error": "Error saving the Device Referral",
+      "error_conflict": "A Device Referral with your Advocate id already exists in the system.",
+      "error_unprocessable": "Your Device Referral link is invalid. Please review it."
+    }
+  }
+}

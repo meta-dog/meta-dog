@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 
 import { AppTable, Footer, Header } from "components";
 import { CreateAppDialog } from "components/AppTable";
+import DeviceReferral from "components/AppTable/DeviceReferral";
 import Quickstart from "components/AppTable/Quickstart";
 
 export default function Main() {
@@ -21,8 +22,9 @@ export default function Main() {
         container
         gridArea="table"
         display="grid"
-        gridTemplateRows="auto 1fr"
+        gridTemplateRows="auto auto 1fr"
       >
+        <DeviceReferral />
         <Quickstart />
         <AppTable />
         <CreateAppDialog />

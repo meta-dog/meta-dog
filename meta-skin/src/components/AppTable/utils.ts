@@ -1,5 +1,6 @@
 import { CreateReferralVM } from "api";
 
+
 const BASE_URL = "https://www.oculus.com/appreferrals/";
 
 export function validateAdvocateId(advocateId: string | null) {
@@ -89,6 +90,15 @@ export function openReferral(advocateId: string | null, appId: string) {
   if (advocateId === null) return;
   window.open(
     `https://www.oculus.com/appreferrals/${advocateId}/${appId}`,
+    "_blank",
+    "noreferrer",
+  );
+}
+
+export function openDeviceReferral(advocateId: string | null) {
+  if (advocateId === null) return;
+  window.open(
+    `https://www.oculus.com/referrals/link/${advocateId}`,
     "_blank",
     "noreferrer",
   );

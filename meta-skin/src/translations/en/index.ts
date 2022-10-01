@@ -2,6 +2,7 @@ import appTableCreateAppDialog from "./AppTable/createAppDialog.json";
 import appTableCreateCell from "./AppTable/createCell.json";
 import appTableCreateReferralCellDialog from "./AppTable/createReferralCellDialog.json";
 import appTableCreateReferralHeader from "./AppTable/createReferralHeader.json";
+import appTableDeviceReferral from "./AppTable/deviceReferral.json";
 import appTableQuickstart from "./AppTable/quickstart.json";
 import appTableReferralCell from "./AppTable/referralCell.json";
 import appTableReferralDialog from "./AppTable/referralDialog.json";
@@ -21,6 +22,7 @@ const translations = {
   appTableCreateCell,
   appTableCreateReferralCellDialog,
   appTableCreateReferralHeader,
+  appTableDeviceReferral,
   appTableReferralCell,
   appTableReferralDialog,
   appTableReferralHeader,

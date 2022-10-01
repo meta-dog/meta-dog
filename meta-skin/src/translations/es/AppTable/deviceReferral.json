@@ -1,0 +1,36 @@
+{
+  "title": "Referidos Quest 2",
+  "regions": { "error": "Error obteniendo las Regiones. Espere un poco y refresque la página." },
+  "region": "{{context}}",
+  "region_ES": "España",
+  "region_US": "Estados Unidos",
+  "region_NL": "Países Bajos",
+  "region_UK": "Reino Unido",
+  "dialog": {
+    "get": {
+      "title": "Obtener Referido de Quest 2",
+      "subtitle": "Por favor, verifique su región, puesto que los Referidos de Quest 2 son limitados por región. Si elige uno incorrecto no recibirá el crédito. Al aceptar el Referido, debe comprar las Quest 2 antes de que pasen 30 días, y tanto su Promotor como usted recibirán crédito para usar en la tienda Oculus."
+    },
+    "give": {
+      "title": "Dar Referido de Quest 2",
+      "subtitle": "Por favor, verifique su región, puesto que los Referidos de Quest 2 son limitados por región. Si elige uno incorrecto no recibirá el crédito. Cuando un Amigo acepte su Referido, y éste compre las Quest 2 antes de que pasen 30 días, tanto su Amigo como usted recibirán crédito para usar en la tienda Oculus."
+    }
+  },
+  "button": {
+    "get": "Pida",
+    "give": "Dé"
+  },
+  "toast": {
+    "get": {
+      "success": "Redirigiendo al enlace de Referido",
+      "error": "Error obteniendo el Referido",
+      "error_notfound": "No se encontró Referido para su región. Por favor, inténtelo más tarde."
+    },
+    "give": {
+      "success": "Su Referido ha sido enviado a la cola de verificación.",
+      "error": "Error salvando el Referido",
+      "error_conflict": "Ya existe un Referido con su Id de Promotor en el sistema.",
+      "error_unprocessable": "Su enlace de Referido es inválido. Por favor, revíselo."
+    }
+  }
+}
