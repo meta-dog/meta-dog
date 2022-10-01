@@ -13,6 +13,15 @@ const theme = createTheme({
     primary: { main: "#1C1E20" },
     secondary: { main: "#418af7" },
   },
+  components: {
+    MuiTooltip: {
+      styleOverrides: {
+        popper: {
+          zIndex: 1300,
+        },
+      },
+    },
+  },
 });
 
 function App() {
