@@ -333,7 +333,7 @@ export default function DeviceReferral() {
           direction="row"
           justifyContent="space-between"
           alignItems="center"
-          className="w-full"
+          className="w-full p-2"
         >
           <Typography variant="h6" className="w-full">
             {t("title")}
