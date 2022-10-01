@@ -35,6 +35,7 @@ import {
   getStoredAdvocateId,
   getStoredArray,
   getStoredBoolean,
+  openReferral,
   storeBoolean,
 } from "./utils";
 
@@ -107,13 +108,7 @@ export default function Table() {
     const { id } = app;
     appendToStoredArray("received-app-ids", [id]);
 
-    readReferral(id).then(({ advocateId }) => {
-      window.open(
-        `https://www.oculus.com/appreferrals/${advocateId}/${id}`,
-        "_blank",
-        "noreferrer",
-      );
-    });
+    readReferral(id).then(({ advocateId }) => openReferral(advocateId, id));
   };
   const handleRequestClick = (app: AppVM) => {
     setReferralApp(app);

@@ -1,6 +1,10 @@
 {
   "title": "Add App Referral to verification queue",
   "text": "Please confirm that you want to add a referral to the verification queue for the App: <appName/> Using your Advocate Id: <advocateId/> Please note that the verificacion process may take a bit. Always check that your link works (log in and open it, and verify that the 'Get Discount' button is there) before adding it.",
+  "check-link": {
+    "button": { "aria-label": "open your link" },
+    "text": "Open your link"
+  },
   "toast": {
     "error": {
       "invalid-advocate-id": "The Advocate Id is invalid, please review it",

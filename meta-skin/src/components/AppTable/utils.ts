@@ -84,3 +84,12 @@ export function appendToStoredArray(key: ArrayKeys, extraAppIds: string[]) {
   const nextAppIds: Set<string> = new Set([...prevAppIds, ...extraAppIds]);
   localStorage.setItem(key, JSON.stringify(Array.from(nextAppIds)));
 }
+
+export function openReferral(advocateId: string | null, appId: string) {
+  if (advocateId === null) return;
+  window.open(
+    `https://www.oculus.com/appreferrals/${advocateId}/${appId}`,
+    "_blank",
+    "noreferrer",
+  );
+}

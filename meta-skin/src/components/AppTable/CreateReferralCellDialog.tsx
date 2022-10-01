@@ -1,7 +1,13 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-import { Cancel, Check, Person, Widgets } from "@mui/icons-material";
-import { Stack, TextField } from "@mui/material";
+import {
+  Cancel,
+  Check,
+  Link as LinkIcon,
+  Person,
+  Widgets,
+} from "@mui/icons-material";
+import { Button, Stack, TextField, Typography } from "@mui/material";
 import { Trans, useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
@@ -12,6 +18,7 @@ import {
   extractReferral,
   extractUrls,
   getStoredAdvocateId,
+  openReferral,
   storeAdvocateId,
   validateAdvocateId,
 } from "./utils";
@@ -162,6 +169,17 @@ export default function CreateReferralCellDialog({
           ),
         }}
       />
+      <Button
+        variant="contained"
+        color="secondary"
+        className="w-auto"
+        startIcon={<LinkIcon />}
+        onClick={() => openReferral(currentAdvocateId, app.id)}
+        disabled={!validAdvocateId}
+        aria-label={t("check-link.button.aria-label")}
+      >
+        <Typography>{t("check-link.text")}</Typography>
+      </Button>
     </Stack>
   );
   return (
@@ -171,7 +189,7 @@ export default function CreateReferralCellDialog({
       handleAccept={handleAcceptClick}
       title={title}
       content={content}
-      disableAccept={!validateAdvocateId(currentAdvocateId)}
+      disableAccept={!validAdvocateId}
     />
   );
 }
