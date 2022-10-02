@@ -281,7 +281,7 @@ function GiveDialog({ open, setOpen, handleAction }: GiveDialogProps) {
           className="flex w-full items-center justify-center pb-4"
         >
           <Button
-            startIcon={<Hail />}
+            startIcon={<RecordVoiceOver />}
             variant="contained"
             color="secondary"
             disabled={!isValid}
