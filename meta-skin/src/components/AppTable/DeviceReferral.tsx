@@ -4,6 +4,7 @@ import {
   Cancel,
   Check,
   Hail,
+  Link as LinkIcon,
   Person,
   RecordVoiceOver,
 } from "@mui/icons-material";
@@ -237,7 +238,8 @@ function GiveDialog({ open, setOpen, handleAction }: GiveDialogProps) {
   }, [open]);
 
   const validRegion = currentRegion !== null;
-  const isValid = validRegion && currentAdvocateId !== null;
+  const validAdvocateId = currentAdvocateId !== null;
+  const isValid = validRegion && validAdvocateId;
   return (
     <Dialog
       open={open}
@@ -273,6 +275,17 @@ function GiveDialog({ open, setOpen, handleAction }: GiveDialogProps) {
             setHelperText={setHelperText}
           />
           <Typography className="pt-4">{t("dialog.give.subtitle")}</Typography>
+          <Button
+            variant="contained"
+            color="secondary"
+            className="w-full"
+            startIcon={<LinkIcon />}
+            onClick={() => openDeviceReferral(currentAdvocateId)}
+            disabled={!validAdvocateId}
+            aria-label={t("check-link.button.aria-label")}
+          >
+            <Typography>{t("check-link.text")}</Typography>
+          </Button>
         </Stack>
       </DialogContent>
       <DialogActions>

@@ -1,6 +1,12 @@
 {
   "title": "Device Referrals",
-  "regions": { "error": "Error getting the Regions. Wait a bit and refresh the page." },
+  "check-link": {
+    "button": { "aria-label": "open your link" },
+    "text": "Open your link"
+  },
+  "regions": {
+    "error": "Error getting the Regions. Wait a bit and refresh the page."
+  },
   "region": "{{context}}",
   "region_ES": "Spain",
   "region_US": "USA",
@@ -13,7 +19,7 @@
     },
     "give": {
       "title": "Give Device Referral",
-      "subtitle": "Please verify your region, as the Device Referrals are region-locked, so if you choose the wrong one you will not receive the credit. Once a Friend accepts your Device Referral, and they buy the Meta Quest 2 before 30 days pass, both you and the Friend will receive credit to use in the Oculus Store."
+      "subtitle": "Please verify your region, as the Device Referrals are region-locked, so if you choose the wrong one you will not receive the credit. Once a Friend accepts your Device Referral, and they buy the Meta Quest 2 before 30 days pass, both you and the Friend will receive credit to use in the Oculus Store. You can verify that the link is valid before adding it to the queue by clicking on the button below."
     }
   },
   "button": {

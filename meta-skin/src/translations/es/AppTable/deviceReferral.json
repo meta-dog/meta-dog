@@ -1,6 +1,12 @@
 {
   "title": "Referidos Quest 2",
-  "regions": { "error": "Error obteniendo las Regiones. Espere un poco y refresque la página." },
+  "check-link": {
+    "button": { "aria-label": "abra su enlace" },
+    "text": "Abra su enlace"
+  },
+  "regions": {
+    "error": "Error obteniendo las Regiones. Espere un poco y refresque la página."
+  },
   "region": "{{context}}",
   "region_ES": "España",
   "region_US": "Estados Unidos",
@@ -13,7 +19,7 @@
     },
     "give": {
       "title": "Dar Referido de Quest 2",
-      "subtitle": "Por favor, verifique su región, puesto que los Referidos de Quest 2 son limitados por región. Si elige uno incorrecto no recibirá el crédito. Cuando un Amigo acepte su Referido, y éste compre las Quest 2 antes de que pasen 30 días, tanto su Amigo como usted recibirán crédito para usar en la tienda Oculus."
+      "subtitle": "Por favor, verifique su región, puesto que los Referidos de Quest 2 son limitados por región. Si elige uno incorrecto no recibirá el crédito. Cuando un Amigo acepte su Referido, y éste compre las Quest 2 antes de que pasen 30 días, tanto su Amigo como usted recibirán crédito para usar en la tienda Oculus. Puede verificar que su enlace es válido antes de subirlo a la cola abriéndolo con el siguiente botón."
     }
   },
   "button": {
