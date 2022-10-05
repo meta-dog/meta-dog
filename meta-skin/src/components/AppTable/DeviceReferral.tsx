@@ -146,14 +146,10 @@ function GetDialog({ open, setOpen, handleAction }: GetDialogProps) {
   const { t } = useTranslation("appTableDeviceReferral");
 
   const [currentRegion, setCurrentRegion] = useState<Region | null>(null);
-  const [currentAdvocateId, setCurrentAdvocateId] = useState<string | null>(
-    getStoredAdvocateId(),
-  );
   const [regions, setRegions] = useState<RegionVM[]>([]);
 
   useEffect(() => {
     setCurrentRegion(null);
-    setCurrentAdvocateId(getStoredAdvocateId());
     readRegions()
       .then(setRegions)
       .catch(() => {
@@ -163,7 +159,7 @@ function GetDialog({ open, setOpen, handleAction }: GetDialogProps) {
   }, [open, t]);
 
   const validRegion = currentRegion !== null;
-  const isValid = validRegion && currentAdvocateId !== null;
+  const isValid = validRegion;
   return (
     <Dialog
       open={open}
