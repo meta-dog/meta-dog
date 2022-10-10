@@ -15,11 +15,11 @@
   "dialog": {
     "get": {
       "title": "Obtener Referido de Quest 2",
-      "subtitle": "Por favor, verifique su región, puesto que los Referidos de Quest 2 son limitados por región. Si elige uno incorrecto no recibirá el crédito. Al aceptar el Referido, debe comprar las Quest 2 antes de que pasen 30 días, y tanto su Promotor como usted recibirán crédito para usar en la tienda Oculus."
+      "subtitle": "Por favor, verifique su región, puesto que los Referidos de Quest 2 son limitados por región. Si elige uno incorrecto no recibirá el crédito. Al aceptar el Referido, debe comprar las Quest 2 antes de que pasen 30 días, y tanto su Promotor como usted recibirán 30€/$30/£23 en crédito para usar en la tienda Oculus."
     },
     "give": {
       "title": "Dar Referido de Quest 2",
-      "subtitle": "Por favor, verifique su región, puesto que los Referidos de Quest 2 son limitados por región. Si elige uno incorrecto no recibirá el crédito. Cuando un Amigo acepte su Referido, y éste compre las Quest 2 antes de que pasen 30 días, tanto su Amigo como usted recibirán crédito para usar en la tienda Oculus. Puede verificar que su enlace es válido antes de subirlo a la cola abriéndolo con el siguiente botón."
+      "subtitle": "Por favor, verifique su región, puesto que los Referidos de Quest 2 son limitados por región. Si elige uno incorrecto no recibirá el crédito. Cuando un Amigo acepte su Referido, y éste compre las Quest 2 antes de que pasen 30 días, tanto su Amigo como usted recibirán 30€/$30/£23 en crédito para usar en la tienda Oculus. Puede verificar que su enlace es válido antes de subirlo a la cola abriéndolo con el siguiente botón."
     }
   },
   "button": {
