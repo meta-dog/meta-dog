@@ -242,7 +242,7 @@ function GiveDialog({ open, setOpen, handleAction }: GiveDialogProps) {
       onClose={() => setOpen(false)}
       sx={{ "& .MuiPaper-root": { width: "95vw", maxWidth: "650px" } }}
     >
-      <DialogTitle textAlign="center">{t("dialog.get.title")}</DialogTitle>
+      <DialogTitle textAlign="center">{t("dialog.give.title")}</DialogTitle>
       <DialogContent>
         <Stack
           direction="column"
