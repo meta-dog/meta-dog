@@ -13,6 +13,7 @@
   "region_NL": "Países Bajos",
   "region_UK": "Reino Unido",
   "region_BE": "Bélgica",
+  "region_CA": "Canadá",
   "dialog": {
     "get": {
       "title": "Obtener Referido de Quest 2",

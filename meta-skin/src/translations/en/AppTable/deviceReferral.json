@@ -13,6 +13,7 @@
   "region_NL": "The Netherlands",
   "region_UK": "United Kingdom",
   "region_BE": "Belgium",
+  "region_CA": "Canada",
   "dialog": {
     "get": {
       "title": "Get Device Referral",
