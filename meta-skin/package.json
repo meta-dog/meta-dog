@@ -2,7 +2,7 @@
   "name": "meta-skin",
   "version": "0.16.10",
   "homepage": "https://meta-dog.github.io/meta-dog",
-  "proxy": "https://meta-organs.herokuapp.com",
+  "proxy": "https://meta-dog.onrender.com",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",
