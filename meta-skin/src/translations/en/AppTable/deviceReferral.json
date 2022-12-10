@@ -15,6 +15,7 @@
   "region_BE": "Belgium",
   "region_CA": "Canada",
   "region_AU": "Australia",
+  "region_NZ": "New Zealand",
   "dialog": {
     "get": {
       "title": "Get Device Referral",

@@ -11,7 +11,16 @@ export interface CreateReferralVM {
   appId: string;
 }
 
-export const REGIONS = ["ES", "UK", "NL", "US", "BE", "CA", "AU"] as const;
+export const REGIONS = [
+  "ES",
+  "UK",
+  "NL",
+  "US",
+  "BE",
+  "CA",
+  "AU",
+  "NZ",
+] as const;
 export type Region = typeof REGIONS[number];
 
 export interface CreateDeviceReferralVM {
