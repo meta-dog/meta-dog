@@ -20,6 +20,7 @@ export const REGIONS = [
   "CA",
   "AU",
   "NZ",
+  "IT",
 ] as const;
 export type Region = typeof REGIONS[number];
 
