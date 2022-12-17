@@ -17,6 +17,7 @@
   "region_AU": "Australia",
   "region_NZ": "Nueva Zelanda",
   "region_IT": "Italia",
+  "region_AT": "Austria",
   "dialog": {
     "get": {
       "title": "Obtener Referido de Quest 2",
