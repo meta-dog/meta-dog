@@ -129,6 +129,7 @@ function AdvocateIdTextField({
           <Cancel className="ml-4" color="error" />
         ),
       }}
+      placeholder={t("advocate-id.placeholder")}
     />
   );
 }

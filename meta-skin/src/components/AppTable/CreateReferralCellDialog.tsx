@@ -165,6 +165,7 @@ export default function CreateReferralCellDialog({
                   <Cancel className="ml-4" color="error" />
                 ),
               }}
+              placeholder={t("advocate-id.placeholder")}
             />
           ),
         }}
