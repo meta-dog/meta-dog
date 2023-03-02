@@ -20,6 +20,7 @@
   "region_AT": "Austria",
   "region_KR": "Corea",
   "region_PL": "Polonia",
+  "region_IE": "Irlanda",
   "dialog": {
     "get": {
       "title": "Obtener Referido de Quest 2",

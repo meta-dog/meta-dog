@@ -20,6 +20,7 @@
   "region_AT": "Austria",
   "region_KR": "Korea",
   "region_PL": "Poland",
+  "region_IE": "Ireland",
   "dialog": {
     "get": {
       "title": "Get Device Referral",
