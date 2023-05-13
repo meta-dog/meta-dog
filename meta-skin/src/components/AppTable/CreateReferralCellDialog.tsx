@@ -18,7 +18,7 @@ import {
   extractReferral,
   extractUrls,
   getStoredAdvocateId,
-  openReferral,
+  getUrlAndCopyToClipboard,
   storeAdvocateId,
   validateAdvocateId,
 } from "./utils";
@@ -175,7 +175,10 @@ export default function CreateReferralCellDialog({
         color="secondary"
         className="w-auto"
         startIcon={<LinkIcon />}
-        onClick={() => openReferral(currentAdvocateId, app.id)}
+        onClick={() => {
+          getUrlAndCopyToClipboard("app", currentAdvocateId, app.id);
+          toast.success(t("toast.openAndCopyToClipboard"));
+        }}
         disabled={!validAdvocateId}
         aria-label={t("check-link.button.aria-label")}
       >

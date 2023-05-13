@@ -31,7 +31,7 @@ import {
   extractReferral,
   extractUrls,
   getStoredAdvocateId,
-  openDeviceReferral,
+  getUrlAndCopyToClipboard,
   validateAdvocateId,
 } from "./utils";
 
@@ -277,7 +277,10 @@ function GiveDialog({ open, setOpen, handleAction }: GiveDialogProps) {
             color="secondary"
             className="w-full"
             startIcon={<LinkIcon />}
-            onClick={() => openDeviceReferral(currentAdvocateId)}
+            onClick={() => {
+              getUrlAndCopyToClipboard("device", currentAdvocateId);
+              toast.success(t("toast.openAndCopyToClipboard"));
+            }}
             disabled={!validAdvocateId}
             aria-label={t("check-link.button.aria-label")}
           >
@@ -318,8 +321,8 @@ export default function DeviceReferral() {
     readDeviceReferral(region)
       .then((readDeviceReferralResponse) => {
         const { advocateId } = readDeviceReferralResponse;
-        toast.success(t("toast.get.success"));
-        openDeviceReferral(advocateId);
+        getUrlAndCopyToClipboard("device", advocateId);
+        toast.success(t("toast.openAndCopyToClipboard"));
       })
       .catch((error) => {
         toast.error(t("toast.get.error", { context: error.message }));

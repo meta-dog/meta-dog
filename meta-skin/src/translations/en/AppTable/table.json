@@ -20,6 +20,7 @@
       "error_conflict": "Your referral was already in the system",
       "error_badrequest": "You sent an invalid referral",
       "error_unprocessable": "The Referral is invalid"
-    }
+    },
+    "openAndCopyToClipboard": "Your Referral link was copied to the Clipboard"
   }
 }

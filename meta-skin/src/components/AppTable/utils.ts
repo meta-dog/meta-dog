@@ -1,6 +1,5 @@
 import { CreateReferralVM } from "api";
 
-
 const BASE_URL = "https://www.oculus.com/appreferrals/";
 
 export function validateAdvocateId(advocateId: string | null) {
@@ -86,20 +85,37 @@ export function appendToStoredArray(key: ArrayKeys, extraAppIds: string[]) {
   localStorage.setItem(key, JSON.stringify(Array.from(nextAppIds)));
 }
 
-export function openReferral(advocateId: string | null, appId: string) {
-  if (advocateId === null) return;
-  window.open(
-    `https://www.oculus.com/appreferrals/${advocateId}/${appId}`,
-    "_blank",
-    "noreferrer",
-  );
+function getAppReferralUrl(advocateId: string, appId: string) {
+  return `https://www.oculus.com/appreferrals/${advocateId}/${appId}`;
 }
 
-export function openDeviceReferral(advocateId: string | null) {
-  if (advocateId === null) return;
-  window.open(
-    `https://www.oculus.com/referrals/link/${advocateId}`,
-    "_blank",
-    "noreferrer",
-  );
+function openUrl(url: string) {
+  setTimeout(() => {
+    window.open(url, "_blank", "noreferrer");
+  });
+}
+
+function getDeviceReferralUrl(advocateId: string) {
+  return `https://www.oculus.com/referrals/link/${advocateId}`;
+}
+
+export function getUrlAndCopyToClipboard(
+  type: "app" | "device",
+  advocateId: string | null,
+  appId?: string,
+) {
+  if (advocateId === null) {
+    return;
+  }
+  let url = "";
+  if (type === "app") {
+    if (appId === undefined) {
+      return;
+    }
+    url = getAppReferralUrl(advocateId, appId);
+  } else {
+    url = getDeviceReferralUrl(advocateId);
+  }
+  navigator.clipboard.writeText(url);
+  openUrl(url);
 }

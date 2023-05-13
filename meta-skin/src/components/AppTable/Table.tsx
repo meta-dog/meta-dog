@@ -35,7 +35,7 @@ import {
   getStoredAdvocateId,
   getStoredArray,
   getStoredBoolean,
-  openReferral,
+  getUrlAndCopyToClipboard,
   storeBoolean,
 } from "./utils";
 
@@ -108,7 +108,10 @@ export default function Table() {
     const { id } = app;
     appendToStoredArray("received-app-ids", [id]);
 
-    readReferral(id).then(({ advocateId }) => openReferral(advocateId, id));
+    readReferral(id).then(({ advocateId }) => {
+      getUrlAndCopyToClipboard("app", advocateId, id);
+      toast.success(t("toast.openAndCopyToClipboard"));
+    });
   };
   const handleRequestClick = (app: AppVM) => {
     setReferralApp(app);

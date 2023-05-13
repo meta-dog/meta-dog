@@ -14,6 +14,7 @@
       "pasted-invalid-advocate-id": "The pasted Advocate Id is invalid, please review it; only an Advocate Id or a single referral url can be pasted here",
       "pasted-too-many-urls": "The text pasted includes too many urls; only an Advocate Id or a single referral url can be pasted here",
       "pasted-invalid-urls": "The text pasted includes an invalid url; only an Advocate Id or a single referral url can be pasted here"
-    }
+    },
+    "openAndCopyToClipboard": "Your Referral link was copied to the Clipboard"
   }
 }

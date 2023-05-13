@@ -46,6 +46,7 @@
       "error": "Error saving the Device Referral",
       "error_conflict": "A Device Referral with your Advocate id already exists in the system.",
       "error_unprocessable": "Your Device Referral link is invalid. Please review it."
-    }
+    },
+    "openAndCopyToClipboard": "Your Referral link was copied to the Clipboard"
   }
 }

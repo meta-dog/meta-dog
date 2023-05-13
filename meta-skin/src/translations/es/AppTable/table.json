@@ -20,6 +20,7 @@
       "error_conflict": "Su invitación ya estaba en el sistema",
       "error_badrequest": "Ha intentado enviar una invitación inválida",
       "error_unprocessable": "La invitación es inválida"
-    }
+    },
+    "openAndCopyToClipboard": "El enlace de Referido se ha copiado al Portapapeles"
   }
 }

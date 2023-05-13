@@ -14,6 +14,7 @@
       "pasted-invalid-advocate-id": "El Id de Promotor pegado es inválido; solo puede pegar un Id de Promotor o un enlace de referido aquí",
       "pasted-too-many-urls": "El texto pegado incluye demasiadas urls; solo puede pegar un Id de Promotor o un enlace de referido aquí",
       "pasted-invalid-urls": "El texto pegado incluye una url inválida; solo puede pegar un Id de Promotor o un enlace de referido aquí"
-    }
+    },
+    "openAndCopyToClipboard": "El enlace de Referido se ha copiado al Portapapeles"
   }
 }
