@@ -21,6 +21,7 @@
   "region_KR": "Korea",
   "region_PL": "Poland",
   "region_IE": "Ireland",
+  "region_UA": "Ukraine",
   "dialog": {
     "get": {
       "title": "Get Device Referral",
