@@ -25,11 +25,11 @@
   "dialog": {
     "get": {
       "title": "Get Device Referral",
-      "subtitle": "Please verify your region, as the Device Referrals are region-locked, so if you choose the wrong one you will not receive the credit. On accepting a Device Referral, you must buy the Meta Quest 2 before 30 days pass, and both you and the Advocate will receive 30€/$30/£23 in credit to use in the Oculus Store."
+      "subtitle": "Please verify your region, as the Device Referrals are region-locked, so if you choose the wrong one you will not receive the credit. On accepting a Device Referral, you must buy the Meta Quest 2/3/Pro before 30 days pass, and both you and the Advocate will receive 30€/$30/£23 in credit to use in the Oculus Store."
     },
     "give": {
       "title": "Give Device Referral",
-      "subtitle": "Please verify your region, as the Device Referrals are region-locked, so if you choose the wrong one you will not receive the credit. Once a Friend accepts your Device Referral, and they buy the Meta Quest 2 before 30 days pass, both you and the Friend will receive 30€/$30/£23 in credit to use in the Oculus Store. You can verify that the link is valid before adding it to the queue by clicking on the button below."
+      "subtitle": "Please verify your region, as the Device Referrals are region-locked, so if you choose the wrong one you will not receive the credit. Once a Friend accepts your Device Referral, and they buy the Meta Quest 2/3/Pro before 30 days pass, both you and the Friend will receive 30€/$30/£23 in credit to use in the Oculus Store. You can verify that the link is valid before adding it to the queue by clicking on the button below."
     }
   },
   "button": {

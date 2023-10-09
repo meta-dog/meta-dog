@@ -1,6 +1,6 @@
 {
   "title": "Apps",
-  "tooltip": "No mostrar de nuevo",
+  "tooltip": "Cerrar para ver los referidos de Apps",
   "button": { "aria-label": "cerrar" },
   "table-usage": {
     "title": "Uso de Tabla",

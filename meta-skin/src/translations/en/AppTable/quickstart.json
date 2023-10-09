@@ -1,6 +1,6 @@
 {
   "title": "Apps",
-  "tooltip": "Never show this again",
+  "tooltip": "Close to show the App referrals",
   "button": { "aria-label": "close" },
   "table-usage": {
     "title": "Table usage",
