@@ -5,7 +5,7 @@
 ### Concepts
 
 - App: Any of the Meta Apps that are listed in the Oculus Store. They must be above a certain price to be eligible (10€ in EU)
-- Region of Application (as of September 2022): UK, NL, ES, KR, US (limited)
+- Not all countries can use referrals
 
 ### Personas
 
