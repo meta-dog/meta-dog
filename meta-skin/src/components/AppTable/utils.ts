@@ -96,7 +96,7 @@ function openUrl(url: string) {
 }
 
 function getDeviceReferralUrl(advocateId: string) {
-  return `https://www.meta.com/referrals/link/${advocateId}`;
+  return `https://www.oculus.com/referrals/link/${advocateId}`;
 }
 
 export function getUrlAndCopyToClipboard(
