@@ -36,9 +36,12 @@ export default function Quickstart() {
             alignItems="center"
             className="w-full"
           >
-            <Typography variant="h6" className="pl-4">{t("title")}</Typography>
+            <Typography variant="h6" className="pl-4">
+              {t("title")}
+            </Typography>
             <Tooltip title={t("tooltip")} open arrow placement="left">
               <IconButton
+                color="error"
                 aria-label={t("button.aria-label")}
                 onClick={() => {
                   storeBoolean("quickstart-on", false);
