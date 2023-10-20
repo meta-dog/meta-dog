@@ -23,6 +23,7 @@
   "region_IE": "Ireland",
   "region_UA": "Ukraine",
   "region_DE": "Germany",
+  "region_FR": "France",
   "dialog": {
     "get": {
       "title": "Get Device Referral",
