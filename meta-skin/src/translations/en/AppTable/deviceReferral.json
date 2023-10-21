@@ -24,6 +24,7 @@
   "region_UA": "Ukraine",
   "region_DE": "Germany",
   "region_FR": "France",
+  "region_JP": "Japan",
   "dialog": {
     "get": {
       "title": "Get Device Referral",

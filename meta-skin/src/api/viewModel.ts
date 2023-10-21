@@ -28,6 +28,7 @@ export const REGIONS = [
   "UA",
   "DE",
   "FR",
+  "JP",
 ] as const;
 export type Region = typeof REGIONS[number];
 
