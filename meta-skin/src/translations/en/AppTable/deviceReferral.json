@@ -25,6 +25,7 @@
   "region_DE": "Germany",
   "region_FR": "France",
   "region_JP": "Japan",
+  "region_NO": "Norway",
   "dialog": {
     "get": {
       "title": "Get Device Referral",
