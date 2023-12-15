@@ -31,6 +31,7 @@ export const REGIONS = [
   "JP",
   "NO",
   "CH",
+  "SE",
 ] as const;
 export type Region = typeof REGIONS[number];
 

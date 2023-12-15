@@ -27,6 +27,7 @@
   "region_JP": "Japón",
   "region_NO": "Noruega",
   "region_CH": "Suiza",
+  "region_SE": "Suecia",
   "dialog": {
     "get": {
       "title": "Obtener Referido de Quest 2/3/Pro",
