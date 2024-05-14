@@ -2,8 +2,15 @@ import { AppAM, ReadReferralAM, RegionAM } from "./apiModel";
 import { AppVM, ReadReferralVM, RegionVM } from "./viewModel";
 
 export function mapAppAMToVM({ app_id: id, name, has_quest, has_rift }: AppAM) {
-  if (id === undefined) throw Error("Undefined id");
-  if (name === undefined) throw Error("Undefined name");
+  if (id === undefined) {
+    throw Error("Undefined id");
+  }
+  if (name === undefined) {
+    throw Error("Undefined name");
+  }
+  if(has_quest && has_rift) {
+    return { id, name };
+  }
   const questName = has_quest ? " (Quest)" : "";
   const riftName = has_rift ? " (Rift)" : "";
   const displayName = `${name}${questName}${riftName}`.trim();
