@@ -14,6 +14,7 @@ import common from "./common.json";
 import footer from "./footer.json";
 import header from "./header.json";
 import helpDialog from "./helpDialog.json";
+import maintenanceDialog from './maintenanceDialog.json'
 import languageSelector from "./languageSelector.json";
 
 const translations = {
@@ -34,6 +35,7 @@ const translations = {
   header,
   helpDialog,
   languageSelector,
+  maintenanceDialog,
 };
 
 type TranslationType = typeof translations;

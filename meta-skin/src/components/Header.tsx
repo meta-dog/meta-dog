@@ -1,15 +1,16 @@
-import { Help } from "@mui/icons-material";
-import { AppBar, Avatar, IconButton, Toolbar, Typography } from "@mui/material";
+// import { Help } from "@mui/icons-material";
+// import { AppBar, Avatar, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Avatar, Toolbar, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { useAppStateContext } from "contexts";
-
+// import { useAppStateContext } from "contexts";
 import { ReactComponent as Logo } from "res/logo.svg";
 
-import HelpDialog from "./HelpDialog";
+// import HelpDialog from "./HelpDialog";
+import MaintenanceDialog from "./MaintenanceDialog";
 
 export default function Header() {
-  const { setOpenHelpDialog } = useAppStateContext();
+  // const { setOpenHelpDialog } = useAppStateContext();
 
   const { t } = useTranslation("header");
 
@@ -20,15 +21,16 @@ export default function Header() {
           <Logo />
         </Avatar>
         <Typography variant="h6">{t("title")}</Typography>
-        <IconButton
+        {/* <IconButton
           aria-label={t("button.open-help.aria-label")}
           color="secondary"
           onClick={() => setOpenHelpDialog(true)}
         >
           <Help />
-        </IconButton>
+        </IconButton> */}
       </Toolbar>
-      <HelpDialog />
+      {/* <HelpDialog /> */}
+      <MaintenanceDialog />
     </AppBar>
   );
 }

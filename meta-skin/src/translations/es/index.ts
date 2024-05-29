@@ -16,6 +16,7 @@ import footer from "./footer.json";
 import header from "./header.json";
 import helpDialog from "./helpDialog.json";
 import languageSelector from "./languageSelector.json";
+import maintenanceDialog from './maintenanceDialog.json'
 
 const translations: TranslationType = {
   appStateContext,
@@ -35,6 +36,7 @@ const translations: TranslationType = {
   header,
   helpDialog,
   languageSelector,
+  maintenanceDialog,
 };
 
 const language: Language = {
