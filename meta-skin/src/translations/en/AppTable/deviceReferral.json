@@ -1,5 +1,5 @@
 {
-  "title": "Device Referrals",
+  "title": "Device Referrals (Read only for now)",
   "check-link": {
     "button": { "aria-label": "open your link" },
     "text": "Open your link"

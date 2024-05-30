@@ -21,9 +21,9 @@ import { AppVM, createReferral, readReferral } from "api";
 import { useAppStateContext } from "contexts";
 
 import AppNameRenderer from "./AppNameRenderer";
-import CreateCellRenderer from "./CreateCellRenderer";
+// import CreateCellRenderer from "./CreateCellRenderer";
 import CreateReferralCellDialog from "./CreateReferralCellDialog";
-import CreateReferralHeaderRenderer from "./CreateReferralHeaderRenderer";
+// import CreateReferralHeaderRenderer from "./CreateReferralHeaderRenderer";
 import ReferralCellRenderer from "./ReferralCellRenderer";
 import ReferralDialog from "./ReferralDialog";
 import ReferralHeaderRenderer from "./ReferralHeaderRenderer";
@@ -42,7 +42,7 @@ import {
 const getColumns = (
   t: TFunction<"appTableTable", undefined>,
   handleRequestClick: HandleAppClick,
-  handleCreateClick: HandleAppClick,
+  // handleCreateClick: HandleAppClick,
   handleChangeDialogOn: (key: BooleanKeys) => (newOn: boolean) => void,
 ) =>
   [
@@ -69,23 +69,23 @@ const getColumns = (
       flex: 1,
       renderCell: AppNameRenderer,
     },
-    {
-      field: "create",
-      headerName: t("columns.create"),
-      renderHeader: ({ colDef }) =>
-        CreateReferralHeaderRenderer(
-          colDef.headerName || "",
-          handleChangeDialogOn("create-referral-dialog-on"),
-        ),
-      headerAlign: "center",
-      headerClassName: "text-center",
-      width: 70,
-      renderCell: (params) => CreateCellRenderer(params, handleCreateClick),
-      disableReorder: true,
-      disableColumnMenu: true,
-      disableExport: true,
-      sortable: false,
-    },
+    // {
+    //   field: "create",
+    //   headerName: t("columns.create"),
+    //   renderHeader: ({ colDef }) =>
+    //     CreateReferralHeaderRenderer(
+    //       colDef.headerName || "",
+    //       handleChangeDialogOn("create-referral-dialog-on"),
+    //     ),
+    //   headerAlign: "center",
+    //   headerClassName: "text-center",
+    //   width: 70,
+    //   renderCell: (params) => CreateCellRenderer(params, handleCreateClick),
+    //   disableReorder: true,
+    //   disableColumnMenu: true,
+    //   disableExport: true,
+    //   sortable: false,
+    // },
   ] as GridColDef[];
 
 const ROWS_PER_PAGE = 100;
@@ -100,8 +100,8 @@ export default function Table() {
   ]);
   const [referralApp, setReferralApp] = useState<AppVM | null>(null);
   const [referralDialogOpen, setReferralDialogOpen] = useState(false);
-  const [createReferralDialogOpen, setCreateReferralDialogOpen] =
-    useState(false);
+  // const [createReferralDialogOpen, setCreateReferralDialogOpen] =
+  //   useState(false);
 
   const handleRequest = (app: AppVM | null = referralApp) => {
     if (app === null) return;
@@ -148,15 +148,15 @@ export default function Table() {
       toast.error(t("toast.create.error", { context }));
     }
   };
-  const handleCreateClick = (app: AppVM) => {
-    setReferralApp(app);
-    const advocateId = getStoredAdvocateId();
-    if (advocateId === null || getStoredBoolean("create-referral-dialog-on")) {
-      setCreateReferralDialogOpen(true);
-      return;
-    }
-    handleCreate(app);
-  };
+  // const handleCreateClick = (app: AppVM) => {
+  //   setReferralApp(app);
+  //   const advocateId = getStoredAdvocateId();
+  //   if (advocateId === null || getStoredBoolean("create-referral-dialog-on")) {
+  //     setCreateReferralDialogOpen(true);
+  //     return;
+  //   }
+  //   handleCreate(app);
+  // };
   const handleChangeDialogOn = (key: BooleanKeys) => (newOn: boolean) => {
     storeBoolean(key, newOn);
   };
@@ -198,7 +198,7 @@ export default function Table() {
   const columns = getColumns(
     t,
     handleRequestClick,
-    handleCreateClick,
+    // handleCreateClick,
     handleChangeDialogOn,
   );
 
@@ -253,8 +253,9 @@ export default function Table() {
         handleAccept={handleRequest}
       />
       <CreateReferralCellDialog
-        open={createReferralDialogOpen}
-        setOpen={setCreateReferralDialogOpen}
+        open={false}
+        // setOpen={setCreateReferralDialogOpen}
+        setOpen={() => {}}
         handleAccept={handleCreate}
         app={referralApp}
       />

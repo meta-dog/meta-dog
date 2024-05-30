@@ -29,7 +29,7 @@ function useAppState() {
   }, [t]);
 
   useEffect(() => {
-    // reloadApps();
+    reloadApps();
   }, [reloadApps]);
 
   return {

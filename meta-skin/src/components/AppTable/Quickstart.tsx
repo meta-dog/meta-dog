@@ -13,10 +13,11 @@ import {
 import { GridSearchIcon } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
 
-import { getStoredBoolean, storeBoolean } from "./utils";
+// import { getStoredBoolean, storeBoolean } from "./utils";
+import { storeBoolean } from "./utils";
 
 export default function Quickstart() {
-  const [visible, setVisible] = useState(getStoredBoolean("quickstart-on"));
+  const [visible, setVisible] = useState(false);
 
   const { t } = useTranslation("appTableQuickstart");
 

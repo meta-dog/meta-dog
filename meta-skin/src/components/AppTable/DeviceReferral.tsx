@@ -367,7 +367,7 @@ export default function DeviceReferral() {
             >
               {t("button.get")}
             </Button>
-            <Button
+            {/* <Button
               variant="contained"
               color="secondary"
               aria-label={t("button.give")}
@@ -375,7 +375,7 @@ export default function DeviceReferral() {
               startIcon={<RecordVoiceOver />}
             >
               {t("button.give")}
-            </Button>
+            </Button> */}
           </Stack>
         </Stack>
       </Paper>
