@@ -1,6 +1,6 @@
 {
   "name": "meta-skin",
-  "version": "0.16.34",
+  "version": "0.16.35",
   "homepage": "https://meta-dog.github.io/meta-dog",
   "proxy": "https://meta-dog.up.railway.app",
   "private": true,
