@@ -1,9 +1,7 @@
 import { Grid } from "@mui/material";
 
-// import { AppTable, Footer, Header } from "components";
 import { AppTable, Footer, Header } from "components";
-
-// import { CreateAppDialog } from "components/AppTable";
+import { CreateAppDialog } from "components/AppTable";
 import DeviceReferral from "components/AppTable/DeviceReferral";
 import Quickstart from "components/AppTable/Quickstart";
 
@@ -29,7 +27,7 @@ export default function Main() {
         <DeviceReferral />
         <Quickstart />
         <AppTable />
-        {/* <CreateAppDialog /> */}
+        <CreateAppDialog />
       </Grid>
       <Grid item gridArea="footer">
         <Footer />

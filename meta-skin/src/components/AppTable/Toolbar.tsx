@@ -1,5 +1,4 @@
-// import { Add, Refresh } from "@mui/icons-material";
-import { Refresh } from "@mui/icons-material";
+import { Add, Refresh } from "@mui/icons-material";
 import { IconButton, Stack, Typography } from "@mui/material";
 import { GridToolbarContainer, GridToolbarQuickFilter } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
@@ -7,8 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useAppStateContext } from "contexts";
 
 export default function Toolbar() {
-  // const { reloadApps, setOpenCreateDialog } = useAppStateContext();
-  const { reloadApps } = useAppStateContext();
+  const { reloadApps, setOpenCreateDialog } = useAppStateContext();
 
   const { t } = useTranslation("appTableToolbar");
 
@@ -36,13 +34,13 @@ export default function Toolbar() {
           >
             <Refresh />
           </IconButton>
-          {/* <IconButton
+          <IconButton
             aria-label={t("button.create.aria-label")}
             onClick={() => setOpenCreateDialog(true)}
             color="secondary"
           >
             <Add />
-          </IconButton> */}
+          </IconButton>
         </Stack>
       </Stack>
     </GridToolbarContainer>

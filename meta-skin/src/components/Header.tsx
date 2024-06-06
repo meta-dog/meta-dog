@@ -8,7 +8,6 @@ import { ReactComponent as Logo } from "res/logo.svg";
 
 import HelpDialog from "./HelpDialog";
 
-// import HelpDialog from "./HelpDialog";
 // import MaintenanceDialog from "./MaintenanceDialog";
 
 export default function Header() {
