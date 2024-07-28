@@ -4,14 +4,14 @@ import { CreateReferralVM } from "api";
 
 import advocates from "./advocates.json";
 
-// https://www.oculus.com/appreferrals/great-guy/1251251/?utm_source=3 201
-// https://www.oculus.com/appreferrals/great-guy/2323124/?utm_source=3 409
-// https://www.oculus.com/appreferrals/great-guy/1672671/?utm_source=3 404
-// https://www.oculus.com/appreferrals/great-guy/5138511912885491/?utm_source=3 409
-// https://www.oculus.com/appreferrals/maybe-good-gal/1251251/?utm_source=3 201
-// https://www.oculus.com/appreferrals/maybe-good-gal/2323124/?utm_source=3 201
-// https://www.oculus.com/appreferrals/maybe-good-gal/1672671/?utm_source=3 404
-// https://www.oculus.com/appreferrals/maybe-good-gal/5138511912885491/?utm_source=3 404
+// https://www.meta.com/appreferrals/great-guy/1251251/?utm_source=3 201
+// https://www.meta.com/appreferrals/great-guy/2323124/?utm_source=3 409
+// https://www.meta.com/appreferrals/great-guy/1672671/?utm_source=3 404
+// https://www.meta.com/appreferrals/great-guy/5138511912885491/?utm_source=3 409
+// https://www.meta.com/appreferrals/maybe-good-gal/1251251/?utm_source=3 201
+// https://www.meta.com/appreferrals/maybe-good-gal/2323124/?utm_source=3 201
+// https://www.meta.com/appreferrals/maybe-good-gal/1672671/?utm_source=3 404
+// https://www.meta.com/appreferrals/maybe-good-gal/5138511912885491/?utm_source=3 404
 
 export default function createReferralMock({
   appId,

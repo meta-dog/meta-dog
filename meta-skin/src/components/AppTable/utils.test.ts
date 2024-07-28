@@ -10,37 +10,37 @@ interface ExtractReferralData {
 const extractReferralData: ExtractReferralData[] = [
   {
     input:
-      "https://www.oculus.com/appreferrals/example-user/1241241241241241/?utm_source=3",
+      "https://www.meta.com/appreferrals/example-user/1241241241241241/?utm_source=3",
     output: { advocateId: "example-user", appId: "1241241241241241" },
   },
   {
     input:
-      "https://www.oculus.com/appreferrals/maybe-good-gal/5138511912885491/?utm_source=3",
+      "https://www.meta.com/appreferrals/maybe-good-gal/5138511912885491/?utm_source=3",
     output: { advocateId: "maybe-good-gal", appId: "5138511912885491" },
   },
   {
     input:
-      "https://www.oculus.com/appreferrals/example-user/asdasd/1241241241241241/?utm_source=3",
+      "https://www.meta.com/appreferrals/example-user/asdasd/1241241241241241/?utm_source=3",
     output: false,
   },
   {
     input:
-      "https://oculus.com/appreferrals/example-user/1241241241241241/?utm_source=3",
+      "https://meta.com/appreferrals/example-user/1241241241241241/?utm_source=3",
     output: false,
   },
   {
     input:
-      "https://www.anotheroculus.com/appreferrals/example-user/1241241241241241/?utm_source=3",
+      "https://www.anothermeta.com/appreferrals/example-user/1241241241241241/?utm_source=3",
     output: false,
   },
   {
     input:
-      "http://www.anotheroculus.com/appreferrals/example-user/1241241241241241/?utm_source=3",
+      "http://www.anothermeta.com/appreferrals/example-user/1241241241241241/?utm_source=3",
     output: false,
   },
   {
     input:
-      "http://anotheroculus.com/appreferrals/example-user/1241241241241241/",
+      "http://anothermeta.com/appreferrals/example-user/1241241241241241/",
     output: false,
   },
 ];
@@ -60,28 +60,28 @@ interface ExtractUrlData {
 const extractUrlData: ExtractUrlData[] = [
   {
     input:
-      "URL 1: https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
+      "URL 1: https://www.meta.com/appreferrals/example.user/1241241241241241/?utm_source=3",
     output: [
-      "https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
+      "https://www.meta.com/appreferrals/example.user/1241241241241241/?utm_source=3",
     ],
   },
   {
-    input: `URL 1: https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3
-      , URL 2:  https://www.oculus.com/appreferrals/example.user.potato/1212541241241241/?utm_source=3
+    input: `URL 1: https://www.meta.com/appreferrals/example.user/1241241241241241/?utm_source=3
+      , URL 2:  https://www.meta.com/appreferrals/example.user.potato/1212541241241241/?utm_source=3
       , NON OCULUS URL: https://www.facebook.com`,
     output: [
-      "https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
-      "https://www.oculus.com/appreferrals/example.user.potato/1212541241241241/?utm_source=3",
+      "https://www.meta.com/appreferrals/example.user/1241241241241241/?utm_source=3",
+      "https://www.meta.com/appreferrals/example.user.potato/1212541241241241/?utm_source=3",
     ],
   },
   {
-    input: `URL 1: https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3
-      , URL 2:  https://www.oculus.com/appreferrals/example.user.potato/1212541241241241/?utm_source=3
-      , NON OCULUS URL: https://www.facebook.com https://www.oculus.com/appreferrals/maybe-good-gal/5138511912885491/?utm_source=3`,
+    input: `URL 1: https://www.meta.com/appreferrals/example.user/1241241241241241/?utm_source=3
+      , URL 2:  https://www.meta.com/appreferrals/example.user.potato/1212541241241241/?utm_source=3
+      , NON OCULUS URL: https://www.facebook.com https://www.meta.com/appreferrals/maybe-good-gal/5138511912885491/?utm_source=3`,
     output: [
-      "https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
-      "https://www.oculus.com/appreferrals/example.user.potato/1212541241241241/?utm_source=3",
-      "https://www.oculus.com/appreferrals/maybe-good-gal/5138511912885491/?utm_source=3",
+      "https://www.meta.com/appreferrals/example.user/1241241241241241/?utm_source=3",
+      "https://www.meta.com/appreferrals/example.user.potato/1212541241241241/?utm_source=3",
+      "https://www.meta.com/appreferrals/maybe-good-gal/5138511912885491/?utm_source=3",
     ],
   },
 ];
@@ -98,7 +98,7 @@ interface ValidateAdvocateIdData {
   output: boolean;
 }
 
-// Based off on: https://www.meta.com/en-gb/help/quest/articles/accounts/account-settings-and-management/manage-oculus-account/
+// Based off on: https://www.meta.com/en-gb/help/quest/articles/accounts/account-settings-and-management/manage-meta-account/
 /* Username requirements:
 
 - Usernames must start with a letter or digit.
@@ -152,7 +152,7 @@ const validateAdvocateIdData: ValidateAdvocateIdData[] = [
   },
   {
     input:
-      "https://www.oculus.com/appreferrals/example.user/1241241241241241/?utm_source=3",
+      "https://www.meta.com/appreferrals/example.user/1241241241241241/?utm_source=3",
     output: false,
   },
   {

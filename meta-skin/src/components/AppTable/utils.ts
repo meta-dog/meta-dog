@@ -1,6 +1,6 @@
 import { CreateReferralVM } from "api";
 
-const BASE_URL = "https://www.oculus.com/appreferrals/";
+const BASE_URL = "https://www.meta.com/appreferrals/";
 
 export function validateAdvocateId(advocateId: string | null) {
   if (advocateId === null) return false;
@@ -27,11 +27,11 @@ export function extractReferral(url: string): false | CreateReferralVM {
   return { advocateId, appId };
 }
 
-export function extractUrls(text: string) {
+export function extractUrls(text: string): string[] {
   const urlRegex =
-    /\s*(?<url>https:\/\/www.oculus.com\/appreferrals\/[\w.\-/?*&_=]+)\s*/g;
+    /\s*(?<url>https:\/\/www.meta.com\/appreferrals\/[\w.\-/?*&_=]+)\s*/g;
   const allMatches = text.matchAll(urlRegex);
-  return Array.from(allMatches).reduce((prev, match) => {
+  return Array.from(allMatches).reduce<string[]>((prev, match) => {
     const url = match.groups?.url;
     if (url !== undefined) prev.push(url);
     return prev;
@@ -86,7 +86,7 @@ export function appendToStoredArray(key: ArrayKeys, extraAppIds: string[]) {
 }
 
 function getAppReferralUrl(advocateId: string, appId: string) {
-  return `https://www.oculus.com/appreferrals/${advocateId}/${appId}`;
+  return `https://www.meta.com/appreferrals/${advocateId}/${appId}`;
 }
 
 function openUrl(url: string) {
@@ -96,7 +96,7 @@ function openUrl(url: string) {
 }
 
 function getDeviceReferralUrl(advocateId: string) {
-  return `https://www.oculus.com/referrals/link/${advocateId}`;
+  return `https://www.meta.com/referrals/link/${advocateId}`;
 }
 
 export function getUrlAndCopyToClipboard(

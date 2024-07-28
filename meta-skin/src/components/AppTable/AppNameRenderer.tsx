@@ -9,7 +9,7 @@ export default function AppNameRenderer(params: { row: any }) {
   return (
     <Link
       className="flex items-center justify-stretch w-full h-full pl-2 pr-2"
-      href={`https://www.oculus.com/experiences/quest/${id}`}
+      href={`https://www.meta.com/experiences/quest/${id}`}
       target="_blank"
       rel="noreferrer"
       underline="none"
